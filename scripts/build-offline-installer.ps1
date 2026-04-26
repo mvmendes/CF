@@ -17,11 +17,21 @@
 [CmdletBinding()]
 param(
   [string] $Version = "",
-  [string] $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path,
+  [string] $RepoRoot = "",
   [string] $IsccPath = ""
 )
 
 $ErrorActionPreference = "Stop"
+if (-not $RepoRoot) {
+  if ($PSScriptRoot) {
+    $RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
+  } else {
+    $def = if ($PSCommandPath) { $PSCommandPath } else { $MyInvocation.MyCommand.Definition }
+    $base = Split-Path -Parent -LiteralPath $def
+    if ($base) { $RepoRoot = (Resolve-Path (Join-Path $base "..")).Path }
+    if (-not $RepoRoot) { $RepoRoot = (Resolve-Path (Get-Location).Path).Path }
+  }
+}
 if (-not $Version) {
   Push-Location $RepoRoot
   try {
@@ -210,14 +220,20 @@ if (-not (Test-Path -LiteralPath $dist)) {
   New-Item -ItemType Directory -Path $dist -Force | Out-Null
 }
 
-# Start-Process evita o operador & a partir a um caminho C:\ com espacos; ExitCode e fiavel.
+# Start-Process evita o operador & a partir a um caminho C:\ com espacos.
 $issFull = (Resolve-Path -LiteralPath $iss).Path
 $ps = Start-Process -FilePath $iscc -ArgumentList @("/DMyAppVersion=$Version", $issFull) -NoNewWindow -PassThru -Wait
-if ($ps.ExitCode -ne 0) {
-  throw "Compilacao Inno falhou (codigo $($ps.ExitCode))."
-}
-
 $out = Join-Path $dist "CF-Agents-Setup-$Version.exe"
+$code = if ($ps.ExitCode) { $ps.ExitCode } else { 0 }
+# ISCC 6 pode devolver 1 com "Successful compile" (ex.: aviso de ArchitecturesInstallIn64BitMode=x64).
+$exeExiste = Test-Path -LiteralPath $out
+if ($code -eq 0) {
+  if (-not $exeExiste) { throw "ISCC (codigo 0) sem $out" }
+} elseif ($code -eq 1 -and $exeExiste) {
+  Write-Warning "ISCC devolveu 1; o ficheiro Setup foi gerado. (Frequentemente avisos, nao erros fatais.)"
+} else {
+  throw "Compilacao Inno falhou (codigo $code). Ver mensagens do ISCC acima."
+}
 if (Test-Path -LiteralPath $out) {
   Write-Host "OK: $out"
 } else {
