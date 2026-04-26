@@ -1,0 +1,22 @@
+Instaladores .exe para utilizadores finais (dois modos)
+=======================================================
+
+1) OFFLINE (tudo incluído, sem Internet no PC alvo)
+   - Instale "Inno Setup 6" no seu PC de build: https://jrsoftware.org/isdl.php
+   - Na raiz do repositório:
+     .\scripts\build-offline-installer.ps1
+   - Saída: dist\installer\CF-Agents-Setup-<versão>.exe
+   - O .exe copia .agents para C:\CCB\CF\.agents (exclui works, node_modules, .siga_session no pacote)
+     e instala Node.js (win-x64) em C:\CCB\CF\node, versão em scripts\installer\node-embedded.txt
+     (alinhada com engines do siga-automation, ≥20). Ajusta o início do PATH de sistema; abra
+     um terminal novo se "node" não for reconhecido de imediato.
+
+2) WEB (ficheiro pequeno; requer Internet para descarregar o zip do GitHub)
+   - Install-Module ps2exe -Scope CurrentUser -Force
+   - .\scripts\build-websetup-exe.ps1
+   - Saída: dist\installer\CF-Agents-WebSetup.exe (e node-embedded.txt no mesmo directório)
+   - O utilizador executa o .exe; o script obtém o último release, cf-agents-*.zip, e o Node.js
+     oficial (win-x64) indicado em node-embedded.txt, para C:\CCB\CF\node com PATH ajustado.
+
+Após instalar: num terminal novo, em C:\CCB\CF\.agents\skills\siga-automation executar npm install
+(o Node vêm com o pacote; não necessita de instalação global separada).

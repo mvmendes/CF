@@ -1,0 +1,65 @@
+# Gera o pacote `.agents` (sem `works`, `node_modules`, `.siga_session`) e cria
+# um GitHub Release ao publicar tag `v*` a partir de um commit contido em `main`.
+# A cópia para C:\ no PC do utilizador não roda no CI; use `scripts\install-dot-agents-to-ccb.ps1` localmente.
+
+name: Release pacote .agents (tag v*)
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  verify-on-main:
+    name: Garantir que a tag aponta para histórico de main
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Verificar que o commit da tag é antecessor de main
+        run: |
+          set -e
+          git fetch origin main:refs/remotes/origin/main
+          if ! git merge-base --is-ancestor "${{ github.sha }}" origin/main; then
+            echo "::error::A tag ${{ github.ref_name }} não está no histórico de origin/main. Crie a tag a partir de main (ou fazer merge) antes de publicar."
+            exit 1
+          fi
+          echo "Tag ${{ github.ref_name }} OK (commit na linha de main)."
+
+  build-and-release:
+    name: Empacotar e publicar Release
+    needs: verify-on-main
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Staging (rsync) e zip
+        run: |
+          set -e
+          TAG="${{ github.ref_name }}"
+          if [ ! -d ".agents" ]; then
+            echo "::error::Pasta .agents não encontrada na raiz do repositório."
+            exit 1
+          fi
+          mkdir -p staging
+          rsync -a \
+            --exclude "node_modules" \
+            --exclude "works" \
+            --exclude ".siga_session" \
+            .agents/ "staging/.agents/"
+          (cd staging && zip -r -q "${GITHUB_WORKSPACE}/cf-agents-${TAG}.zip" .agents)
+          ls -la "cf-agents-${TAG}.zip"
+          echo "ASSET_NAME=cf-agents-${TAG}.zip" >> "$GITHUB_ENV"
+
+      - name: Criar Release e anexar zip
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "CF agents ${{ github.ref_name }}"
+          files: cf-agents-*.zip
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
