@@ -20,3 +20,15 @@ Instaladores .exe para utilizadores finais (dois modos)
 
 Após instalar: num terminal novo, em C:\CCB\CF\.agents\skills\siga-automation executar npm install
 (o Node vêm com o pacote; não necessita de instalação global separada).
+
+3) PUBLICAR (tag Git, build do instalador, GitHub Release)
+   - Pré: Git, gh (GitHub CLI) autenticado (gh auth login), Inno/ISCC no PC.
+   - O workflow .github/workflows/publish-dot-agents-on-tag.yml cria, ao fazer push de uma
+     tag "v*", o zip cf-agents-vX.Y.Z.zip no Release. O script abaixo sincroniza main, builda
+     o .exe, envia a tag, espera o release, e anexa CF-Agents-Setup-X.Y.Z.exe.
+   - Na raiz do repositório:
+     .\scripts\publish-cf-release.ps1 -Version 1.0.1
+   - Com alterações a incluir: -CommitMessage "texto" -TagMessage "nota do tag" (opcional)
+   - Só compilar/empurrar: -NoUpload; só não compilar: -SkipBuild; não pull: -SkipSync
+   - Revisar sem fazer nada: -DryRun. Se GITHUB_TOKEN no ambiente for inválido, o upload pode
+     falhar; nessa janela: Remove-Item Env:GITHUB_TOKEN; gh auth status
