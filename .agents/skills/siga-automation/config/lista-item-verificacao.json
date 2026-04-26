@@ -1,0 +1,282 @@
+[
+  {
+    "codigo": 272,
+    "nomeExibicao": "17.01 - Ausência de formulario de fechamento mensal devidamente preenchido e assinado.",
+    "nomeGrupo": "Fechamento de Fundo Bíblico"
+  },
+  {
+    "codigo": 277,
+    "nomeExibicao": "29.14 - Indícios de preenchimento único: registros exibem caligrafia idêntica entre colaboradores distintos.",
+    "nomeGrupo": "LEGALIDADE - VOLUNTÁRIO"
+  },
+  {
+    "codigo": 26,
+    "nomeExibicao": "04.01 - Ausência de documento legal",
+    "nomeGrupo": "Legitimidade e impostos"
+  },
+  {
+    "codigo": 27,
+    "nomeExibicao": "04.02 - Rasura, alteração ou preenchimento por terceiros",
+    "nomeGrupo": "Legitimidade e impostos"
+  },
+  {
+    "codigo": 28,
+    "nomeExibicao": "04.03 - Natureza da despesa não pertinente e ou descrição de forma genérica. ",
+    "nomeGrupo": "Legitimidade e impostos"
+  },
+  {
+    "codigo": 29,
+    "nomeExibicao": "04.04 - Aluguéis e serviços: Retenção e pagamento de impostos (ISS/INSS/PIS/COFINS/IRRF, etc)",
+    "nomeGrupo": "Legitimidade e impostos"
+  },
+  {
+    "codigo": 32,
+    "nomeExibicao": "05.03 - Ausência de Contrato Locação: Serviços, Equipamentos, Imóvel, Estac, etc)",
+    "nomeGrupo": "Legitimidade e impostos"
+  },
+  {
+    "codigo": 33,
+    "nomeExibicao": "05.04 - Contratação de locação/aluguéis - Casa de oração",
+    "nomeGrupo": "Legitimidade e impostos"
+  },
+  {
+    "codigo": 34,
+    "nomeExibicao": "05.05 - Contratação Profissionais Autônomos (MEI) e Pessoa Fisica - Atenção aos impostos",
+    "nomeGrupo": "Legitimidade e impostos"
+  },
+  {
+    "codigo": 35,
+    "nomeExibicao": "05.06 - Contratação de Serviços de empresas de outro município - Casa de oração",
+    "nomeGrupo": "Legitimidade e impostos"
+  },
+  {
+    "codigo": 270,
+    "nomeExibicao": "23.01 - Não entregou o checklist do mês no prazo estabelecido.",
+    "nomeGrupo": "Livro de  Acompanhamento da Manutenção Preventiva - Casa de Oração"
+  },
+  {
+    "codigo": 271,
+    "nomeExibicao": "23.02 - Checklist sem o devido preenchimento ou não assinado pelo responsável.",
+    "nomeGrupo": "Livro de  Acompanhamento da Manutenção Preventiva - Casa de Oração"
+  },
+  {
+    "codigo": 30,
+    "nomeExibicao": "05.01 - Luz, gás, água, telefone e taxas: Em nome de terceiros (exceto cedida ou alugada) ",
+    "nomeGrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos"
+  },
+  {
+    "codigo": 36,
+    "nomeExibicao": "05.07 - Ausência de Carta justificativa do diacono para pagamento em atraso.",
+    "nomeGrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos"
+  },
+  {
+    "codigo": 37,
+    "nomeExibicao": "05.08 - Ausência de Carta justificativa de saldo acima de R$200,00 assinada pelo Diacono.",
+    "nomeGrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos"
+  },
+  {
+    "codigo": 305,
+    "nomeExibicao": "05.09 - Documento não digitalizado ou não anexado no SIGA",
+    "nomeGrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos"
+  },
+  {
+    "codigo": 304,
+    "nomeExibicao": "07.01 - Não conformidade com a norma/regra/comunicado interno. ",
+    "nomeGrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos"
+  },
+  {
+    "codigo": 472,
+    "nomeExibicao": "25.01 - Formulário 14.8 entregue sem assinatura do ministério e o responsável da Casa de Oração",
+    "nomeGrupo": "P. BENS MÓVEIS - Controles Interno"
+  },
+  {
+    "codigo": 15,
+    "nomeExibicao": "03.01 - Ausência do carimbo e/ou recibo de quitação (datado) ",
+    "nomeGrupo": "Pagamento"
+  },
+  {
+    "codigo": 16,
+    "nomeExibicao": "03.02 - Nota fiscal com CFOP 5929 (Lançamento relativo ao Cupom Fiscal) sem o cupom fiscal. ",
+    "nomeGrupo": "Pagamento"
+  },
+  {
+    "codigo": 17,
+    "nomeExibicao": "03.03 - Quitação por cartão de credito/debito​",
+    "nomeGrupo": "Pagamento"
+  },
+  {
+    "codigo": 18,
+    "nomeExibicao": "03.04 - Quitação por débito automático (Casas de Oração) ​",
+    "nomeGrupo": "Pagamento"
+  },
+  {
+    "codigo": 19,
+    "nomeExibicao": "03.05 - Pagamento em atraso, independente de justificativa. ",
+    "nomeGrupo": "Pagamento"
+  },
+  {
+    "codigo": 20,
+    "nomeExibicao": "03.06 - Pagamento fora de competência  (Casa de oração)",
+    "nomeGrupo": "Pagamento"
+  },
+  {
+    "codigo": 21,
+    "nomeExibicao": "03.07 - Pagamento para Pessoa física",
+    "nomeGrupo": "Pagamento"
+  },
+  {
+    "codigo": 25,
+    "nomeExibicao": "03.11 - Compras acima do limite recomendado pelo Setor/Administração",
+    "nomeGrupo": "Pagamento"
+  },
+  {
+    "codigo": 10,
+    "nomeExibicao": "02.01 - Campo destinatário: Difere aos dados do cadastro da Congregação? ​",
+    "nomeGrupo": "Preenchimento"
+  },
+  {
+    "codigo": 11,
+    "nomeExibicao": "02.02 - CNPJ ausente ou difere ao do cadastro da Congregação",
+    "nomeGrupo": "Preenchimento"
+  },
+  {
+    "codigo": 12,
+    "nomeExibicao": "02.03 - Corpo do documento fiscal: Inconsistências referentes aos produtos ",
+    "nomeGrupo": "Preenchimento"
+  },
+  {
+    "codigo": 38,
+    "nomeExibicao": "06.01 - Totais e subtotais das linhas e colunas incorretos.",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 39,
+    "nomeExibicao": "06.02 - Rasura, preenchimento incorreto ou incompleto no registro das coletas.",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 40,
+    "nomeExibicao": "06.03 - Ausência de visto (mínimo três) nas colunas do formulário ou ocorrência.",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 41,
+    "nomeExibicao": "06.04 - Ausência de justificativa nas folhas de ocorrências .",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 42,
+    "nomeExibicao": "06.05 - Ausência de registro separado para Reunião de Mocidade, Culto de Conselhos ou Ensaio Regional.",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 43,
+    "nomeExibicao": "06.06 - Campos em branco não inutilizados e ou linhas restantes sem o traço diagonal. ",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 44,
+    "nomeExibicao": "06.07 - Ausência de registro de coleta nos cultos oficiais e Reunião de Jovens e Menores.",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 45,
+    "nomeExibicao": "06.08 - Ausência de assinatura do diácono (s) na folha mensal de recebimento do Livro de Registro de Coletas.",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 46,
+    "nomeExibicao": "06.09 - Divergência entre o livro e o balancete/movimento financeiro (C-52).",
+    "nomeGrupo": "Registro de coletas"
+  },
+  {
+    "codigo": 274,
+    "nomeExibicao": "29.02 - Não disponibilizou as vias (amarelas ou brancas digitalizadas) dos livros no respectivo mês",
+    "nomeGrupo": "REGISTRO DE VOLUNTARIO"
+  },
+  {
+    "codigo": 278,
+    "nomeExibicao": "29.06 - Nome do colaborador ilegível",
+    "nomeGrupo": "REGISTRO DE VOLUNTARIO"
+  },
+  {
+    "codigo": 279,
+    "nomeExibicao": "29.07 - Não registrada a entrega dos EPIs",
+    "nomeGrupo": "REGISTRO DE VOLUNTARIO"
+  },
+  {
+    "codigo": 280,
+    "nomeExibicao": "29.08 - Código da função não preenchido",
+    "nomeGrupo": "REGISTRO DE VOLUNTARIO"
+  },
+  {
+    "codigo": 281,
+    "nomeExibicao": "29.09 - Registro com Data/Horário de entrada fora da ordem, rasurado ou repetição acima de 3 vezes",
+    "nomeGrupo": "REGISTRO DE VOLUNTARIO"
+  },
+  {
+    "codigo": 282,
+    "nomeExibicao": "29.10 - Registro sem horário de saída",
+    "nomeGrupo": "REGISTRO DE VOLUNTARIO"
+  },
+  {
+    "codigo": 283,
+    "nomeExibicao": "29.11 - Registro sem a assinatura do voluntário",
+    "nomeGrupo": "REGISTRO DE VOLUNTARIO"
+  },
+  {
+    "codigo": 284,
+    "nomeExibicao": "29.12 - Registros não lançados no SIGA conforme os livros.",
+    "nomeGrupo": "REGISTRO DE VOLUNTARIO"
+  },
+  {
+    "codigo": 1,
+    "nomeExibicao": "01.01 - O Formulário C52 não apresentou assinatura do ministério local e mínimo de 3 assinaturas. ",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 2,
+    "nomeExibicao": "01.02 - O Saldo do caixa esta acima do limite máximo orientado pela Administração. ",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 3,
+    "nomeExibicao": "01.03 - Ausência de Justificativa do Diácono quando limite máximo de caixa for ultrapassado. ",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 4,
+    "nomeExibicao": "01.04 - O código da despesa esta em desacordo com a natureza da despesa. ",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 6,
+    "nomeExibicao": "01.06 - Formulário C39 - Não possui as 3 assinaturas necessárias",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 7,
+    "nomeExibicao": "01.07 - Formulário C39 - Apresenta colagens em desacordo com as normas administrativas. ",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 8,
+    "nomeExibicao": "01.08 - Comprovantes de depósitos de coleta não foram copiados e ou colados folha A4. ",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 9,
+    "nomeExibicao": "01.09 - Ausência de cópia de Cupons e/ou CFE-SAT termossensível.",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 552,
+    "nomeExibicao": "01.10 - Quantidade de depósitos semanais está fora do padrão estabelecido pela norma. ",
+    "nomeGrupo": "Relatório financeiro"
+  },
+  {
+    "codigo": 365,
+    "nomeExibicao": "01.90 - A verificação mensal da Casa de Oração foi realizada e nenhuma ocorrência foi encontrada ",
+    "nomeGrupo": "VERIFICAÇÃO SEM OCORRENCIA"
+  }
+]

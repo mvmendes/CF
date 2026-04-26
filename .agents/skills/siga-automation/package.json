@@ -1,0 +1,17 @@
+{
+  "name": "siga-automation-skill",
+  "version": "1.0.0",
+  "description": "Ferramentas CLI para automação de tarefas do Conselho Fiscal no SIGA, desenhado para integração isolada com Agent IDEs.",
+  "main": "scripts/siga-tools.mjs",
+  "type": "module",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.99",
+    "pdfjs-dist": "~5.6.205",
+    "playwright": "^1.42.0"
+  },
+  "author": "",
+  "license": "ISC",
+  "engines": {
+    "node": ">=20"
+  }
+}

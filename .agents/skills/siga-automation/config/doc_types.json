@@ -1,0 +1,295 @@
+{
+    "version": "2.0.0",
+    "description": "Tipos de documentos de fechamento e seus padrões de reconhecimento",
+    "types": [
+        {
+            "type": "movimento_c52",
+            "name": "Movimento Financeiro (C-52)",
+            "template": "relatorio_financeiro",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "C-52",
+                "C52",
+                "Movimento Mensal",
+                "Movimento Financeiro",
+                "Recibo de Coletas",
+                "Caixa de Manutenção",
+                "FECHAMENTO_C52"
+            ],
+            "file_patterns": [
+                "*C52*",
+                "*C-52*",
+                "*MOVIMENTO*"
+            ],
+            "verification_items": ["01.01", "01.02", "01.03", "01.04"]
+        },
+        {
+            "type": "despesas_c39",
+            "name": "Despesas C-39",
+            "template": "expense_validation",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "C-39",
+                "C39",
+                "Despesas",
+                "FORMULÁRIO C-39",
+                "Cupom Fiscal",
+                "CF",
+                "NF"
+            ],
+            "file_patterns": [
+                "*C39*",
+                "*CF*",
+                "*DESPESA*"
+            ],
+            "verification_items": ["01.06", "01.07", "03.01", "03.02", "03.03", "03.04", "03.05", "03.06", "03.07"]
+        },
+        {
+            "type": "folha_colagem_depositos",
+            "name": "Folha de Colagem Depósitos",
+            "template": "deposit_validation",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "Depósitos",
+                "Folha de Colagem",
+                "Comprovante de Depósito",
+                "COMPROVANTE_DEPOSITOS"
+            ],
+            "file_patterns": [
+                "*DEPOSITO*",
+                "*COLAGEM*"
+            ],
+            "verification_items": ["01.08", "01.10"]
+        },
+        {
+            "type": "livro_coletas",
+            "name": "Livro de Coletas (C-50)",
+            "template": "livro_coletas",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "Livro de Coletas",
+                "Livro Coleta",
+                "C-50",
+                "C50",
+                "Registro de Coletas",
+                "LIVRO_REGISTRO_COLETAS"
+            ],
+            "file_patterns": [
+                "*LIVRO*COLETA*",
+                "*C50*",
+                "*C-50*"
+            ],
+            "verification_items": ["06.01", "06.02", "06.03", "06.04", "06.05", "06.06", "06.07", "06.08", "06.09"]
+        },
+        {
+            "type": "fundo_biblico",
+            "name": "Fechamento do Fundo Bíblico (mensal)",
+            "template": "fundo_biblico",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "Fundo Bíblico",
+                "Fundo Biblico",
+                "FUNDO_BIBLICO",
+                "Fechamento do Fundo Bíblico",
+                "Fechamento Fundo Bíblico",
+                "CONGREGAÇÃO CRISTÃ NO BRASIL",
+                "EST04102"
+            ],
+            "file_patterns": [
+                "*FUNDO*BIBLICO*",
+                "*FECHAMENTO*FUNDO*",
+                "*FUNDO*B*",
+                "*BIBLICO*FECH*"
+            ],
+            "verification_items": ["17.01"],
+            "codigo_item_siga_erp": 272,
+            "nota_catalogo": "Após sincronizar-lista-itens, confirmar em lista-item-verificacao.json: regra 17.01, grupo 'Fechamento de Fundo Bíblico'. Não confundir com C-52 nem com Mapa de Coletas.",
+            "criterio_auditoria": {
+                "falta_documento_ou_nao_reconhecido": "Não há PDF em Fechamento (ou o fechamento no SIGA não lista anexo equivalente) cujo conteúdo seja o formulário mensal: título 'Fechamento' / 'Fundo Bíblico', tabelas de estoque (Bíblias, hinários etc.), totais, rodapé com referência SIGA EST04102 e paginação folha 1/2, 2/2.",
+                "assinaturas_insuficientes": "O PDF existe e é o formulário correto, porém na folha de encerramento (em geral 'Folha 2 / 2') faltam três assinaturas nos blocos 'Responsável' (cada bloco: assinatura e identificação do responsável). A primeira folha costuma trazer só tabelas e pode não trazer as três assinaturas: validar a última folha.",
+                "conteudo_para_reconhecer": [
+                    "Cabeçalho: CONGREGAÇÃO CRISTÃ NO BRASIL, estabelecimento e competência (mês/ano).",
+                    "Título: Fechamento Fundo Bíblico (ou 'Fechamento do Fundo Bíblico').",
+                    "Corpo: colunas Código, Descrição, Quantidade, totais (Total em Caixa, Conta Corrente, Total Fundo Bíblico).",
+                    "Rodapé: identificador SIGA - EST04102, data/hora de emissão, numeração de folhas (ex. Folha 1/2, Folha 2/2).",
+                    "Página de assinaturas: três seções 'Responsável' lado a lado, com assinaturas manuais (tinta) e nomes, quando o formulário estiver completo."
+                ],
+                "nao_e_este_documento": "C-52 (movimento financeiro), MAPA de coletas, recebimentos de coletas, depósitos ou despesas C-39 não substituem este formulário do Fundo Bíblico."
+            }
+        },
+        {
+            "type": "mapa_coletas",
+            "name": "Mapa de Coletas",
+            "template": "mapa_coletas",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "Mapa de Coletas",
+                "Mapa de Coleta",
+                "MAPA_DE_COLETAS",
+                "OFP",
+                "CXM",
+                "Vlr. arrec. em PIX / TED / Transf"
+            ],
+            "file_patterns": [
+                "*MAPA*COLETA*"
+            ],
+            "verification_items": ["06.09", "07.01"],
+            "nota_07_01_caso_pix_ted": "A linha de detalhamento 'Vlr. arrec. em PIX / TED / Transf.' (ou redação equivalente) no mapa **da Casa de Oração** indica emissão do relatório em desacordo com a cartilha de orientação do manual: a CO não deve consolidar/validar o mapa nesse layout com essa rubrica. Tratar como não conformidade de norma interna, item **07.01**, codigo **304** no SIGA (confirmar catalogo apos sync). Diferente de 06.09 (culto sem registro).",
+            "criterio_emissao_manual": {
+                "padrao_visual": "Tabela com colunas OFP, CXM, Total, sublinhas (especie, cartao, PIX/TED/Transf).",
+                "nao_conforme_se": "O PDF 'MAPA DE COLETAS' associado a uma CO contiver linha explicita de valores em PIX / TED / Transferencia como discriminacao, quando a orientacao interna nao preve o uso desse leiaute/linha assinada pela CO.",
+                "codigo_erp_07_01": 304
+            }
+        },
+        {
+            "type": "relatorio_manutencao",
+            "name": "Relatório de Manutenção Preventiva",
+            "template": "relatorio_manutencao",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "Relatório de Manutenção",
+                "Manutenção Preventiva",
+                "Checklist Manutenção",
+                "RELATORIO_MANUTENCAO",
+                "Inspeção Semanal"
+            ],
+            "file_patterns": [
+                "*MANUTENCAO*",
+                "*RELATORIO_MANUTENCAO*"
+            ],
+            "verification_items": ["23.01", "23.02"]
+        },
+        {
+            "type": "ata_reuniao_manutencao",
+            "name": "Ata de Reunião de Manutenção",
+            "template": "ata_reuniao_manutencao",
+            "validated": true,
+            "required": false,
+            "frequency": "trimestral",
+            "patterns": [
+                "Ata de Reunião",
+                "ATA REUNIÃO",
+                "ATA DE REUNIÃO DA MANUTENÇÃO",
+                "ATA_REUNIAO_TRIMESTRAL"
+            ],
+            "file_patterns": [
+                "*ATA*REUNIAO*",
+                "*ATA*MANUTENCAO*"
+            ],
+            "verification_items": []
+        },
+        {
+            "type": "lista_presenca_manutencao",
+            "name": "Lista de Presença Reunião",
+            "template": "lista_presenca_manutencao",
+            "validated": true,
+            "required": false,
+            "frequency": "trimestral",
+            "patterns": [
+                "Lista de Presença",
+                "LISTA_PRESENCA",
+                "Lista Presença da Ata"
+            ],
+            "file_patterns": [
+                "*LISTA*PRESENCA*"
+            ],
+            "verification_items": []
+        },
+        {
+            "type": "bens_moveis",
+            "name": "Movimentação Mensal Bens Móveis (14.8)",
+            "template": "bens_moveis",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "Movimento Mensal de Bens",
+                "Formulário 14.8",
+                "14.8",
+                "Bens Móveis",
+                "RELATORIO_MENSAL_BENS_MOVEIS"
+            ],
+            "file_patterns": [
+                "*BENS*MOVEIS*",
+                "*14.8*"
+            ],
+            "verification_items": ["25.01"]
+        },
+        {
+            "type": "livro_voluntarios",
+            "name": "Livro de Voluntários",
+            "template": "voluntario_book",
+            "validated": true,
+            "required": true,
+            "patterns": [
+                "Livro de Voluntários",
+                "Voluntários",
+                "Folhas Brancas",
+                "Registro de Voluntário"
+            ],
+            "file_patterns": [
+                "*VOLUNTARIO*",
+                "*FOLHAS_BRANCAS*"
+            ],
+            "verification_items": ["29.02", "29.04", "29.06", "29.07", "29.08", "29.09", "29.10", "29.11", "29.12"]
+        },
+        {
+            "type": "expense_validation",
+            "name": "Cupom/Nota Fiscal",
+            "template": "expense_validation",
+            "validated": true,
+            "required": false,
+            "patterns": [
+                "CUPOM",
+                "CUPOM FISCAL",
+                "NOTA FISCAL",
+                "NF",
+                "CFe",
+                "SAT"
+            ],
+            "file_patterns": [
+                "*CF*",
+                "*NF*"
+            ],
+            "verification_items": ["03.01", "03.02", "03.03", "03.04", "03.05", "03.06", "03.07"]
+        },
+        {
+            "type": "comprovante_pagamento",
+            "name": "Comprovante de Pagamento",
+            "template": "comprovante_pagamento",
+            "validated": false,
+            "required": false,
+            "patterns": [
+                "Comprovante",
+                "Pagamento",
+                "Recibo"
+            ],
+            "file_patterns": [
+                "*COMPROVANTE*",
+                "*RECIBO*"
+            ],
+            "verification_items": []
+        },
+        {
+            "type": "folha_ponto",
+            "name": "Folha de Ponto",
+            "template": "folha_ponto",
+            "validated": false,
+            "required": false,
+            "patterns": [
+                "Ponto",
+                "Folha de Ponto"
+            ],
+            "file_patterns": [
+                "*PONTO*"
+            ],
+            "verification_items": []
+        }
+    ]
+}
