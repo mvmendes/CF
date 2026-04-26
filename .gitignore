@@ -1,3 +1,4 @@
 dist/
 scripts/installer/staging/
 scripts/installer/cache/
+node/
