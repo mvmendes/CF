@@ -15,11 +15,11 @@ flowchart TB
   end
 
   subgraph skill[".agents/skills/siga-automation/"]
-    cli["scripts/siga-tools.mjs\n(CLI)"]
-    ctrl["controllers/siga-controller.mjs"]
-    lib["lib: siga-api, siga-browser,\nsiga-scraper, render-pdf-png"]
-    cfg["config/*.json","SKILL.md"]
-    works["works/ (dados, sessão,\nPDFs) — fora do zip de release"]
+    cli["siga-tools.mjs (CLI)"]
+    ctrl["siga-controller.mjs"]
+    lib["Módulos: API · browser · scraper · render-pdf-png"]
+    cfg["config JSON + SKILL.md"]
+    works["works/ · dados locais (fora do zip de release)"]
   end
 
   agents --> skill
