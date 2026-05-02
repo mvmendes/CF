@@ -219,14 +219,57 @@ export class SigaController {
 
   async fecharVerificacao(idFechar) {
      if (!(await this.browser.hasValidSession())) throw new Error("Sessão inválida.");
-     // Aguardará implementação da API de fechamento
+     const data = await this.api.fecharVerificacao(idFechar);
      await this.browser.close();
-     return { success: true, message: `Verificação ${idFechar} concluída!`, link: "https://siga.congregacao.org.br/relatorio" };
+     return {
+       success: true,
+       message: `Verificação ${idFechar} encerrada no SIGA.`,
+       data,
+       link: "https://siga.congregacao.org.br/relatorio"
+     };
   }
 
-  async baixarRelatorio(idVerificacao, localidade, competencia, urlCustomizada) {
+  /**
+   * VER00207 com os mesmos query params do browser; sem filtro de estabelecimento/tipo/localidade
+   * o SIGA costuma devolver PDF/HTML sem linhas de apontamentos.
+   */
+  _montarUrlRelatorioVer00207({
+    codigoVerificacao,
+    filtroLocalidade,
+    filtroTipoVerificacao,
+    filtroCodigoEstabelecimento,
+    dataDocumento = ""
+  }) {
+    const q = new URLSearchParams();
+    const set = (k, v) => q.set(k, v == null ? "" : String(v));
+    set("codigoVerificacao", codigoVerificacao);
+    set("codigoDepartamento", "");
+    set("codigoGrupo", "");
+    set("data", dataDocumento);
+    set("codigoSubGrupo", "");
+    set("reincidencia", "");
+    set("codigoItemVerificacao", "");
+    set("FiltroItemVerificacao", "Todos");
+    set("filtroTipoVerificacao", filtroTipoVerificacao);
+    set("filtroLocalidade", filtroLocalidade);
+    set("filtroGrupo", "Todos");
+    set("filtroStatusVerificacao", "3");
+    set("filtroReincidencia", "Todos");
+    set("filtrosubgrupo", "Todos");
+    set("filtroCodigoEstabelecimento", filtroCodigoEstabelecimento);
+    set("filtroDepartamento", "Todos");
+    return `https://siga.congregacao.org.br/ver/VER00207.aspx?${q.toString()}`;
+  }
+
+  /**
+   * @param {string|null} urlCustomizada URL copiada do browser (recomendado) ou null
+   * @param {{ codigoEstabelecimento?: string, dataRelatorio?: string, filtroTipoVerificacao?: string }} [opts] Para CO: informe codigoEstabelecimento do select de localidade no SIGA (ex. 12316 Cidade Ademar).
+   */
+  async baixarRelatorio(idVerificacao, localidade, competencia, urlCustomizada, opts = {}) {
      if (!idVerificacao || !localidade || !competencia) {
-         throw new Error("Parâmetros insulficientes: baixar-relatorio <id> <localidade> <competencia> [url_opcional]");
+         throw new Error(
+           "Parâmetros insuficientes: baixar-relatorio <id> <localidade> <competencia> [url] [--est=codigo] [--data=AAAA-MM-DD] [--tipo=...]"
+         );
      }
      
      if (!(await this.browser.hasValidSession())) throw new Error("Sessão inválida.");
@@ -235,7 +278,26 @@ export class SigaController {
      await this.browser.init(true); 
      const page = this.browser.page;
      
-     const url = urlCustomizada || `https://siga.congregacao.org.br/ver/VER00207.aspx?codigoVerificacao=${idVerificacao}&FiltroItemVerificacao=Todos&filtroStatusVerificacao=3`;
+     let url = urlCustomizada || null;
+     if (!url && opts.codigoEstabelecimento) {
+       const tipo =
+         opts.filtroTipoVerificacao || "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO";
+       const d = (opts.dataRelatorio || "").trim();
+       const dataParam = d ? (d.includes("T") ? d : `${d}T00:00:00`) : "";
+       url = this._montarUrlRelatorioVer00207({
+         codigoVerificacao: idVerificacao,
+         filtroLocalidade: localidade,
+         filtroTipoVerificacao: tipo,
+         filtroCodigoEstabelecimento: opts.codigoEstabelecimento,
+         dataDocumento: dataParam
+       });
+     }
+     if (!url) {
+       console.error(
+         "[SIGA Controller] Aviso: URL mínima — o PDF pode sair em branco. Use a URL completa do browser ou --est=<código da localidade no filtro>."
+       );
+       url = `https://siga.congregacao.org.br/ver/VER00207.aspx?codigoVerificacao=${idVerificacao}&FiltroItemVerificacao=Todos&filtroStatusVerificacao=3`;
+     }
      
      const [mes, ano] = competencia.split("/");
      const compFormatted = `${ano}-${mes.padStart(2, "0")}`;

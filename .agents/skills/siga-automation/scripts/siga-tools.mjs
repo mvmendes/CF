@@ -96,8 +96,33 @@ async function run() {
       break;
     }
     case "baixar-relatorio": {
-      const [idRelatorio, localidadeRelatorio, compRelatorio, urlCustomizada] = args;
-      result = await controller.baixarRelatorio(idRelatorio, localidadeRelatorio, compRelatorio, urlCustomizada);
+      const urlLike = args.find(
+        (a) => String(a).startsWith("http") || String(a).includes("VER00207.aspx")
+      );
+      const pick = (prefix) => {
+        const p = args.find((a) => a.startsWith(prefix));
+        return p ? p.slice(prefix.length) : null;
+      };
+      const positional = args.filter(
+        (a) =>
+          a !== "--visivel=true" &&
+          !a.startsWith("--est=") &&
+          !a.startsWith("--data=") &&
+          !a.startsWith("--tipo=") &&
+          a !== urlLike
+     );
+      const [idRelatorio, localidadeRelatorio, compRelatorio] = positional;
+      result = await controller.baixarRelatorio(
+        idRelatorio,
+        localidadeRelatorio,
+        compRelatorio,
+        urlLike || null,
+        {
+          codigoEstabelecimento: pick("--est="),
+          dataRelatorio: pick("--data="),
+          filtroTipoVerificacao: pick("--tipo=")
+        }
+      );
       break;
     }
     case "atualizar-historico": {

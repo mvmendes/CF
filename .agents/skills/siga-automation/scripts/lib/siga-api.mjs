@@ -112,6 +112,33 @@ export class SigaApi {
     return await this.fetchApi(url, "PUT", {});
   }
 
+  /**
+   * Encerra a verificação no SIGA (submissão final do auditor).
+   * O path exato pode variar entre versões; tenta candidatos comuns.
+   */
+  async fecharVerificacao(codigoVerificacao) {
+    const id = parseInt(String(codigoVerificacao), 10);
+    if (Number.isNaN(id)) {
+      throw new Error(`codigoVerificacao inválido: ${codigoVerificacao}`);
+    }
+    const bases = [
+      "finalizar-verificacao",
+      "encerrar-verificacao",
+      "fechar-verificacao",
+      "concluir-verificacao"
+    ];
+    let lastErr = null;
+    for (const pathSuffix of bases) {
+      const url = `https://siga-api.congregacao.org.br/api/ver/ver002/${pathSuffix}?codigoVerificacao=${id}`;
+      try {
+        return await this.fetchApi(url, "PUT", {});
+      } catch (e) {
+        lastErr = e;
+      }
+    }
+    throw lastErr || new Error("Não foi possível encerrar a verificação pela API.");
+  }
+
   async postItem(codigoVerificacao, codigoItem, dataFato, documento, observacao) {
     const url = "https://siga-api.congregacao.org.br/api/ver/ver002/inserir-apontamento";
     const body = {
