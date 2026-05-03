@@ -43,7 +43,7 @@ Para que a automação seja robusta, a I.A. deve ter ciência de como o SIGA se 
    - O `codigo` a usar (inteiro) está explícito nessa linha; e
    - Não existem **duas** regras distintas aplicáveis ao mesmo fato; e
    - Regras de procedimento crítico desta skill (ex.: 29.09 com múltiplos `N.º Documento`, `parseInt` do `codigo`, nunca o rótulo `29.09` sozinho no CLI) estão **satisfeitas**; e
-   - O analista do chat **já autorizou** o lançamento, ou o pedido do utilizador foi explícito para efe.
+   - O analista do chat **já autorizou** o lançamento, ou o pedido do utilizador foi explícito para isso.
 
    **Quando a I.A. *não* deve adivinhar: deve interpelar o analista (perguntar no chat):**
    - Aparecem **itens novos** ou inéditos no catálogo (p.ex. códigos ou textos de `nomeExibicao` que não existiam nas auditorias anteriores ou fora do roteiro desta skill) e a relação com o documento **não** está 100% clara.
@@ -65,7 +65,7 @@ Supondo que você está na raiz da skill:
 ### Comandos Principais:
 - `login`: Abre o navegador Playwright visível para o usuário autenticar-se. O processo detecta automaticamente a rede e gera o `state.json`. Ex: `node scripts/siga-tools.mjs login --visivel=true`
 - `sincronizar-lista-itens [codigoDepartamento]`: Baixa o catálogo de itens de verificação do ERP e grava `config/lista-item-verificacao.json` (padrão: `24` = Conselho Fiscal). Também ocorre **automaticamente** em `listar-verificacoes`, `iniciar-verificacao` e `extrair-dados`.
-- `listar-verificacoes <setor> <competencia>`: Busca pendências de auditoria de um setor. Ex: `node scripts/siga-tools.mjs listar-verificacoes "SET - SANTO AMARO" "02/2026"`
+- `listar-verificacoes <filtroLocalidadeOuSetor> <competencia>`: Busca pendências de auditoria. Para verificação de **Casa de Oração**, prefira código/nome da CO (ex.: `21-0173` ou `CIDADE ADEMAR`) em vez de filtro genérico por setor, para não selecionar Tesouraria/Setor por engano. Ex: `node scripts/siga-tools.mjs listar-verificacoes "21-0173" "02/2026"`
 - `extrair-dados <id> <localidade> <competencia>`: O fluxo principal. Faz a troca de unidade, busca a chave GUID do mês, lê despesas e baixa todos os PDFs financeiros, de manutenção e voluntários. Os dados são estruturados em `/works/<Localidade>/<Competencia>/`.
 - `validar-voluntarios <localidade> <competencia>`: Valida os apontamentos dos voluntários em busca de repetições sequenciais no arquivo gerado pela extração.
 - `render-pdf-png <caminhoDoPdf> [pastaSaida]`: Gera **um ficheiro PNG por página** a partir de um PDF (só **Node 20+**: `pdfjs-dist` e `@napi-rs/canvas`; **sem** Python). Se `pastaSaida` for omitida, a saída fica em `<pastaDoPdf>/.pdf-render/<nomeSemExtensao>/`. Útil para inspecionar digitalizações de livro de voluntários (imagem) com zoom na IDE. Ex.: `node scripts/siga-tools.mjs render-pdf-png "works/.../limpeza-fev-2026.pdf"`.
@@ -78,16 +78,78 @@ Supondo que você está na raiz da skill:
 
 ---
 
-## Workflow Princípal: Auditoria Mensal
+## Plano mestre: execução completa de uma verificação
+
+Use este plano para **qualquer** verificação mensal do Conselho Fiscal, independentemente da Casa de Oração e da competência. Ele prevalece sobre exemplos antigos e deve ser seguido junto com o catálogo ERP, o módulo de auditoria visual e os comandos CLI documentados nesta skill.
+
+### 0. Entrada mínima obrigatória
+- Antes de executar qualquer comando, confirme que o pedido contém **Casa de Oração** e **competência**.
+- Se faltar a Casa de Oração, pergunte ao analista qual é a CO (nome, código `BR ...` ou parte inequívoca do nome).
+- Se faltar a competência, pergunte o período em formato `MM/AAAA`.
+- Normalize a competência para `MM/AAAA` nos comandos e para `AAAA-MM` ao procurar pastas em `works/`.
+- Nunca assuma a CO a partir de um arquivo aberto, pasta recente ou setor se o usuário não tiver informado isso no pedido atual.
+
+### 1. Sessão, dependências e catálogo
+- Se for um ambiente novo, rode `npm install` na pasta da skill antes dos comandos Node.
+- Verifique se há sessão em `works/.siga_session/`. Se a sessão estiver ausente, expirada ou a API responder `401`, execute `node scripts/siga-tools.mjs login --visivel=true` e aguarde o usuário concluir o login no Chromium.
+- No início da verificação, sincronize o catálogo ERP por uma ação que já atualiza `config/lista-item-verificacao.json` (`listar-verificacoes`, `iniciar-verificacao`, `extrair-dados`) ou por `node scripts/siga-tools.mjs sincronizar-lista-itens`.
+- Após sincronizar, leia o catálogo e use sempre o `codigo` inteiro do ERP para `inserir-item` / `atualizar-item`; nunca use apenas rótulos como `29.09`, pois `parseInt("29.09")` vira `29`.
+
+### 2. Identificação segura da verificação
+- Liste as verificações com filtro específico da CO e competência: `node scripts/siga-tools.mjs listar-verificacoes "<CO ou codigo BR>" "<MM/AAAA>"`.
+- Prefira código/nome da CO (`21-0173`, `CIDADE ADEMAR`, etc.) em vez de `SET - ...`. Filtro por setor pode devolver verificação de **Tesouraria/Setor**, que não deve receber apontamento de Casa de Oração.
+- Antes de qualquer lançamento, confirme nos dados retornados que o registro escolhido é `CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO`, que a localidade corresponde à CO solicitada e que a competência bate com o pedido.
+- Se houver nenhuma verificação, várias candidatas plausíveis, tipo diferente de `CASA DE ORAÇÃO`, ou localidade ambígua, pare e pergunte ao analista qual `codigoVerificacao` usar.
+
+### 3. Início e extração dos dados
+- Se a verificação ainda precisar ser aberta, execute `node scripts/siga-tools.mjs iniciar-verificacao <id> <dataInicioDD/MM/AAAA>`.
+- Execute a extração principal: `node scripts/siga-tools.mjs extrair-dados <id> "<localidade completa>" "<MM/AAAA>"`.
+- Confirme que foi criada a árvore `works/<localidade>/<AAAA-MM>/` com `Fechamento`, `Despesas`, `Manutencao`, `Voluntarios`, anexos e JSONs consolidados.
+- Se o fechamento/GUID não existir para a competência, pare e informe o bloqueio; não invente pastas, GUIDs ou IDs.
+
+### 4. Auditoria documental obrigatória
+- Leia o `fechamento_*.json`, `config/doc_types.json` e o catálogo `config/lista-item-verificacao.json` atualizado.
+- Inspecione os documentos de `Fechamento`, `Despesas`, `Manutencao`, `Voluntarios` e depósitos/coletas conforme o módulo de auditoria visual desta skill.
+- Quando o PDF for imagem ou a leitura depender de conferência visual, renderize páginas com `node scripts/siga-tools.mjs render-pdf-png "<pdf>"` e analise página a página.
+- Não substitua a leitura visual de livros de voluntários por `dados_voluntarios.json`: o JSON ajuda em repetições, mas não mostra assinaturas, campos vazios, riscos de cancelamento ou ordem real no encarte.
+
+### 5. Parecer, dúvidas e autorização
+- Registre os achados em `works/Task-Parecer-<CO>.md`, com evidência concreta, documento/página/linha quando aplicável, item candidato do catálogo (`codigo`, `nomeExibicao`, `nomeGrupo`) e campos sugeridos de data e `N.º Documento`.
+- Se houver item novo, regra genérica, múltiplos códigos plausíveis ou dúvida sobre reincidência/competência/anexo, pergunte ao analista antes de lançar.
+- Apresente o parecer no chat e só execute `inserir-item`, `atualizar-item`, `excluir-item`, `fechar-verificacao` ou equivalente após autorização explícita do usuário.
+
+### 6. Lançamentos e padrão de observação
+- Para cada apontamento autorizado, chame `node scripts/siga-tools.mjs inserir-item <idVerificacao> <codigoItemERP> "<dataFato>" "<numeroDocumento>" "<observacao>"`.
+- A observação deve ser **curta, factual e restrita ao achado**: cite documento/localidade/competência, número do documento quando houver e divergência observada.
+- Não prefixe a observação com o código do item (`07.01 -`, `29.09 -` etc.); o item já é intrínseco ao lançamento.
+- Não acrescente recomendações de correção, conclusões não observadas, frases como "demais conferem" ou justificativas fora do escopo do erro.
+- Para apontamentos sequenciais da mesma regra, use o campo `N.º Documento` como sequencial/identificador, não apenas a observação.
+- Na regra 29.09 por repetição de horário, conte as ocorrências a partir da 4.ª: 5 entradas iguais no mesmo dia/livro geram 2 apontamentos, com `N.º Documento` `1` e `2`.
+
+### 7. Correção de lançamentos
+- Se um apontamento foi lançado na verificação errada, exclua-o com `node scripts/siga-tools.mjs excluir-item <codigoApontamento> <codigoVerificacaoErrada>` antes de relançar no `codigoVerificacao` correto.
+- Se o apontamento está na verificação correta mas o texto/data/documento/reincidência precisa ajuste, prefira `node scripts/siga-tools.mjs atualizar-item ...` em vez de excluir e recriar.
+- Depois de lançar, atualizar ou excluir, rode `listar-verificacoes "<CO ou codigo BR>" "<MM/AAAA>"` para confirmar `codigosApontamento` e documente os IDs no parecer.
+
+### 8. Encerramento e relatório
+- Quando o parecer estiver revisado e o usuário autorizar o fechamento, execute `node scripts/siga-tools.mjs fechar-verificacao <id>`.
+- Em seguida baixe o relatório: `node scripts/siga-tools.mjs baixar-relatorio <id> "<localidade completa>" "<MM/AAAA>"`.
+- Informe ao usuário o caminho do PDF salvo em `works/<localidade>/<AAAA-MM>/Relatório CF - ...pdf`.
+- Se o SIGA ou o CLI não confirmar o encerramento/download, pare e relate o erro; não declare a verificação encerrada sem evidência de sucesso.
+
+---
+
+## Workflow Principal: Auditoria Mensal (resumo operacional)
 
 Quando o usuário pedir algo como: *"Vou fazer a analise da CO 'Jardim Miriam', competencia do mes 02/2026."*
 
-Siga **RIGOROSAMENTE** este Roteiro Standalone:
+Siga **rigorosamente** o plano mestre acima. O roteiro abaixo é apenas um resumo operacional dos passos mais comuns.
 
 1. **Garantir Dependências:** 
    Se for necessário rodar em um projeto novo, execute `npm install` na pasta da skill (Playwright, `pdfjs-dist` e `@napi-rs/canvas` para o CLI; **não** é necessário Python).
    
-2. **Apresentação e Check de Login**: 
+2. **Entrada mínima e check de login**: 
+   Confirme a **Casa de Oração** e a **competência**. Se algum dado faltar, pergunte antes de executar comandos.  
    Verifique se o `works/.siga_session/state.json` existe. Se não existir ou o usuário relatar falhas, execute o login visível:
    `node scripts/siga-tools.mjs login --visivel=true`
    Peça para o usuário preencher suas credenciais na janela do Chromium que se abrirá.
@@ -95,8 +157,10 @@ Siga **RIGOROSAMENTE** este Roteiro Standalone:
 2b. **Catálogo de itens (início de qualquer verificação):**  
    Com sessão válida, o `config/lista-item-verificacao.json` é atualizado automaticamente na primeira ação de `listar-verificacoes`, `iniciar-verificacao` ou `extrair-dados`. Se precisar só atualizar o arquivo (sem outra operação), execute `node scripts/siga-tools.mjs sincronizar-lista-itens`. **Em seguida, cumpra o ponto 5** dos *Aprendizados Técnicos* (aprender o catálogo, mapear `nomeExibicao` → `codigo`, autonomia vs. pergunta ao analista). Use sempre o `codigo` numérico do JSON (não o rótulo `29.09` solto) ao chamar `inserir-item` / `atualizar-item`.
 
-3. **Extração de Dados**:
-   Rode os comandos `iniciar-verificacao <id> <data>` (opcional) e, o mais importante:
+3. **Identificação da verificação e extração de dados**:
+   Liste por CO/código BR, não por setor genérico, e confirme que o `codigoVerificacao` retornado é da aplicação **CASA DE ORAÇÃO**:
+   `node scripts/siga-tools.mjs listar-verificacoes "21-0198" "02/2026"`  
+   Rode `iniciar-verificacao <id> <data>` quando necessário e, o mais importante:
    `node scripts/siga-tools.mjs extrair-dados 123456 "BR 21-0198 - JD MIRIAM - SANTO AMARO" "02/2026"`
    Alerte o usuário que está procedendo com o download de todos os comprovantes.
 
@@ -107,13 +171,14 @@ Siga **RIGOROSAMENTE** este Roteiro Standalone:
 
 5. **Geração do Parecer (Task.md)**:
    Pegue o resultado da análise detalhada e escreva as constatações listadas no arquivo `/works/Task-Parecer-<CO>.md`.
-   Alerte o usuário (usando a ferramenta `notify_user`) apresentando o que encontrou e pergunte o que deseja aprovar como lançamento.
+   Apresente no chat o que encontrou e pergunte o que o analista aprova como lançamento.
 
 6. **Efetivação das Constatações**:
    Quando o usuário confirmar a lista final do `Task.md`, dispare seu controle iterativo chamando o comando CLI. 
    **CUIDADO 1:** O comando `inserir-item` exige o ID OBRIGATORIAMENTE em formato inteiro (`281`). Nunca repasse o número com pontos (`"29.09"`).
    **CUIDADO 2:** Ao inserir múltiplos itens da mesma regra, posicione a numeração sequencial/identificador no 4º argumento (campo "Número do Documento"), e não apenas dentro da string de observação. Ex: `inserir-item 1084703 274 "02/02/2026" "3" ""`.
    **CUIDADO 3 (regra 29.09 – repetição de horário):** Contam-se as ocorrências **a partir da 4.ª** repetição do mesmo horário no mesmo dia/livro: cada uma delas exige **um apontamento** (mesmo item `281`), com *N.º Documento* sequencial **1, 2, … N** no mesmo dia. Ex.: 5 entradas iguais → **dois** itens 29.09 (4.ª e 5.ª), doc `1` e `2`, podendo a observação ser idêntica nos dois.
+   **CUIDADO 4 (observação):** Redija texto factual e enxuto. Não inclua o prefixo do item, recomendações de correção, "demais conferem" ou inferências fora do achado observado.
    **AJUSTE:** Para alterar um apontamento já lançado (texto, data, documento, reincidência), use `atualizar-item` em vez de excluir/recriar quando fizer sentido.
    **ERROS:** Caso efetue um apontamento incorreto, utilize o comando `excluir-item <codigoApontamento> <idDaVerificacao>`; para edição, prefira `atualizar-item`.
 
