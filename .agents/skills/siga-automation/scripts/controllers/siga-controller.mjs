@@ -121,10 +121,12 @@ export class SigaController {
      const workDir = path.join(this.workspacePath, fullLocalidade, competenciaDir);
      await fs.mkdir(workDir, { recursive: true });
 
-     await this.scraper.scrapeClosingData(workDir, closingGuid);
-     await this.scraper.downloadMaintenance(workDir, compFormatted, closingGuid);
-     await this.scraper.downloadDeposits(workDir, compFormatted);
-     await this.scraper.downloadExpenses(workDir, compFormatted);
+    await this.scraper.scrapeClosingData(workDir, closingGuid);
+    await this.scraper.downloadMaintenance(workDir, compFormatted, closingGuid);
+    await this.scraper.switchEstablishment(nomeLocalidade);
+    await this.scraper.downloadDeposits(workDir, compFormatted);
+    await this.scraper.switchEstablishment(nomeLocalidade);
+    await this.scraper.downloadExpenses(workDir, compFormatted);
      await this.scraper.downloadVolunteers(workDir, compFormatted, nomeLocalidade);
 
      if (!isVisible) {
@@ -133,6 +135,58 @@ export class SigaController {
        console.error("[SIGA Controller] O navegador será mantido aberto (modo visível). Pressione Ctrl+C ou feche a janela.");
      }
      return { success: true, message: "Extração de todos os dados concluída.", diretorio: workDir };
+  }
+
+  /**
+   * Volta ao contexto da CO e rebaixa apenas TES00601 / TES00801 (anexos isolados).
+   * Útil quando a sessão/grid cruzou dados de outro estabelecimento.
+   */
+  async baixarDepositosDespesas(localidadeExtrair, competenciaExtrair, opts = {}) {
+    const { isVisible = false, limparLocal = false } = opts || {};
+    if (!localidadeExtrair || !competenciaExtrair) {
+      throw new Error(
+        "Uso: baixar-depositos-despesas <localidadeCompletaSIGA> <MM/AAAA> [--visivel=true] [--limpar-local=true]"
+      );
+    }
+
+    if (!(await this.browser.hasValidSession(!isVisible))) throw new Error("Sessão inválida.");
+    await this.browser.init(!isVisible);
+    this.scraper.page = this.browser.page;
+
+    const parts = localidadeExtrair.split(" - ");
+    const nomeLocalidade = parts.length >= 2 ? parts[1].trim() : localidadeExtrair.trim();
+
+    const [mes, ano] = competenciaExtrair.split("/");
+    const compFormatted = `${mes.padStart(2, "0")}/${ano}`;
+    const competenciaDir = `${ano}-${mes.padStart(2, "0")}`;
+
+    const fullLocalidade = await this.scraper.switchEstablishment(nomeLocalidade);
+    const workDir = path.join(this.workspacePath, fullLocalidade, competenciaDir);
+    await fs.mkdir(workDir, { recursive: true });
+
+    const depDir = path.join(workDir, "Depositos");
+    const desDir = path.join(workDir, "Despesas");
+    if (limparLocal) {
+      await fs.rm(depDir, { recursive: true, force: true });
+      await fs.rm(desDir, { recursive: true, force: true });
+    }
+
+    await this.scraper.switchEstablishment(nomeLocalidade);
+    await this.scraper.downloadDeposits(workDir, compFormatted);
+
+    await this.scraper.switchEstablishment(nomeLocalidade);
+    await this.scraper.downloadExpenses(workDir, compFormatted);
+
+    if (!isVisible) await this.browser.close();
+
+    return {
+      success: true,
+      message: "Anexos TES.Deposito e TES.Despesa re-download concluído.",
+      diretorio: workDir,
+      depositos: depDir,
+      despesas: desDir,
+      limparLocal
+    };
   }
 
   async validarVoluntarios(localidade, competencia) {

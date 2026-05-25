@@ -10,6 +10,13 @@ Esta skill fornece uma suíte completa em CLI para extração de dados e automa�
 **IMPORTANTE: Como a skill é distribuível, o caminho para os scripts dependerá de onde a skill for instalada.**
 Caminho principal do CLI: `scripts/siga-tools.mjs`
 
+## Princípio imperativo: o analista manda nos lançamentos e no encerramento
+
+- **Quem realiza e responsabiliza a verificação é o utilizador (analista humano).** A skill e o CLI são **apenas apoio** — extração, organização de ficheiros, leitura de documentos, proposta de mapeamento para o catálogo ERP e texto de parecer — **não** substituem o juízo do auditor.
+- A I.A. **deve** propor achados (`codigo` ERP, dados sugeridos, observação factual). Pode atualizar **`Task-Parecer-*.md`** com essas propostas e os comandos *sugeridos* (como exemplo).
+- **`inserir-item`**, **`atualizar-item`**, **`excluir-item`**, **`fechar-verificacao`** e **`baixar-relatorio`** só podem ser executados depois do utilizador **confirmar explicitamente no chat**, com intenção clara (por exemplo: «sim, lança o item X», «aprovo lançar os quatro pontos», «podes fechar a verificação e baixar o relatório»).
+- É **vedado** usar como autorização vagas como «implementa o plano», «termina todos os to-dos», «não pares até concluíres», «executa automático» ou tarefas de sistema — **mantém os apontamentos e o fecho em espera** até haver uma **confirmação humana explícita** para cada bloco sensível.
+
 ## Aprendizados Técnicos Críticos (Contexto para I.A.)
 
 Para que a automação seja robusta, a I.A. deve ter ciência de como o SIGA se comporta:
@@ -38,12 +45,14 @@ Para que a automação seja robusta, a I.A. deve ter ciência de como o SIGA se 
    - **Construir o mapa mental** `inconformidade observada` → par (`codigo`, `nomeExibicao`, `nomeGrupo`), usando a redação do ERP como *fonte* dos critérios oficiais.
    - **Tentar converter** cada constatação da auditoria em proposta de apontamento: escolher **um** `codigo` por achado, redigir `observacao` e campos de data / *N.º Documento* alinhados a esta skill (e geralmente apresentar ao analista no parecer *antes* de `inserir-item`, salvo se o fluxo do utilizador for “já lance tudo”).
 
-   **Quando a I.A. pode fazer o mapeamento e propor/inserir apontamentos de forma autónoma (entendimento *pleno*):**
+   **Quando a I.A. pode propor o mapeamento com confiança (entendimento *pleno* no catálogo):**
    - Existe no catálogo **exatamente uma** linha cujo `nomeExibicao` descreve, sem ambiguidade, a mesma situação que se viu no PDF/JSON; e
    - O `codigo` a usar (inteiro) está explícito nessa linha; e
    - Não existem **duas** regras distintas aplicáveis ao mesmo fato; e
-   - Regras de procedimento crítico desta skill (ex.: 29.09 com múltiplos `N.º Documento`, `parseInt` do `codigo`, nunca o rótulo `29.09` sozinho no CLI) estão **satisfeitas**; e
-   - O analista do chat **já autorizou** o lançamento, ou o pedido do utilizador foi explícito para isso.
+   - Regras de procedimento crítico desta skill (ex.: 29.09 com múltiplos `N.º Documento`, `parseInt` do `codigo`, nunca o rótulo `29.09` sozinho no CLI) estão **satisfeitas**.
+   Executar **`inserir-item`** só após confirmação explícita do utilizador (secção «Princípio imperativo»); clareza no catálogo **não** dispensa esse passo.
+
+   **Já há autorização para chamar `inserir-item` / `fechar-verificacao`?** Só quando o utilizador tiver respondido afirmativamente na conversa aos **tipos de ação concretos** (lançar, alterar, excluir, encerrar, baixar). Frases ambíguas ou genéricas de automação não contam.
 
    **Quando a I.A. *não* deve adivinhar: deve interpelar o analista (perguntar no chat):**
    - Aparecem **itens novos** ou inéditos no catálogo (p.ex. códigos ou textos de `nomeExibicao` que não existiam nas auditorias anteriores ou fora do roteiro desta skill) e a relação com o documento **não** está 100% clara.

@@ -53,6 +53,18 @@ async function run() {
       result = await controller.extrairDados(idExtrair, localidadeExtrair, compExtrair, isVisible);
       break;
     }
+    case "baixar-depositos-despesas": {
+      const limparLocal = args.includes("--limpar-local=true");
+      const pos = args.filter(
+        (a) => a !== "--visivel=true" && a !== "--limpar-local=true"
+      );
+      const [localidadeBs, compBs] = pos;
+      result = await controller.baixarDepositosDespesas(localidadeBs, compBs, {
+        isVisible,
+        limparLocal
+      });
+      break;
+    }
     case "validar-voluntarios": {
       const [localidadeVol, compVol] = args;
       result = await controller.validarVoluntarios(localidadeVol, compVol);

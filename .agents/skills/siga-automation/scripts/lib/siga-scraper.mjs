@@ -185,7 +185,9 @@ export class SigaScraper {
     const gedUrl = `https://siga.congregacao.org.br/GED/GED99901.aspx?codigo=${codigo}`;
     
     // Navegar para a página GED que contém o script de download
-    const response = await this.page.goto(gedUrl, { waitUntil: "networkidle", timeout: 30000 });
+    // GED grandes (ex.: colagem DESPESAS) podem exceder 30s com networkidle; domcontentloaded + timeout maior é mais estável.
+    await this.page.goto(gedUrl, { waitUntil: "domcontentloaded", timeout: 120000 });
+    await this.page.waitForTimeout(2000).catch(() => {});
     const html = await this.page.content();
 
     // Extrair URL/headers do script embutido (engine.js L2139-2148)
@@ -501,26 +503,50 @@ export class SigaScraper {
     }
 
     const items = await this.page.evaluate((targetComp) => {
+        const partesComp = targetComp.split("/").map((s) => s.trim()).filter(Boolean);
+        const mesComp = String(partesComp[0] || "").padStart(2, "0");
+        const anoComp = String(partesComp[1] || "");
+        if (!(mesComp && anoComp)) return [];
+
+        /** @returns {boolean} */
+        function linhaEhDaCompetencia(rowEl) {
+          const cel0 = rowEl.querySelector("td:nth-child(1)")?.textContent?.trim() || "";
+          const cel1 = rowEl.querySelector("td:nth-child(2)")?.textContent?.trim() || "";
+
+          const mDd = /^(\d{1,2})\/(\d{1,2})\/(\d{4})/.exec(cel0);
+          if (mDd && mDd.length >= 4) {
+            const mo = String(mDd[2]).padStart(2, "0");
+            const yy = String(mDd[3]);
+            return mo === mesComp && yy === anoComp;
+          }
+
+          const norm = (s) => String(s || "").replace(/\s+/g, "");
+          let mMm = /^(\d{1,2})\/(\d{4})$/.exec(norm(cel0));
+          if (!mMm) mMm = /^(\d{1,2})\/(\d{4})$/.exec(norm(cel1));
+          if (mMm && mMm.length >= 3) {
+            return String(mMm[1]).padStart(2, "0") === mesComp && String(mMm[2]) === anoComp;
+          }
+
+          const fullHead = `${cel0} ${cel1}`;
+          const reMesAnoComp = new RegExp(
+            `(^|[^0-9])${mesComp}\\/${anoComp}([^0-9]|$)`
+          );
+          return reMesAnoComp.test(fullHead);
+        }
+
+        const vistos = new Set();
         const data = [];
-        document.querySelectorAll("#grid1 tbody tr").forEach(row => {
-            const cells = row.querySelectorAll("td");
-            if (cells.length < 5) return;
-            // Para depósitos, coluna Mês (célula 1) ou Data (célula 0). 
-            // Para despesas, freqüentemente tem Data na cél[0] e Mês não existe. 
-            // Porém o Roteiro apontava que TES00601 tem Mês na cél[1]. 
-            // Na dúvida, vamos pegar os `data-codigo` que estejam visíveis ou filtrados?
-            // O sistema SIGA filtra a grid com base no ano atual se não houver filtro preenchido.
-            // Para validar a competência, verificaremos se a Data contém o mes/ano da competência (`01/2026`).
-            const mesAnoUrl = targetComp.split("/"); // ['01', '2026']
-            let textDaLinha = row.textContent || "";
-            // Verifica se a string do mes/ano está em alguma célula inicial
-            let pertenceAComp = textDaLinha.includes(targetComp) || 
-               (!targetComp || (cells[0] && cells[0].textContent.includes(`${mesAnoUrl[0]}/${mesAnoUrl[1]}`)));
-               
-            const link = row.querySelector("a[data-codigo]");
-            if (link && pertenceAComp) {
-                data.push({ codigo: link.getAttribute("data-codigo") });
-            }
+        document.querySelectorAll("#grid1 tbody tr").forEach((row) => {
+          const cells = row.querySelectorAll("td");
+          if (cells.length < 5) return;
+          if (!linhaEhDaCompetencia(row)) return;
+
+          const link = row.querySelector("a[data-codigo]");
+          const guid = link?.getAttribute("data-codigo") || "";
+          if (!guid || vistos.has(guid)) return;
+          vistos.add(guid);
+
+          data.push({ codigo: guid });
         });
         return data;
     }, competencia);
