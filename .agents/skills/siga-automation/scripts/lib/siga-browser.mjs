@@ -157,8 +157,8 @@ export class SigaBrowser {
       const url = this.page.url();
       console.error(`[SIGA Browser] URL após navegação: ${url}`);
 
-      if (url.includes("login") || url.includes("Autenticacao") || url.includes("logon") || url.includes("logoff")) {
-        console.error("[SIGA Browser] ❌ Sessão expirada (redirecionado para login/logout).");
+      if (url.includes("login") || url.includes("Autenticacao") || url.includes("logon") || url.includes("logoff") || url.endsWith("index.aspx") || url.includes("index.aspx?")) {
+        console.error("[SIGA Browser] ❌ Sessão expirada (redirecionado para login/logout/index).");
         return false;
       }
 
