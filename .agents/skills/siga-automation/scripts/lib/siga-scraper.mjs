@@ -20,6 +20,118 @@ export class SigaScraper {
   constructor(browser) {
     this.browser = browser; // Instance of SigaBrowser
     this.page = browser.page;
+    /** @type {string|null} MM/AAAA — aplicado após cada troca de CO (Mês de Trabalho no SIGA). */
+    this.workingCompetencia = null;
+  }
+
+  // ====================================================================
+  // 0. MÊS DE TRABALHO (SIS99908 — #f_competencia_webmaster)
+  // O RH00401 e várias telas usam a competência da sessão (localStorage competenciasDados),
+  // não só o parâmetro passado ao CLI. Sem isto, maio/2026 na barra devolve datas */05/26.
+  // ====================================================================
+  async fetchRh010Competencias() {
+    return this.page.evaluate(async () => {
+      const token =
+        document.querySelector("#antiXsrfTokenGlobal")?.value ||
+        document.cookie.match(/__AntiXsrfToken=([^;]+)/)?.[1];
+      let jwt = window.localStorage.getItem("ccbsiga-token-api") || "";
+      if (jwt.startsWith('"')) jwt = jwt.slice(1, -1);
+      const resp = await fetch(
+        "https://siga-api.congregacao.org.br/api/rh/rh010/dados/tabela?codigoCompetencia=&codigoStatus=",
+        {
+          headers: {
+            accept: "application/json",
+            __antixsrftoken: token,
+            Authorization: `Bearer ${jwt}`,
+          },
+        }
+      );
+      if (!resp.ok) return [];
+      return await resp.json();
+    });
+  }
+
+  async resolveCompetenciaCodigo(competenciaLabel) {
+    const norm = String(competenciaLabel || "").trim().toLowerCase();
+    const list = await this.fetchRh010Competencias();
+    const hit = (list || []).find(
+      (c) => String(c.nomeExibicaoCompetencia || "").trim().toLowerCase() === norm
+    );
+    return hit?.codigoCompetencia || null;
+  }
+
+  /**
+   * Define o Mês de Trabalho global (ex.: 03/2026). Competências encerradas podem
+   * não aparecer no &lt;select&gt;; injeta a opção via codigoCompetencia da API RH010.
+   */
+  async switchWorkingMonth(competencia) {
+    const parts = String(competencia || "").split("/");
+    if (parts.length < 2) {
+      console.error("[SIGA Scraper] ⚠️ Competência inválida para Mês de Trabalho:", competencia);
+      return false;
+    }
+    const label = `${parts[0].padStart(2, "0")}/${parts[1]}`;
+
+    const codigo = await this.resolveCompetenciaCodigo(label);
+    if (!codigo) {
+      console.error(`[SIGA Scraper] ❌ codigoCompetencia não encontrado para ${label}.`);
+      return false;
+    }
+
+    console.error(`[SIGA Scraper] Definindo Mês de Trabalho: ${label}...`);
+    await this.page.goto("https://siga.congregacao.org.br/SIS/SIS99908.aspx", {
+      waitUntil: "networkidle",
+      timeout: 30000,
+    });
+    await this.page.waitForTimeout(1000);
+
+    const switched = await this.page.evaluate(
+      ({ codigoComp, lbl }) => {
+        const sel = document.querySelector("#f_competencia_webmaster");
+        if (!sel) return { ok: false, reason: "select #f_competencia_webmaster ausente" };
+        if (![...sel.options].some((o) => o.value === codigoComp)) {
+          sel.add(new Option(lbl, codigoComp));
+        }
+        sel.value = codigoComp;
+        if (window.jQuery) window.jQuery(sel).val(codigoComp).trigger("change");
+        sel.dispatchEvent(new Event("change", { bubbles: true }));
+        const btn = document.querySelector("#btn-adicionar-competencia");
+        if (!btn) return { ok: false, reason: "botão #btn-adicionar-competencia ausente" };
+        btn.click();
+        return { ok: true };
+      },
+      { codigoComp: codigo, lbl: label }
+    );
+
+    if (!switched.ok) {
+      console.error(`[SIGA Scraper] ❌ Falha ao trocar Mês de Trabalho: ${switched.reason}`);
+      return false;
+    }
+
+    await this.page.waitForTimeout(3000);
+
+    const check = await this.page.evaluate((lbl) => {
+      try {
+        const d = JSON.parse(localStorage.getItem("competenciasDados") || "{}");
+        return { ok: String(d.nome || "").trim() === lbl, nome: d.nome, mes: d.mes };
+      } catch {
+        return { ok: false };
+      }
+    }, label);
+
+    if (check.ok) {
+      console.error(`[SIGA Scraper] ✅ Mês de Trabalho: ${label} (sessão competenciasDados).`);
+      if (this.browser?.browserContext) {
+        await this.browser.browserContext.storageState({ path: this.browser.stateFile });
+      }
+      return true;
+    }
+
+    console.error(
+      `[SIGA Scraper] ⚠️ Mês de Trabalho pode não ter sido aplicado. Esperado ${label}, obtido:`,
+      check
+    );
+    return false;
   }
 
   // ====================================================================
@@ -75,7 +187,11 @@ export class SigaScraper {
     
     await this.page.waitForTimeout(2000);
     console.error("[SIGA Scraper] Contexto de unidade alterado.");
-    
+
+    if (this.workingCompetencia) {
+      await this.switchWorkingMonth(this.workingCompetencia);
+    }
+
     return selected.found ? selected.text : establishmentName;
   }
 
@@ -724,6 +840,64 @@ export class SigaScraper {
           "TES.Despesa", 
           "Despesas"
       );
+  }
+
+  // ====================================================================
+  // Diagnóstico de sessão (Mês de Trabalho × CO × RH00401)
+  // ====================================================================
+
+  /** Lê `localStorage.competenciasDados` e o rótulo visível do select. */
+  async readWorkingMonthSession() {
+    await this.page.goto("https://siga.congregacao.org.br/SIS/SIS99908.aspx", {
+      waitUntil: "networkidle",
+      timeout: 30000,
+    });
+    return this.page.evaluate(() => {
+      let dados = null;
+      try {
+        const raw = localStorage.getItem("competenciasDados");
+        if (raw) dados = JSON.parse(raw);
+      } catch {
+        dados = null;
+      }
+      const sel = document.querySelector("#f_competencia_webmaster");
+      const selectText = sel?.selectedOptions?.[0]?.text?.trim() || null;
+      const selectValue = sel?.value || null;
+      return {
+        competenciasDados: dados
+          ? { nome: dados.nome, mes: dados.mes, codigo: dados.codigo }
+          : null,
+        selectText,
+        selectValue,
+      };
+    });
+  }
+
+  /** Amostra datas da grid RH00401 (coluna data de registro). */
+  async probeRh00401Grid() {
+    await this.page.goto(
+      "https://siga.congregacao.org.br/RH/RH00401.aspx?f_inicio=S&__initPage__=S",
+      { waitUntil: "networkidle", timeout: 30000 }
+    );
+    return this.page.evaluate(() => {
+      const datas = [];
+      document.querySelectorAll("#grid1 tbody tr").forEach((row) => {
+        const cells = row.querySelectorAll("td");
+        if (cells.length >= 7 && cells[6]) {
+          datas.push(cells[6].textContent.trim());
+        }
+      });
+      return { totalLinhas: datas.length, datas };
+    });
+  }
+
+  /** Filtra linhas RH010 por trecho do nome da localidade. */
+  filterRh010ByLocalidade(rows, localidadeNeedle) {
+    const n = String(localidadeNeedle || "").trim().toUpperCase();
+    if (!n) return rows || [];
+    return (rows || []).filter((x) =>
+      String(x.nomeExibicaoLocalidade || "").toUpperCase().includes(n)
+    );
   }
 }
 

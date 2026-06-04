@@ -48,6 +48,11 @@ async function run() {
       result = await controller.iniciarVerificacao(idIniciar, dataInicio, isVisible);
       break;
     }
+    case "verificar-sessao-co": {
+      const [localidadeSess, compSess] = args.filter(argSemFlag);
+      result = await controller.verificarSessaoCo(localidadeSess, compSess, isVisible);
+      break;
+    }
     case "extrair-dados": {
       const [idExtrair, localidadeExtrair, compExtrair] = args;
       result = await controller.extrairDados(idExtrair, localidadeExtrair, compExtrair, isVisible);
@@ -156,7 +161,28 @@ async function run() {
       break;
     }
     default:
-      console.error(JSON.stringify({ success: false, error: `Comando desconhecido: ${command}` }));
+      console.error(
+        JSON.stringify({
+          success: false,
+          error: `Comando desconhecido: ${command}`,
+          comandos: [
+            "login",
+            "sincronizar-lista-itens",
+            "listar-verificacoes",
+            "verificar-sessao-co",
+            "iniciar-verificacao",
+            "extrair-dados",
+            "baixar-depositos-despesas",
+            "validar-voluntarios",
+            "render-pdf-png",
+            "inserir-item",
+            "atualizar-item",
+            "excluir-item",
+            "fechar-verificacao",
+            "baixar-relatorio",
+          ],
+        })
+      );
       process.exit(1);
   }
 

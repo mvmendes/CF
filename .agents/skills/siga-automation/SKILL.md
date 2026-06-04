@@ -30,6 +30,11 @@ Para que a automação seja robusta, a I.A. deve ter ciência de como o SIGA se 
    - O SIGA utiliza a tela `SIS99906.aspx` para trocar a Unidade.  
    - Não basta selecionar a `<option>` no HTML. A automação localiza a opção, força o valor no input hidden e chama o `form.submit()`.
 
+2b. **Mês de Trabalho (barra superior — crítico):**
+   - O dropdown **Mês de Trabalho** (`#f_competencia_webmaster` em `SIS99908.aspx`) define a competência da **sessão** (`localStorage` → `competenciasDados`). Telas como **RH00401** listam apontamentos conforme esse mês — **não** apenas o parâmetro `MM/AAAA` do CLI.
+   - Se a barra estiver em **05/2026** e a auditoria for **03/2026**, o `dados_voluntarios.json` virá com datas `*/05/26` (falso 29.12). O `extrair-dados` chama `switchWorkingMonth` após cada troca de CO (competências encerradas são injetadas via `codigoCompetencia` da API RH010).
+   - **Pré-voo obrigatório:** antes de `extrair-dados` ou `validar-voluntarios`, execute `verificar-sessao-co` (troca CO, aplica o mês, amostra RH00401). Só prossiga se `"ok": true` no JSON; se `"ok": false`, leia `problemas` e corrija a sessão (ou repita após `login`).
+
 3. **Arquitetura de Anexos e GED Azure:**
    - Os documentos em transações financeiras (Fechamentos, Despesas) e Voluntários **NÃO** estão em links HTML clássicos.
    - Para listar arquivos: O SIGA invoca um endpoint SOAP `ArquivoWS.asmx/Selecionar`.
@@ -76,6 +81,7 @@ Supondo que você está na raiz da skill:
 - `login`: Abre o navegador Playwright visível para o usuário autenticar-se. O processo detecta automaticamente a rede e gera o `state.json`. Ex: `node scripts/siga-tools.mjs login --visivel=true`
 - `sincronizar-lista-itens [codigoDepartamento]`: Baixa o catálogo de itens de verificação do ERP e grava `config/lista-item-verificacao.json` (padrão: `24` = Conselho Fiscal). Também ocorre **automaticamente** em `listar-verificacoes`, `iniciar-verificacao` e `extrair-dados`.
 - `listar-verificacoes <filtroLocalidadeOuSetor> <competencia>`: Busca pendências de auditoria. Para verificação de **Casa de Oração**, prefira código/nome da CO (ex.: `21-0173` ou `CIDADE ADEMAR`) em vez de filtro genérico por setor, para não selecionar Tesouraria/Setor por engano. Ex: `node scripts/siga-tools.mjs listar-verificacoes "21-0173" "02/2026"`
+- `verificar-sessao-co <localidade> <competencia>`: Diagnóstico rápido — Mês de Trabalho (`competenciasDados`), `codigoCompetencia` (RH010), troca de CO e amostra de datas em **RH00401** (`*/MM/AA`). Retorna `"ok": true|false`. Ex.: `node scripts/siga-tools.mjs verificar-sessao-co "PEDREIRA" "03/2026"`
 - `extrair-dados <id> <localidade> <competencia>`: O fluxo principal. Faz a troca de unidade, busca a chave GUID do mês, lê despesas e baixa todos os PDFs financeiros, de manutenção e voluntários. Os dados são estruturados em `/works/<Localidade>/<Competencia>/`.
 - `baixar-depositos-despesas <localidade> <competencia> [--limpar-local=true]`: Rebaixa só anexos TES00601/TES00801 (pastas `Depositos/` e `Despesas/`), com troca explícita de CO antes de cada ecrã. Use `--limpar-local=true` para apagar as duas pastas antes de gravar.
 - `validar-voluntarios <localidade> <competencia>`: Valida os apontamentos dos voluntários em busca de repetições sequenciais no arquivo gerado pela extração.
@@ -114,6 +120,7 @@ Use este plano para **qualquer** verificação mensal do Conselho Fiscal, indepe
 
 ### 3. Início e extração dos dados
 - Se a verificação ainda precisar ser aberta, execute `node scripts/siga-tools.mjs iniciar-verificacao <id> <dataInicioDD/MM/AAAA>`.
+- **Pré-voo de sessão (obrigatório):** `node scripts/siga-tools.mjs verificar-sessao-co "<CO ou trecho do nome>" "<MM/AAAA>"`. Confirme `"ok": true` antes de extrair; se `false`, não rode `extrair-dados` até corrigir (evita falso 29.12 e re-download desnecessário).
 - Execute a extração principal: `node scripts/siga-tools.mjs extrair-dados <id> "<localidade completa>" "<MM/AAAA>"`.
 - Confirme que foi criada a árvore `works/<localidade>/<AAAA-MM>/` com `Fechamento`, `Despesas`, `Manutencao`, `Voluntarios`, anexos e JSONs consolidados.
 - Se o fechamento/GUID não existir para a competência, pare e informe o bloqueio; não invente pastas, GUIDs ou IDs.
@@ -171,7 +178,9 @@ Siga **rigorosamente** o plano mestre acima. O roteiro abaixo é apenas um resum
 3. **Identificação da verificação e extração de dados**:
    Liste por CO/código BR, não por setor genérico, e confirme que o `codigoVerificacao` retornado é da aplicação **CASA DE ORAÇÃO**:
    `node scripts/siga-tools.mjs listar-verificacoes "21-0198" "02/2026"`  
-   Rode `iniciar-verificacao <id> <data>` quando necessário e, o mais importante:
+   Rode `iniciar-verificacao <id> <data>` quando necessário. **Antes de extrair:**
+   `node scripts/siga-tools.mjs verificar-sessao-co "JD MIRIAM" "02/2026"` — só continue se `"ok": true`.  
+   Em seguida:
    `node scripts/siga-tools.mjs extrair-dados 123456 "BR 21-0198 - JD MIRIAM - SANTO AMARO" "02/2026"`
    Alerte o usuário que está procedendo com o download de todos os comprovantes.
 

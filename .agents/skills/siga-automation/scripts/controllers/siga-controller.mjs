@@ -95,6 +95,10 @@ export class SigaController {
      // Recria o scraper com a page injetada
      this.scraper.page = this.browser.page;
 
+     const [mes, ano] = compExtrair.split("/");
+     const compFormatted = `${mes.padStart(2, "0")}/${ano}`;
+     this.scraper.workingCompetencia = compFormatted;
+
      // 1. Trocar o estabelecimento para a CO (Casa de Oração) via interface web
      // Extrair o nome curto da localidade (ex: "PEDREIRA" de "BR 21-0198 - PEDREIRA - SANTO AMARO")
      const parts = localidadeExtrair.split(" - ");
@@ -104,8 +108,6 @@ export class SigaController {
      const fullLocalidade = await this.scraper.switchEstablishment(nomeLocalidade);
 
       // 2. Buscar o GUID do fechamento da competência na tela TES01401
-     const [mes, ano] = compExtrair.split("/");
-     const compFormatted = `${mes.padStart(2, "0")}/${ano}`;
      const closing = await this.scraper.loadClosingData(compFormatted);
      
      if (!closing || !closing.codigo) {
@@ -159,6 +161,7 @@ export class SigaController {
     const [mes, ano] = competenciaExtrair.split("/");
     const compFormatted = `${mes.padStart(2, "0")}/${ano}`;
     const competenciaDir = `${ano}-${mes.padStart(2, "0")}`;
+    this.scraper.workingCompetencia = compFormatted;
 
     const fullLocalidade = await this.scraper.switchEstablishment(nomeLocalidade);
     const workDir = path.join(this.workspacePath, fullLocalidade, competenciaDir);
@@ -186,6 +189,128 @@ export class SigaController {
       depositos: depDir,
       despesas: desDir,
       limparLocal
+    };
+  }
+
+  /**
+   * Pré-voo: CO + Mês de Trabalho + amostra RH00401 antes de `extrair-dados`.
+   * Evita extração com sessão em competência errada (ex.: 05/2026 × auditoria 03/2026).
+   */
+  async verificarSessaoCo(localidade, competencia, isVisible = true) {
+    if (!localidade || !competencia) {
+      throw new Error(
+        'Uso: verificar-sessao-co "<localidade completa ou trecho>" "<MM/AAAA>"'
+      );
+    }
+    if (!(await this.browser.hasValidSession(!isVisible))) {
+      throw new Error("Sessão inválida. Execute 'login' primeiro.");
+    }
+
+    const [mes, ano] = competencia.split("/");
+    if (!mes || !ano) {
+      throw new Error("Competência inválida. Use MM/AAAA.");
+    }
+    const compFormatted = `${mes.padStart(2, "0")}/${ano}`;
+    const sufixoData = `${mes.padStart(2, "0")}/${String(ano).slice(-2)}`;
+
+    await this.browser.init(!isVisible);
+    this.scraper.page = this.browser.page;
+    this.scraper.workingCompetencia = compFormatted;
+
+    const parts = localidade.split(" - ");
+    const nomeLocalidade = parts.length >= 2 ? parts[1].trim() : localidade.trim();
+
+    const mesAntes = await this.scraper.readWorkingMonthSession();
+    const codigoCompetencia = await this.scraper.resolveCompetenciaCodigo(compFormatted);
+    const rh010All = await this.scraper.fetchRh010Competencias();
+    const rh010Competencia = (rh010All || []).find(
+      (c) =>
+        String(c.nomeExibicaoCompetencia || "").trim().toLowerCase() ===
+        compFormatted.toLowerCase()
+    );
+    const rh010Localidade = this.scraper.filterRh010ByLocalidade(rh010All, nomeLocalidade);
+
+    const estabelecimento = await this.scraper.switchEstablishment(nomeLocalidade);
+    const mesDepois = await this.scraper.readWorkingMonthSession();
+    const rh004 = await this.scraper.probeRh00401Grid();
+
+    const datasFora = (rh004.datas || []).filter(
+      (d) => d && !d.includes(sufixoData)
+    );
+    const amostraDatas = (rh004.datas || []).slice(0, 8);
+
+    const mesOk =
+      String(mesDepois.competenciasDados?.nome || "").trim() === compFormatted ||
+      String(mesDepois.selectText || "").trim() === compFormatted;
+
+    const avisos = [];
+    if (
+      mesDepois.selectText &&
+      String(mesDepois.selectText).trim() !== compFormatted &&
+      mesOk
+    ) {
+      avisos.push(
+        `Select visível (${mesDepois.selectText}) difere de competenciasDados (${compFormatted}); confiar nas datas RH00401.`
+      );
+    }
+
+    const problemas = [];
+    if (!codigoCompetencia) {
+      problemas.push(`codigoCompetencia não encontrado na API RH010 para ${compFormatted}.`);
+    }
+    if (!mesOk) {
+      problemas.push(
+        `Mês de Trabalho da sessão não é ${compFormatted} (obtido: ${mesDepois.competenciasDados?.nome || mesDepois.selectText || "?" }).`
+      );
+    }
+    if (rh004.totalLinhas > 0 && datasFora.length > 0) {
+      problemas.push(
+        `${datasFora.length} data(s) em RH00401 fora de */${sufixoData} (ex.: ${datasFora.slice(0, 3).join(", ")}).`
+      );
+    }
+    if (rh004.totalLinhas === 0) {
+      problemas.push("RH00401 sem linhas — pode ser CO errada ou competência vazia.");
+    }
+
+    const ok = problemas.length === 0;
+
+    if (!isVisible) await this.browser.close();
+
+    return {
+      success: true,
+      ok,
+      competenciaEsperada: compFormatted,
+      sufixoDataEsperado: sufixoData,
+      codigoCompetencia: codigoCompetencia || null,
+      estabelecimento,
+      filtroLocalidade: nomeLocalidade,
+      mesTrabalho: {
+        antes: mesAntes,
+        depois: mesDepois,
+        alterado: JSON.stringify(mesAntes) !== JSON.stringify(mesDepois),
+      },
+      rh010: {
+        competencia: rh010Competencia
+          ? {
+              codigoCompetencia: rh010Competencia.codigoCompetencia,
+              nomeExibicaoCompetencia: rh010Competencia.nomeExibicaoCompetencia,
+              status: rh010Competencia.nomeStatus || rh010Competencia.status,
+            }
+          : null,
+        localidadesNaCompetencia: rh010Localidade.length,
+        amostraLocalidades: rh010Localidade.slice(0, 3).map((r) => r.nomeExibicaoLocalidade),
+      },
+      rh00401: {
+        totalLinhas: rh004.totalLinhas,
+        amostraDatas,
+        datasForaCompetencia: datasFora.length,
+        exemplosFora: datasFora.slice(0, 5),
+      },
+      problemas,
+      avisos,
+      message: ok
+        ? `Sessão OK para ${estabelecimento} em ${compFormatted} (${rh004.totalLinhas} linhas RH00401).`
+        : `Sessão NÃO confere: ${problemas.join(" ")}`,
     };
   }
 
