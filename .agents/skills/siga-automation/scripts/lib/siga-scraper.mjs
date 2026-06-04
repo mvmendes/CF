@@ -1,5 +1,6 @@
 import path from "path";
 import fs from "fs/promises";
+import crypto from "node:crypto";
 import { existsSync, mkdirSync, writeFileSync } from "fs";
 
 /**
@@ -179,7 +180,84 @@ export class SigaScraper {
   // Baseado em: engine.js → downloadFromGedByCodigo (L2110-2205)
   // Extrai URL do blob + Authorization do script embutido no HTML
   // ====================================================================
-  async downloadFromGedByCodigo(codigo, suggestedName, targetDir) {
+
+  _sanitizeGedFileName(fileName) {
+    return String(fileName || "arquivo").trim().replace(/[<>:"/\\|?*\x00-\x1F]/g, "_");
+  }
+
+  _sha256Buffer(buf) {
+    return crypto.createHash("sha256").update(buf).digest("hex");
+  }
+
+  /** Evita sobrescrever quando o GED devolve o mesmo nome sugerido para blobs distintos. */
+  _resolveUniqueGedPath(targetDir, safeName, gedCodigo) {
+    const ext = path.extname(safeName);
+    const stem = path.basename(safeName, ext) || "arquivo";
+    const short = String(gedCodigo || "ged").split("-")[0].toLowerCase();
+
+    if (!existsSync(path.join(targetDir, safeName))) {
+      return { fullPath: path.join(targetDir, safeName), fileName: safeName, disambiguated: false };
+    }
+
+    for (let n = 1; n <= 20; n += 1) {
+      const suffix = n === 1 ? short : `${short}_${n}`;
+      const candidate = `${stem}__${suffix}${ext}`;
+      const full = path.join(targetDir, candidate);
+      if (!existsSync(full)) {
+        return { fullPath: full, fileName: candidate, disambiguated: true };
+      }
+    }
+
+    const fallback = `${stem}__${gedCodigo}${ext}`;
+    return { fullPath: path.join(targetDir, fallback), fileName: fallback, disambiguated: true };
+  }
+
+  async _appendGedDuplicateManifest(targetDir, payload) {
+    const manifestPath = path.join(targetDir, ".ged-download-manifest.json");
+    let manifest = { duplicadosNome: [] };
+    try {
+      manifest = JSON.parse(await fs.readFile(manifestPath, "utf8"));
+    } catch {
+      /* primeiro registo */
+    }
+
+    const idx = manifest.duplicadosNome.findIndex(
+      (g) => g.nomeSugerido === payload.nomeSugerido
+    );
+    if (idx >= 0) {
+      manifest.duplicadosNome[idx].arquivos.push(payload.novoArquivo);
+      const hashes = new Set(manifest.duplicadosNome[idx].arquivos.map((a) => a.sha256));
+      manifest.duplicadosNome[idx].conteudoIdentico = hashes.size === 1;
+      manifest.duplicadosNome[idx].interpretacao =
+        hashes.size === 1
+          ? "Mesmo conteúdo (hash SHA-256 igual): provável duplicata de upload no GED para o mesmo ficheiro."
+          : "Conteúdo diferente com o mesmo nome sugerido: conferir se um anexo foi arquivado por engano no lugar de outro comprovante.";
+    } else {
+      const hashes = new Set([payload.novoArquivo.sha256]);
+      if (payload.arquivoAnterior) {
+        hashes.add(payload.arquivoAnterior.sha256);
+      }
+      manifest.duplicadosNome.push({
+        nomeSugerido: payload.nomeSugerido,
+        arquivos: payload.arquivoAnterior
+          ? [payload.arquivoAnterior, payload.novoArquivo]
+          : [payload.novoArquivo],
+        conteudoIdentico: hashes.size === 1,
+        interpretacao:
+          hashes.size === 1
+            ? "Mesmo conteúdo (hash SHA-256 igual): provável duplicata de upload no GED para o mesmo ficheiro."
+            : "Conteúdo diferente com o mesmo nome sugerido: conferir se um anexo foi arquivado por engano no lugar de outro comprovante.",
+      });
+    }
+
+    await fs.writeFile(manifestPath, JSON.stringify(manifest, null, 2), "utf8");
+    console.error(
+      `[SIGA Scraper] ⚠️ Nome GED duplicado "${payload.nomeSugerido}" → ${payload.novoArquivo.arquivo} ` +
+        `(manifest: ${manifestPath})`
+    );
+  }
+
+  async downloadFromGedByCodigo(codigo, suggestedName, targetDir, meta = null) {
     console.error(`[SIGA Scraper] Baixando: ${suggestedName} (GED: ${codigo})...`);
     
     const gedUrl = `https://siga.congregacao.org.br/GED/GED99901.aspx?codigo=${codigo}`;
@@ -220,13 +298,49 @@ export class SigaScraper {
     
     if (blobResp.ok()) {
       const buf = await blobResp.body();
-      const safeName = fileName.replace(/[<>:"/\\|?*]/g, "_");
-      await fs.writeFile(path.join(targetDir, safeName), buf);
-      console.error(`[SIGA Scraper] ✅ ${safeName} salvo (${(buf.length / 1024).toFixed(1)} KB).`);
-      return true;
+      const safeName = this._sanitizeGedFileName(fileName);
+      const firstPath = path.join(targetDir, safeName);
+      let arquivoAnterior = null;
+
+      if (existsSync(firstPath)) {
+        const priorBuf = await fs.readFile(firstPath);
+        arquivoAnterior = {
+          arquivo: safeName,
+          gedCodigo: "(existente antes deste download)",
+          sha256: this._sha256Buffer(priorBuf),
+          bytes: priorBuf.length,
+        };
+      }
+
+      const { fullPath, fileName: savedName, disambiguated } = this._resolveUniqueGedPath(
+        targetDir,
+        safeName,
+        codigo
+      );
+      await fs.writeFile(fullPath, buf);
+
+      const sha256 = this._sha256Buffer(buf);
+      const novoArquivo = {
+        arquivo: savedName,
+        gedCodigo: codigo,
+        sha256,
+        bytes: buf.length,
+        ...(meta || {}),
+      };
+
+      if (disambiguated) {
+        await this._appendGedDuplicateManifest(targetDir, {
+          nomeSugerido: safeName,
+          arquivoAnterior,
+          novoArquivo,
+        });
+      }
+
+      console.error(`[SIGA Scraper] ✅ ${savedName} salvo (${(buf.length / 1024).toFixed(1)} KB).`);
+      return { ok: true, fileName: savedName, disambiguated, sha256 };
     } else {
       console.error(`[SIGA Scraper] ❌ Download falhou (${blobResp.status()}) para ${fileName}`);
-      return false;
+      return { ok: false };
     }
   }
 
@@ -581,7 +695,12 @@ export class SigaScraper {
 
         if (files && files.length > 0) {
             for (const f of files) {
-                await this.downloadFromGedByCodigo(f.Codigo, f.Nome, targetDir);
+                await this.downloadFromGedByCodigo(f.Codigo, f.Nome, targetDir, {
+                  origemWS,
+                  origemGuid: item.codigo,
+                  pasta: folderName,
+                  nomeListaGED: f.Nome,
+                });
             }
         }
     }

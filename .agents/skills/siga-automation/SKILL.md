@@ -34,6 +34,7 @@ Para que a automação seja robusta, a I.A. deve ter ciência de como o SIGA se 
    - Os documentos em transações financeiras (Fechamentos, Despesas) e Voluntários **NÃO** estão em links HTML clássicos.
    - Para listar arquivos: O SIGA invoca um endpoint SOAP `ArquivoWS.asmx/Selecionar`.
    - Para baixar arquivos: O SIGA abre a página `GED99901.aspx`. O script extrai a URL real (Blob Storage) e o Token de Autorização do Azure, injetados diretamente na tag `<script>` dentro do HTML do GED.
+   - **Nomes duplicados no GED:** se dois blobs distintos sugerem o mesmo nome (ex.: `CF052554.pdf`), o scraper **não sobrescreve** — grava `nome__<guid8>.ext` e regista em `<pasta>/.ged-download-manifest.json` com SHA-256 de cada ficheiro e interpretação (*conteúdo idêntico* = upload duplicado; *diferente* = possível anexo trocado).
 
 4. **Catálogo de itens de verificação (ERP):**
    - Os códigos numéricos e textos de `nomeExibicao` vêm do ERP e **mudam** (ex.: novas regras 29.14, 05.09). A fonte de verdade é: `GET /api/ver/ver002/lista-item-verificacao?codigoDepartamento=24` (Conselho Fiscal). O CLI grava o resultado em `config/lista-item-verificacao.json` e **já chama** essa sincronização automaticamente no início de: `listar-verificacoes`, `iniciar-verificacao` e `extrair-dados` (sempre com departamento `24`, salvo uso explícito do comando abaixo).
@@ -76,6 +77,7 @@ Supondo que você está na raiz da skill:
 - `sincronizar-lista-itens [codigoDepartamento]`: Baixa o catálogo de itens de verificação do ERP e grava `config/lista-item-verificacao.json` (padrão: `24` = Conselho Fiscal). Também ocorre **automaticamente** em `listar-verificacoes`, `iniciar-verificacao` e `extrair-dados`.
 - `listar-verificacoes <filtroLocalidadeOuSetor> <competencia>`: Busca pendências de auditoria. Para verificação de **Casa de Oração**, prefira código/nome da CO (ex.: `21-0173` ou `CIDADE ADEMAR`) em vez de filtro genérico por setor, para não selecionar Tesouraria/Setor por engano. Ex: `node scripts/siga-tools.mjs listar-verificacoes "21-0173" "02/2026"`
 - `extrair-dados <id> <localidade> <competencia>`: O fluxo principal. Faz a troca de unidade, busca a chave GUID do mês, lê despesas e baixa todos os PDFs financeiros, de manutenção e voluntários. Os dados são estruturados em `/works/<Localidade>/<Competencia>/`.
+- `baixar-depositos-despesas <localidade> <competencia> [--limpar-local=true]`: Rebaixa só anexos TES00601/TES00801 (pastas `Depositos/` e `Despesas/`), com troca explícita de CO antes de cada ecrã. Use `--limpar-local=true` para apagar as duas pastas antes de gravar.
 - `validar-voluntarios <localidade> <competencia>`: Valida os apontamentos dos voluntários em busca de repetições sequenciais no arquivo gerado pela extração.
 - `render-pdf-png <caminhoDoPdf> [pastaSaida]`: Gera **um ficheiro PNG por página** a partir de um PDF (só **Node 20+**: `pdfjs-dist` e `@napi-rs/canvas`; **sem** Python). Se `pastaSaida` for omitida, a saída fica em `<pastaDoPdf>/.pdf-render/<nomeSemExtensao>/`. Útil para inspecionar digitalizações de livro de voluntários (imagem) com zoom na IDE. Ex.: `node scripts/siga-tools.mjs render-pdf-png "works/.../limpeza-fev-2026.pdf"`.
 - `iniciar-verificacao <id> <data>`: Abre a verificação (status Em Andamento) informando a data de início.
@@ -240,6 +242,7 @@ Este passo de categorizar e validar profundamente os documentos é **ESSENCIAL e
    - **Colagem de Despesas (C-39)**: 
      - *Composição C-39:* Verifique as 3 assinaturas visíveis e obrigatórias no cabeçalho ou rodapé formal do modelo C-39.
      - *Rastreabilidade de NFs:* Cada nota listada no `despesas` do JSON (ex: R$ 159,80 Leroy Merlin, R$ 542,80 Enel/Eletropaulo) consta materialmente anexada ou grampeada nesta Colagem de Despesas? (Aponte NF ausente de comprovante com os itens `03.01` ou `03.02`).
+     - *Nomes GED duplicados:* Após extração/re-download, leia `Despesas/.ged-download-manifest.json` (se existir). Para cada grupo com `conteudoIdentico: false`, abra **ambos** os PDFs (`CF052554.pdf` e `CF052554__<guid>.pdf`), compare valor/data/fornecedor e cruze com a linha da despesa no JSON/SIGA (`origemGuid`, `nomeListaGED`). Registre no parecer se é upload duplicado inofensivo ou possível comprovante arquivado no lugar errado.
    
    - **Colagem de Depósitos (Local das Coletas)**: 
      - As filipetas bancárias ou comprovantes de caixa eletrônico devem estar legíveis na folha A4 e a folha rubricada 3 vezes.
