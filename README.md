@@ -67,6 +67,7 @@ Todos os resultados de sucesso são impressos em **JSON** no stdout (salvo o flu
 
 | Comando | Argumentos | Descrição |
 |--------|------------|------------|
+| `preflight` | (opcional) `--force=true` | Sincroniza scripts/SKILL/config com `origin/main` (obrigatório no início da sessão). |
 | `login` | (opcional) `--visivel=true` | Abre o fluxo de login; persiste a sessão em `works/.siga_session/`. |
 | `sincronizar-lista-itens` | `[codigoDepartamento]` (defeito: 24) | Descarrega o catálogo de itens de verificação do ERP e grava `config/lista-item-verificacao.json`. Pode levar o mesmo `codigo` + `--visivel`. |
 | `listar-verificacoes` | `<setor> <competencia>` | Lista verificações pendentes. Sincroniza o catálogo no início. |
@@ -110,6 +111,25 @@ Só existe **um** workflow de publicação, focado no zip das agents:
 | [`.agents/skills/siga-automation/SKILL.md`](.agents/skills/siga-automation/SKILL.md) | Roteiro de auditoria, regras de apontamento, módulo visual, catálogo ERP, SIGA/Playwright. |
 | [`scripts/installer/LEIA-ME.txt`](scripts/installer/LEIA-ME.txt) | Instalador offline, Web, publicação, `gh`, Inno. |
 | `config/lista-item-verificacao.json` / `config/doc_types.json` | Catálogo e tipos de documento (preenchidos / referência após `sincronizar-lista-itens` ou após o fluxo automático). |
+
+---
+
+## Repositório público e colaboração
+
+O repositório está (ou deve estar) **público** em [github.com/mvmendes/CF](https://github.com/mvmendes/CF).
+
+| Quem | Push em `main` | Contribuir |
+|------|----------------|------------|
+| **mvmendes** | Sim (mantenedor) | Direto ou PR |
+| **jamanoel** (Josué) e outros | Não | Pull Request; merge após aprovação de code owner |
+
+Política detalhada: [`CONTRIBUTING.md`](CONTRIBUTING.md). Aplicar/reaplicar regras no GitHub (visibilidade, branch protection, permissões):
+
+```powershell
+.\scripts\apply-github-collaboration-policy.ps1
+```
+
+**Atualizar a skill sem instalador:** na pasta da skill, `node scripts/siga-tools.mjs preflight` (ver [`SKILL.md`](.agents/skills/siga-automation/SKILL.md)).
 
 ---
 

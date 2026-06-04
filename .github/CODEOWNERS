@@ -1,0 +1,3 @@
+# Revisão obrigatória em Pull Requests que alterem a skill ou agents.
+/.agents/ @mvmendes @jamanoel
+/.github/ @mvmendes @jamanoel

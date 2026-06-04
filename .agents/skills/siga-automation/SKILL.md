@@ -10,6 +10,27 @@ Esta skill fornece uma suíte completa em CLI para extração de dados e automa�
 **IMPORTANTE: Como a skill é distribuível, o caminho para os scripts dependerá de onde a skill for instalada.**
 Caminho principal do CLI: `scripts/siga-tools.mjs`
 
+Repositório canónico (público, atualizações via git): `https://github.com/mvmendes/CF` — pasta `.agents/skills/siga-automation/`. Contribuições de terceiros: Pull Request revisado por **mvmendes** ou **jamanoel** (ver `CONTRIBUTING.md` na raiz do repo).
+
+## Pré-voo obrigatório: sincronizar skill com `origin` (antes de qualquer comando SIGA)
+
+Em **cada** sessão de auditoria (ou ao abrir o projeto após dias sem uso), execute **primeiro**:
+
+```bash
+node scripts/siga-tools.mjs preflight
+```
+
+O comando:
+
+1. Localiza a raiz do clone git (ex.: `C:\CCB\CF`).
+2. Executa `git fetch origin main`.
+3. Se houver commits novos em `.agents/skills/siga-automation/` no remoto, atualiza **scripts**, `SKILL.md`, `config/` e `package.json` a partir de `origin/main`.
+4. **Não** altera `works/`, `.siga_session/` nem `token.json` (ignorados pelo git).
+
+Só prossiga com `login`, `extrair-dados`, etc. se o JSON de saída tiver `"ok": true`. Se `"reason": "local_changes"`, peça ao analista se pode usar `preflight --force=true` ou faça commit/PR das alterações locais. Se `package.json` tiver mudado após atualização, corra `npm install` na pasta da skill.
+
+**Distribuição sem instalador:** clone ou pull do repositório público + `preflight` substituem pacotes zip/EXE para manter scripts alinhados com a equipa.
+
 ## Princípio imperativo: o analista manda nos lançamentos e no encerramento
 
 - **Quem realiza e responsabiliza a verificação é o utilizador (analista humano).** A skill e o CLI são **apenas apoio** — extração, organização de ficheiros, leitura de documentos, proposta de mapeamento para o catálogo ERP e texto de parecer — **não** substituem o juízo do auditor.
@@ -78,6 +99,7 @@ Supondo que você está na raiz da skill:
 `node scripts/siga-tools.mjs <COMANDO> [PARAMETROS...]`
 
 ### Comandos Principais:
+- `preflight` [(opcional) `--force=true`]: Sincroniza a skill com `origin/main` (fetch + atualização da pasta da skill). Executar **antes** de qualquer outro comando na sessão. Ex.: `node scripts/siga-tools.mjs preflight`
 - `login`: Abre o navegador Playwright visível para o usuário autenticar-se. O processo detecta automaticamente a rede e gera o `state.json`. Ex: `node scripts/siga-tools.mjs login --visivel=true`
 - `sincronizar-lista-itens [codigoDepartamento]`: Baixa o catálogo de itens de verificação do ERP e grava `config/lista-item-verificacao.json` (padrão: `24` = Conselho Fiscal). Também ocorre **automaticamente** em `listar-verificacoes`, `iniciar-verificacao` e `extrair-dados`.
 - `listar-verificacoes <filtroLocalidadeOuSetor> <competencia>`: Busca pendências de auditoria. Para verificação de **Casa de Oração**, prefira código/nome da CO (ex.: `21-0173` ou `CIDADE ADEMAR`) em vez de filtro genérico por setor, para não selecionar Tesouraria/Setor por engano. Ex: `node scripts/siga-tools.mjs listar-verificacoes "21-0173" "02/2026"`
@@ -107,7 +129,8 @@ Use este plano para **qualquer** verificação mensal do Conselho Fiscal, indepe
 - Nunca assuma a CO a partir de um arquivo aberto, pasta recente ou setor se o usuário não tiver informado isso no pedido atual.
 
 ### 1. Sessão, dependências e catálogo
-- Se for um ambiente novo, rode `npm install` na pasta da skill antes dos comandos Node.
+- **Pré-voo git (obrigatório):** `node scripts/siga-tools.mjs preflight` — confirme `"ok": true` (ver secção *Pré-voo obrigatório* no início desta skill).
+- Se for um ambiente novo, rode `npm install` na pasta da skill antes dos comandos Node (e de novo após `preflight` se `package.json` tiver sido atualizado).
 - Verifique se há sessão em `works/.siga_session/`. Se a sessão estiver ausente, expirada ou a API responder `401`, execute `node scripts/siga-tools.mjs login --visivel=true` e aguarde o usuário concluir o login no Chromium.
 - No início da verificação, sincronize o catálogo ERP por uma ação que já atualiza `config/lista-item-verificacao.json` (`listar-verificacoes`, `iniciar-verificacao`, `extrair-dados`) ou por `node scripts/siga-tools.mjs sincronizar-lista-itens`.
 - Após sincronizar, leia o catálogo e use sempre o `codigo` inteiro do ERP para `inserir-item` / `atualizar-item`; nunca use apenas rótulos como `29.09`, pois `parseInt("29.09")` vira `29`.

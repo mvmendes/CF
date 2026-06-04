@@ -25,6 +25,12 @@ async function run() {
   const argSemFlag = (a) => a !== "--visivel=true";
 
   switch (command) {
+    case "preflight": {
+      const force = args.includes("--force=true");
+      const { runPreflightSync } = await import("./lib/preflight-sync.mjs");
+      result = await runPreflightSync({ force });
+      break;
+    }
     case "login": {
       result = await controller.login(isVisible);
       break;
@@ -166,6 +172,7 @@ async function run() {
           success: false,
           error: `Comando desconhecido: ${command}`,
           comandos: [
+            "preflight",
             "login",
             "sincronizar-lista-itens",
             "listar-verificacoes",
