@@ -412,6 +412,24 @@ export class SigaController {
    * VER00207 com os mesmos query params do browser; sem filtro de estabelecimento/tipo/localidade
    * o SIGA costuma devolver PDF/HTML sem linhas de apontamentos.
    */
+  /**
+   * VER00207 só executa no contexto de setor (ex.: DR - SETOR SANTO AMARO), não na CO.
+   * Extrai o setor do nome completo da localidade (último segmento após " - ").
+   */
+  _resolveReportContextEstablishment(localidade) {
+    const parts = String(localidade || "")
+      .split(" - ")
+      .map((p) => p.trim())
+      .filter(Boolean);
+    const setor = parts.length >= 3 ? parts[parts.length - 1] : null;
+    if (!setor) {
+      throw new Error(
+        `Não foi possível inferir o setor a partir de "${localidade}". Use localidade completa (ex.: BR 21-0173 - CIDADE ADEMAR - SANTO AMARO).`
+      );
+    }
+    return `DR - SETOR ${setor}`;
+  }
+
   _montarUrlRelatorioVer00207({
     codigoVerificacao,
     filtroLocalidade,
@@ -453,21 +471,50 @@ export class SigaController {
      
      if (!(await this.browser.hasValidSession())) throw new Error("Sessão inválida.");
      
+     const [mes, ano] = competencia.split("/");
+     const compMmAaaa = `${mes.padStart(2, "0")}/${ano}`;
+     const compDir = `${ano}-${mes.padStart(2, "0")}`;
+
      // Para interceptar download, headless puro ou interface devem escutar o evento
-     await this.browser.init(true); 
+     await this.browser.init(true);
      const page = this.browser.page;
-     
+     this.scraper.page = page;
+
+     const parts = localidade.split(" - ");
+     const nomeLocalidade = parts.length >= 2 ? parts[1].trim() : localidade.trim();
+
+     const contextoSetor = this._resolveReportContextEstablishment(localidade);
+     console.error(
+       `[SIGA Controller] Pré-voo relatório: contexto ${contextoSetor} + Mês de Trabalho ${compMmAaaa}...`
+     );
+     this.scraper.workingCompetencia = compMmAaaa;
+     await this.scraper.switchEstablishment(contextoSetor);
+
+     const mesSessao = await this.scraper.readWorkingMonthSession();
+     const mesOk = String(mesSessao.competenciasDados?.nome || "").trim() === compMmAaaa;
+     if (!mesOk) {
+       await this.browser.close();
+       throw new Error(
+         `Mês de Trabalho da sessão não é ${compMmAaaa} (obtido: ${mesSessao.competenciasDados?.nome || mesSessao.selectText || "?"}).`
+       );
+     }
+
+     const codigoEst =
+       opts.codigoEstabelecimento ||
+       (await this.scraper.resolveEstablishmentCode(nomeLocalidade));
+     const filtroLocalidade = localidade;
+
      let url = urlCustomizada || null;
-     if (!url && opts.codigoEstabelecimento) {
+     if (!url && codigoEst) {
        const tipo =
          opts.filtroTipoVerificacao || "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO";
        const d = (opts.dataRelatorio || "").trim();
        const dataParam = d ? (d.includes("T") ? d : `${d}T00:00:00`) : "";
        url = this._montarUrlRelatorioVer00207({
          codigoVerificacao: idVerificacao,
-         filtroLocalidade: localidade,
+         filtroLocalidade,
          filtroTipoVerificacao: tipo,
-         filtroCodigoEstabelecimento: opts.codigoEstabelecimento,
+         filtroCodigoEstabelecimento: codigoEst,
          dataDocumento: dataParam
        });
      }
@@ -477,47 +524,49 @@ export class SigaController {
        );
        url = `https://siga.congregacao.org.br/ver/VER00207.aspx?codigoVerificacao=${idVerificacao}&FiltroItemVerificacao=Todos&filtroStatusVerificacao=3`;
      }
-     
-     const [mes, ano] = competencia.split("/");
-     const compFormatted = `${ano}-${mes.padStart(2, "0")}`;
-     const dir = path.join(this.workspacePath, localidade, compFormatted);
+
+     const dir = path.join(this.workspacePath, localidade, compDir);
      await fs.mkdir(dir, { recursive: true });
      
      console.error("[SIGA Controller] Acessando URL do relatório...");
-     const downloadPromise = page.waitForEvent('download', { timeout: 60000 }).catch(() => null);
-     
-     try {
-         await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 });
-     } catch (e) {
-         if (e.message.includes('Download is starting')) {
-             console.error("[SIGA Controller] O servidor iniciou a transferência do arquivo...");
-         } else {
-             throw e;
-         }
-     }
-     
-     const download = await downloadPromise;
+     console.error(`[SIGA Controller] URL: ${url}`);
+
      let filePath;
-     let fileName = `Relatório CF - ${mes}-${ano} - ${localidade}.pdf`;
-     // O Windows/SO não aceita certos caracteres, mas o nome da localidade geralmente é seguro.
-     // Tratamento básico para evitar barras que possam estar no nome do arquivo.
-     fileName = fileName.replace(/\//g, "-");
-     
+     const fileName = `Relatório CF - ${mes}-${ano} - ${localidade}.pdf`.replace(/\//g, "-");
+     filePath = path.join(dir, fileName);
+
+     const downloadPromise = page.waitForEvent("download", { timeout: 90000 });
+     try {
+       await page.goto(url, { waitUntil: "commit", timeout: 90000 });
+     } catch (e) {
+       if (!String(e.message || "").includes("Download is starting")) {
+         throw e;
+       }
+       console.error("[SIGA Controller] O servidor iniciou a transferência do arquivo...");
+     }
+
+     const download = await downloadPromise.catch(() => null);
      if (download) {
-         filePath = path.join(dir, fileName);
-         console.error(`[SIGA Controller] Salvando download em: ${filePath}`);
-         await download.saveAs(filePath);
+       console.error(`[SIGA Controller] Salvando download em: ${filePath}`);
+       await download.saveAs(filePath);
      } else {
-         filePath = path.join(dir, fileName);
-         console.error("[SIGA Controller] Gerando impressão estática PDF da página HTML...");
-         await page.emulateMedia({ media: 'print' });
-         await page.pdf({
-             path: filePath,
-             format: 'A4',
-             landscape: true,
-             printBackground: true,
-             margin: { top: '10mm', right: '10mm', bottom: '10mm', left: '10mm' }
-         });
+       const html = await page.content();
+       if (html.includes("não pode ser executado neste estabelecimento")) {
+         await this.browser.close();
+         throw new Error(
+           "VER00207 recusou o contexto de estabelecimento. O relatório exige Mês de Trabalho correto sem troca de CO na sessão."
+         );
+       }
+       const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }).catch(() => null);
+       const ct = response?.headers()?.["content-type"] || "";
+       if (ct.includes("pdf") && response) {
+         await fs.writeFile(filePath, await response.body());
+       } else {
+         await this.browser.close();
+         throw new Error(
+           "O SIGA não devolveu download PDF do relatório. Abra VER00207 no browser, copie a URL completa e passe como 4º argumento."
+         );
+       }
      }
      
      await this.browser.close();

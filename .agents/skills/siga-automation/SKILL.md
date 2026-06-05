@@ -113,7 +113,7 @@ Supondo que você está na raiz da skill:
 - `atualizar-item <codigoApontamento> <idDaVerificacao> <codigoDoItem> <dataFato> <numeroDoDocumento> <observacao> [reincidencia]`: **Edita** um apontamento já existente (API `atualizar-apontamento`, equivalente ao modal *Editar* / VER00204). Útil para corrigir texto, data, *N.º Documento*, reincidência ou item, sem excluir e recriar. A `observacao` pode ter várias palavras; se a última palavra for `true` ou `false`, ela é interpretada como **reincidência** (opcional). Ex.: `node scripts/siga-tools.mjs atualizar-item 1618999 1084703 281 "06/02/2026" "1" "Texto unificado (29.09)." false`
 - `excluir-item <codigoApontamento> <idDaVerificacao>`: Deleta um item/apontamento inserido erroneamente, utilizando seu ID de Apontamento.
 - `fechar-verificacao <id>`: Operação de submissão final do auditor.
-- `baixar-relatorio <id> <localidade> <competencia> [url]`: Efetua o download do Relatório de Auditoria PDF no padrão de nomenclatura amigável para a pasta local.
+- `baixar-relatorio <id> <localidade> <competencia> [url]`: Efetua o download do Relatório de Auditoria PDF no padrão de nomenclatura amigável para a pasta local. O CLI **troca automaticamente** o contexto para **DR - SETOR …** (inferido do nome da CO) e aplica o **Mês de Trabalho** da competência antes de abrir VER00207 — não use contexto de CO na sessão para este relatório.
 
 ---
 

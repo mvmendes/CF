@@ -134,6 +134,35 @@ export class SigaScraper {
     return false;
   }
 
+  /**
+   * Lê o código numérico do estabelecimento (filtroCodigoEstabelecimento) sem submeter o formulário.
+   * Necessário para VER00207 — trocar a CO na sessão bloqueia o relatório nesse programa.
+   */
+  async resolveEstablishmentCode(establishmentName) {
+    await this.page.goto("https://siga.congregacao.org.br/SIS/SIS99906.aspx", {
+      waitUntil: "networkidle",
+      timeout: 30000,
+    });
+    await this.page.waitForTimeout(1500);
+    const hit = await this.page.evaluate((name) => {
+      const selects = document.querySelectorAll("select");
+      for (const sel of selects) {
+        for (const opt of sel.options) {
+          if (opt.text.toUpperCase().includes(name.toUpperCase())) {
+            return { value: opt.value, text: opt.text.trim() };
+          }
+        }
+      }
+      return null;
+    }, establishmentName);
+    if (hit?.value) {
+      console.error(`[SIGA Scraper] Código estabelecimento (somente leitura): ${hit.value} — ${hit.text}`);
+      return hit.value;
+    }
+    console.error(`[SIGA Scraper] ⚠️ Código do estabelecimento não encontrado para "${establishmentName}".`);
+    return null;
+  }
+
   // ====================================================================
   // 1. TROCA DE ESTABELECIMENTO (SIS99906.aspx)
   // Baseado em: engine.js → simulateNavigationFlow + fallbackToPlaywright
@@ -163,8 +192,10 @@ export class SigaScraper {
 
     if (!selected.found) {
       console.error(`[SIGA Scraper] ⚠️ CO "${establishmentName}" não encontrada nos selects. Tentando submit...`);
+      this.lastCodigoEstabelecimento = null;
     } else {
       console.error(`[SIGA Scraper] ✅ Selecionado: ${selected.text}`);
+      this.lastCodigoEstabelecimento = selected.value || null;
     }
 
     // Aguardar que o formulário processe a mudança e o botão fique habilitado
