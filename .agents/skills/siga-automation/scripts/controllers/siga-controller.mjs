@@ -429,7 +429,11 @@ export class SigaController {
         `Não foi possível inferir o setor a partir de "${localidade}". Use localidade completa (ex.: BR 21-0173 - CIDADE ADEMAR - SANTO AMARO).`
       );
     }
-    return `DR - SETOR ${setor}`;
+    // Correção: o contexto de setor para relatórios VER00207 (e edição de verificações)
+    // usa o prefixo "SET -", não "DR -".
+    // "DR - SETOR ..." pertence a outro departamento.
+    // Exemplo correto: "SET - SANTO AMARO - SP" (visível na barra superior do SIGA).
+    return `SET - ${setor} - SP`;
   }
 
   _montarUrlRelatorioVer00207({
@@ -485,9 +489,9 @@ export class SigaController {
     const parts = localidade.split(" - ");
     const nomeLocalidade = parts.length >= 2 ? parts[1].trim() : localidade.trim();
 
-    // VER00207 exige contexto de SETOR (ex.: "DR - SETOR SANTO AMARO"), NÃO a CO.
+    // VER00207 exige contexto de SETOR (ex.: "SET - SANTO AMARO - SP"), NÃO a CO individual.
     // Trocar a sessão para a CO específica costuma bloquear o relatório com "não pode ser executado neste estabelecimento".
-    // A estratégia é: entrar no setor, definir Mês de Trabalho, depois usar o código numérico da CO via filtro.
+    // A estratégia é: entrar no setor (prefixo SET -), definir Mês de Trabalho, depois usar o código numérico da CO via filtroCodigoEstabelecimento.
     const contextoSetor = this._resolveReportContextEstablishment(localidade);
     console.error(
       `[SIGA Controller] Pré-voo relatório: contexto ${contextoSetor} + Mês de Trabalho ${compMmAaaa}...`
@@ -495,7 +499,7 @@ export class SigaController {
 
     this.scraper.workingCompetencia = compMmAaaa;
 
-    // 1. Trocar para o contexto de setor (essencial para VER00207)
+    // 1. Trocar para o contexto de setor (essencial para VER00207 e para relatórios de verificação)
     await this.scraper.switchEstablishment(contextoSetor);
 
     // 2. Garantir o Mês de Trabalho correto dentro desse contexto
