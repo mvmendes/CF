@@ -29,7 +29,19 @@ export class SigaScraper {
   // O RH00401 e várias telas usam a competência da sessão (localStorage competenciasDados),
   // não só o parâmetro passado ao CLI. Sem isto, maio/2026 na barra devolve datas */05/26.
   // ====================================================================
+  async _ensureSigaOrigin() {
+    const url = this.page?.url() || "";
+    if (!url.includes("siga.congregacao.org.br")) {
+      await this.page.goto("https://siga.congregacao.org.br/", {
+        waitUntil: "networkidle",
+        timeout: 30000,
+      });
+      await this.page.waitForTimeout(1500);
+    }
+  }
+
   async fetchRh010Competencias() {
+    await this._ensureSigaOrigin();
     return this.page.evaluate(async () => {
       const token =
         document.querySelector("#antiXsrfTokenGlobal")?.value ||
@@ -72,6 +84,20 @@ export class SigaScraper {
     }
     const label = `${parts[0].padStart(2, "0")}/${parts[1]}`;
 
+    await this._ensureSigaOrigin();
+    const jaCorreto = await this.page.evaluate((lbl) => {
+      try {
+        const d = JSON.parse(localStorage.getItem("competenciasDados") || "{}");
+        return String(d.nome || "").trim() === lbl;
+      } catch {
+        return false;
+      }
+    }, label);
+    if (jaCorreto) {
+      console.error(`[SIGA Scraper] ✅ Mês de Trabalho já é ${label} (competenciasDados).`);
+      return true;
+    }
+
     const codigo = await this.resolveCompetenciaCodigo(label);
     if (!codigo) {
       console.error(`[SIGA Scraper] ❌ codigoCompetencia não encontrado para ${label}.`);
@@ -84,6 +110,9 @@ export class SigaScraper {
       timeout: 30000,
     });
     await this.page.waitForTimeout(1000);
+    await this.page
+      .waitForSelector("#f_competencia_webmaster", { timeout: 15000 })
+      .catch(() => null);
 
     const switched = await this.page.evaluate(
       ({ codigoComp, lbl }) => {
@@ -103,12 +132,7 @@ export class SigaScraper {
       { codigoComp: codigo, lbl: label }
     );
 
-    if (!switched.ok) {
-      console.error(`[SIGA Scraper] ❌ Falha ao trocar Mês de Trabalho: ${switched.reason}`);
-      return false;
-    }
-
-    await this.page.waitForTimeout(3000);
+    await this.page.waitForTimeout(switched.ok ? 3000 : 500);
 
     const check = await this.page.evaluate((lbl) => {
       try {
@@ -127,10 +151,14 @@ export class SigaScraper {
       return true;
     }
 
-    console.error(
-      `[SIGA Scraper] ⚠️ Mês de Trabalho pode não ter sido aplicado. Esperado ${label}, obtido:`,
-      check
-    );
+    if (!switched.ok) {
+      console.error(`[SIGA Scraper] ❌ Falha ao trocar Mês de Trabalho: ${switched.reason}`);
+    } else {
+      console.error(
+        `[SIGA Scraper] ⚠️ Mês de Trabalho pode não ter sido aplicado. Esperado ${label}, obtido:`,
+        check
+      );
+    }
     return false;
   }
 
@@ -139,11 +167,13 @@ export class SigaScraper {
    * Necessário para VER00207 — trocar a CO na sessão bloqueia o relatório nesse programa.
    */
   async resolveEstablishmentCode(establishmentName) {
+    await this._ensureSigaOrigin();
     await this.page.goto("https://siga.congregacao.org.br/SIS/SIS99906.aspx", {
       waitUntil: "networkidle",
       timeout: 30000,
     });
-    await this.page.waitForTimeout(1500);
+    await this.page.waitForTimeout(3000);
+    await this.page.waitForSelector("select option", { timeout: 20000 }).catch(() => null);
     const hit = await this.page.evaluate((name) => {
       const selects = document.querySelectorAll("select");
       for (const sel of selects) {
@@ -879,10 +909,14 @@ export class SigaScraper {
 
   /** Lê `localStorage.competenciasDados` e o rótulo visível do select. */
   async readWorkingMonthSession() {
-    await this.page.goto("https://siga.congregacao.org.br/SIS/SIS99908.aspx", {
-      waitUntil: "networkidle",
-      timeout: 30000,
-    });
+    await this._ensureSigaOrigin();
+    const onSis99908 = (this.page.url() || "").includes("SIS99908");
+    if (!onSis99908) {
+      await this.page.goto("https://siga.congregacao.org.br/SIS/SIS99908.aspx", {
+        waitUntil: "networkidle",
+        timeout: 30000,
+      });
+    }
     return this.page.evaluate(() => {
       let dados = null;
       try {

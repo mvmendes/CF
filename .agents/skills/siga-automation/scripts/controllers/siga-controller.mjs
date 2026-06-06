@@ -411,10 +411,12 @@ export class SigaController {
   /**
    * VER00207 com os mesmos query params do browser; sem filtro de estabelecimento/tipo/localidade
    * o SIGA costuma devolver PDF/HTML sem linhas de apontamentos.
-   */
-  /**
-   * VER00207 só executa no contexto de setor (ex.: DR - SETOR SANTO AMARO), não na CO.
-   * Extrai o setor do nome completo da localidade (último segmento após " - ").
+   *
+   * Requisitos específicos do VER00207 (relatório de verificação):
+   * - O contexto da sessão deve estar no SETOR (ex.: "DR - SETOR SANTO AMARO"), NÃO na CO.
+   * - Mês de Trabalho deve estar correto para a competência da verificação.
+   * - Usar filtroCodigoEstabelecimento (código numérico da CO, obtido via SIS99906 sem submit).
+   * Trocar a sessão para a CO específica costuma fazer o relatório recusar com "não pode ser executado neste estabelecimento".
    */
   _resolveReportContextEstablishment(localidade) {
     const parts = String(localidade || "")
@@ -480,29 +482,39 @@ export class SigaController {
      const page = this.browser.page;
      this.scraper.page = page;
 
-     const parts = localidade.split(" - ");
-     const nomeLocalidade = parts.length >= 2 ? parts[1].trim() : localidade.trim();
+    const parts = localidade.split(" - ");
+    const nomeLocalidade = parts.length >= 2 ? parts[1].trim() : localidade.trim();
 
-     const contextoSetor = this._resolveReportContextEstablishment(localidade);
-     console.error(
-       `[SIGA Controller] Pré-voo relatório: contexto ${contextoSetor} + Mês de Trabalho ${compMmAaaa}...`
-     );
-     this.scraper.workingCompetencia = compMmAaaa;
-     await this.scraper.switchEstablishment(contextoSetor);
+    // VER00207 exige contexto de SETOR (ex.: "DR - SETOR SANTO AMARO"), NÃO a CO.
+    // Trocar a sessão para a CO específica costuma bloquear o relatório com "não pode ser executado neste estabelecimento".
+    // A estratégia é: entrar no setor, definir Mês de Trabalho, depois usar o código numérico da CO via filtro.
+    const contextoSetor = this._resolveReportContextEstablishment(localidade);
+    console.error(
+      `[SIGA Controller] Pré-voo relatório: contexto ${contextoSetor} + Mês de Trabalho ${compMmAaaa}...`
+    );
 
-     const mesSessao = await this.scraper.readWorkingMonthSession();
-     const mesOk = String(mesSessao.competenciasDados?.nome || "").trim() === compMmAaaa;
-     if (!mesOk) {
-       await this.browser.close();
-       throw new Error(
-         `Mês de Trabalho da sessão não é ${compMmAaaa} (obtido: ${mesSessao.competenciasDados?.nome || mesSessao.selectText || "?"}).`
-       );
-     }
+    this.scraper.workingCompetencia = compMmAaaa;
 
-     const codigoEst =
-       opts.codigoEstabelecimento ||
-       (await this.scraper.resolveEstablishmentCode(nomeLocalidade));
-     const filtroLocalidade = localidade;
+    // 1. Trocar para o contexto de setor (essencial para VER00207)
+    await this.scraper.switchEstablishment(contextoSetor);
+
+    // 2. Garantir o Mês de Trabalho correto dentro desse contexto
+    const mesAplicado = await this.scraper.switchWorkingMonth(compMmAaaa);
+    if (!mesAplicado) {
+      await this.browser.close();
+      throw new Error(
+        `Não foi possível definir Mês de Trabalho ${compMmAaaa} no contexto ${contextoSetor} para baixar o relatório.`
+      );
+    }
+
+    const filtroLocalidade = localidade;
+
+    // 3. Resolver o código numérico da CO (leitura only em SIS99906 — não submete troca de CO)
+    const codigoEst =
+      opts.codigoEstabelecimento ||
+      (await this.scraper.resolveEstablishmentCode(localidade)) ||
+      (await this.scraper.resolveEstablishmentCode(parts[0]?.trim())) ||
+      (await this.scraper.resolveEstablishmentCode(nomeLocalidade));
 
      let url = urlCustomizada || null;
      if (!url && codigoEst) {
@@ -551,16 +563,24 @@ export class SigaController {
        await download.saveAs(filePath);
      } else {
        const html = await page.content();
-       if (html.includes("não pode ser executado neste estabelecimento")) {
-         await this.browser.close();
-         throw new Error(
-           "VER00207 recusou o contexto de estabelecimento. O relatório exige Mês de Trabalho correto sem troca de CO na sessão."
-         );
-       }
+      if (html.includes("não pode ser executado neste estabelecimento")) {
+        await this.browser.close();
+        throw new Error(
+          "VER00207 recusou o contexto. O relatório exige: (1) sessão no contexto do SETOR (ex.: DR - SETOR SANTO AMARO), (2) Mês de Trabalho correto, e (3) filtroCodigoEstabelecimento da CO específica."
+        );
+      }
        const response = await page.goto(url, { waitUntil: "domcontentloaded", timeout: 60000 }).catch(() => null);
        const ct = response?.headers()?.["content-type"] || "";
        if (ct.includes("pdf") && response) {
          await fs.writeFile(filePath, await response.body());
+       } else if (
+         html.includes("VER00207") ||
+         html.includes("Relatório") ||
+         html.includes("codigoVerificacao")
+       ) {
+         console.error("[SIGA Controller] Gerando impressão estática PDF da página HTML...");
+         await page.waitForTimeout(2000);
+         await page.pdf({ path: filePath, format: "A4", printBackground: true });
        } else {
          await this.browser.close();
          throw new Error(
