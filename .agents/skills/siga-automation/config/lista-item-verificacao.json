@@ -51,12 +51,12 @@
   },
   {
     "codigo": 270,
-    "nomeExibicao": "23.01 - Não entregou o checklist do mês no prazo estabelecido.",
+    "nomeExibicao": "23.01 - Não realizou a Inspeção Semanal ou Mensal no prazo estabelecido",
     "nomeGrupo": "Livro de  Acompanhamento da Manutenção Preventiva - Casa de Oração"
   },
   {
     "codigo": 271,
-    "nomeExibicao": "23.02 - Checklist sem o devido preenchimento ou não assinado pelo responsável.",
+    "nomeExibicao": "23.02 - Relatório de fechamento de Manut. Preventiva não assinado pelo responsável ou não anexado.",
     "nomeGrupo": "Livro de  Acompanhamento da Manutenção Preventiva - Casa de Oração"
   },
   {

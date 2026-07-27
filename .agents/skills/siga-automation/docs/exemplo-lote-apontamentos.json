@@ -1,0 +1,60 @@
+{
+  "codigoVerificacao": 1084707,
+  "meta": {
+    "co": "BR 21-0173 - CIDADE ADEMAR - SANTO AMARO",
+    "competencia": "06/2026",
+    "analista": "Marcus Vinicius Mendes",
+    "nota": "Exemplo de lote com regra InfoCCB + convicção 0–100 para gate humano."
+  },
+  "itens": [
+    {
+      "seq": 1,
+      "regra": "29.08",
+      "codigo": 280,
+      "conviccao": 96,
+      "status": "proposto",
+      "livro": "Cozinha",
+      "dataFato": "03/06/2026",
+      "numeroDocumento": "1",
+      "observacao": "Livro Cozinha, dia 03/06: Código da Função não preenchido no PDF. Voluntária TEREZINHA LOPES DE MATOS.",
+      "evidencia": "Voluntarios/cozinha-jun-2026.pdf"
+    },
+    {
+      "seq": 2,
+      "regra": "29.09",
+      "codigo": 281,
+      "conviccao": 95,
+      "status": "proposto",
+      "livro": "Cozinha",
+      "dataFato": "04/06/2026",
+      "numeroDocumento": "1",
+      "observacao": "Livro Cozinha: registro do dia 04/06 lançado após o dia 06/06 (fora da ordem cronológica de datas).",
+      "evidencia": "Voluntarios/cozinha-jun-2026.pdf"
+    },
+    {
+      "seq": 3,
+      "regra": "29.09",
+      "codigo": 281,
+      "conviccao": 70,
+      "status": "proposto",
+      "livro": "Costura",
+      "dataFato": "02/06/2026",
+      "numeroDocumento": "1",
+      "observacao": "Livro Costura (RH), dia 02/06: 4ª ocorrência de saída 18:00 (repetição ≥4; total 4).",
+      "evidencia": "Voluntarios/dados_voluntarios.json",
+      "motivoIncerteza": "PDF de Costura ausente; só RH"
+    },
+    {
+      "seq": 4,
+      "regra": "05.09",
+      "codigo": 305,
+      "conviccao": 90,
+      "status": "segurado",
+      "livro": "Costura",
+      "dataFato": "30/06/2026",
+      "numeroDocumento": "2",
+      "observacao": "Livro/PDF de Costura não anexado no SIGA (47 apontamentos RH sem PDF).",
+      "motivoIncerteza": "Prazo de anexo do mês anterior ainda vigente"
+    }
+  ]
+}

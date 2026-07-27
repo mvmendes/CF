@@ -1,0 +1,66 @@
+{
+  "curso": "Conselho Fiscal",
+  "cursoUrl": "https://peadccb.congregacao.org.br/course/view.php?id=28",
+  "secao": "2. Instruções Técnicas (+ anexos úteis)",
+  "avisoPropriedadeIntelectual": "Os ficheiros PDF/XLSX/DOCX listados são propriedade intelectual da CCB. Não versionar binários no Git; baixar localmente com scripts/infoccb-*.mjs.",
+  "baixadoEm": "2026-07-23",
+  "metodo": "Browser Cursor autenticado (SSO Intranet) + fetch pluginfile com credentials",
+  "arquivos": [
+    {
+      "arquivo": "01-secao09-conselho-fiscal.pdf",
+      "titulo": "Seção 9 - Conselho Fiscal (Manual Administrativo)",
+      "moodleResourceId": 8770,
+      "pluginfile": "pluginfile.php/238014/mod_resource/content/2/Secao09_Conselho_Fiscal.pdf",
+      "bytes": 461874
+    },
+    {
+      "arquivo": "02-tutorial-checklist-mensal-trabalho-siga.pdf",
+      "titulo": "Tutorial - Checklist Mensal de Trabalho no SIGA",
+      "moodleResourceId": 8780,
+      "pluginfile": "pluginfile.php/238024/mod_resource/content/1/TUTORIAL-Checklist Mensal v1.1.pdf",
+      "bytes": 5923211
+    },
+    {
+      "arquivo": "03-tutorial-verificacao-grupos-trabalho.pdf",
+      "titulo": "Tutorial - Verificação dos Grupos de Trabalho SIGA",
+      "moodleResourceId": 8781,
+      "pluginfile": "pluginfile.php/238025/mod_resource/content/2/SIGA - Tutorial de verificação dos Grupos de Trabalho.pdf",
+      "bytes": 1434830
+    },
+    {
+      "arquivo": "04-tutorial-verificacao-conselho-fiscal-siga.pdf",
+      "titulo": "Tutorial - Verificação Conselho Fiscal no SIGA",
+      "moodleResourceId": 8782,
+      "pluginfile": "pluginfile.php/238026/mod_resource/content/2/Tutorial Verificação Conselho Fiscal v7.pdf",
+      "bytes": 611403
+    },
+    {
+      "arquivo": "05-roteiro-verificacao-cf-completo.pdf",
+      "titulo": "Roteiro de Verificação do Conselho Fiscal - Completo",
+      "moodleResourceId": 8783,
+      "pluginfile": "pluginfile.php/238027/mod_resource/content/1/Roteiro de Verificação do Conselho Fiscal - Completo.pdf",
+      "bytes": 4707096
+    },
+    {
+      "arquivo": "06-sugestao-verificacao-periodica.pdf",
+      "titulo": "Sugestão de Verificação Periódica (Anexo 03)",
+      "moodleResourceId": 8784,
+      "pluginfile": "pluginfile.php/238028/mod_resource/content/3/00 - Anexo 03 - Sugestão de Trabalho.pdf",
+      "bytes": 120836
+    },
+    {
+      "arquivo": "07-lista-ocorrencias-conselho-fiscal.xlsx",
+      "titulo": "Lista de Ocorrências - Conselho Fiscal",
+      "moodleResourceId": 8787,
+      "pluginfile": "pluginfile.php/238031/mod_resource/content/2/Lista de Ocorrências - Conselho Fiscal_v2.xlsx",
+      "bytes": 52349
+    },
+    {
+      "arquivo": "08-livro-atas-digital-cf.docx",
+      "titulo": "Livro de Atas Digital do Conselho Fiscal",
+      "moodleResourceId": 8788,
+      "pluginfile": "pluginfile.php/238032/mod_resource/content/1/Livro de Atas Digital CF_v2.docx",
+      "bytes": 183513
+    }
+  ]
+}

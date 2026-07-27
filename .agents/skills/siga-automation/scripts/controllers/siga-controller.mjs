@@ -3,6 +3,8 @@ import path from "path";
 import { SigaBrowser } from '../lib/siga-browser.mjs';
 import { SigaApi } from '../lib/siga-api.mjs';
 import { SigaScraper } from '../lib/siga-scraper.mjs';
+import { loadBatchFromFile, sleep, filterBatchItems, summarizeBatch, buildExportPayload } from '../lib/inserir-itens-batch.mjs';
+import { analisarVoluntariosJson } from '../lib/analisar-voluntarios.mjs';
 
 export class SigaController {
   constructor(workspacePath, historyFile) {
@@ -314,13 +316,23 @@ export class SigaController {
     };
   }
 
+  _pathDadosVoluntarios(localidade, competencia) {
+    const [mes, ano] = competencia.split("/");
+    const compFormatted = `${ano}-${mes.padStart(2, "0")}`;
+    return path.join(
+      this.workspacePath,
+      localidade,
+      compFormatted,
+      "Voluntarios",
+      "dados_voluntarios.json"
+    );
+  }
+
   async validarVoluntarios(localidade, competencia) {
     if (!localidade || !competencia) {
       throw new Error("Informe a localidade e a competencia. Ex: validar-voluntarios \"BR 21-0173...\" \"01/2026\"");
     }
-    const [mes, ano] = competencia.split("/");
-    const compFormatted = `${ano}-${mes.padStart(2, "0")}`;
-    const filePath = path.join(this.workspacePath, localidade, compFormatted, "Voluntarios", "dados_voluntarios.json");
+    const filePath = this._pathDadosVoluntarios(localidade, competencia);
     
     try {
       const content = await fs.readFile(filePath, "utf8");
@@ -353,11 +365,77 @@ export class SigaController {
       return {
         success: true,
         message: repeticoes.length > 0 ? "Repetições encontradas (+4x)" : "Nenhuma repetição >3x encontrada.",
-        repeticoes
+        repeticoes,
+        nota: "Só repetição 29.09. Prefira analisar-voluntarios para 29.08/29.09/29.10; PDF obrigatório para 29.11/29.14."
       };
     } catch (e) {
       throw new Error(`Erro ao validar voluntários: Arquivo não encontrado ou não foi possível ler os dados em ${filePath}`);
     }
+  }
+
+  /**
+   * Análise ampla offline do JSON de voluntários (29.08 / 29.09 / 29.10).
+   * Não substitui leitura visual do PDF (29.11, 29.14, ordem no livro, 07.01).
+   */
+  async analisarVoluntarios(localidade, competencia) {
+    if (!localidade || !competencia) {
+      throw new Error(
+        'Uso: analisar-voluntarios "<localidade>" "MM/AAAA"'
+      );
+    }
+    const filePath = this._pathDadosVoluntarios(localidade, competencia);
+    let data;
+    try {
+      data = JSON.parse(await fs.readFile(filePath, "utf8"));
+    } catch {
+      throw new Error(`dados_voluntarios.json não encontrado em ${filePath}`);
+    }
+    const analise = analisarVoluntariosJson(data, competencia);
+    return {
+      success: true,
+      arquivo: filePath,
+      ...analise,
+    };
+  }
+
+  /**
+   * Rebaixa só anexos GED de voluntários (RH) para a CO/competência.
+   */
+  async baixarVoluntarios(localidadeExtrair, competenciaExtrair, opts = {}) {
+    const { isVisible = false } = opts || {};
+    if (!localidadeExtrair || !competenciaExtrair) {
+      throw new Error(
+        'Uso: baixar-voluntarios "<localidadeCompletaSIGA>" "MM/AAAA" [--visivel=true]'
+      );
+    }
+
+    if (!(await this.browser.hasValidSession(!isVisible))) {
+      throw new Error("Sessão inválida. Execute 'login' primeiro.");
+    }
+    await this.browser.init(!isVisible);
+    this.scraper.page = this.browser.page;
+
+    const parts = localidadeExtrair.split(" - ");
+    const nomeLocalidade = parts.length >= 2 ? parts[1].trim() : localidadeExtrair.trim();
+    const [mes, ano] = competenciaExtrair.split("/");
+    const compFormatted = `${mes.padStart(2, "0")}/${ano}`;
+    const competenciaDir = `${ano}-${mes.padStart(2, "0")}`;
+    this.scraper.workingCompetencia = compFormatted;
+
+    const fullLocalidade = await this.scraper.switchEstablishment(nomeLocalidade);
+    const workDir = path.join(this.workspacePath, fullLocalidade, competenciaDir);
+    await fs.mkdir(path.join(workDir, "Voluntarios"), { recursive: true });
+
+    await this.scraper.downloadVolunteers(workDir, compFormatted, nomeLocalidade);
+
+    if (!isVisible) await this.browser.close();
+
+    return {
+      success: true,
+      message: "Anexos de voluntários re-download concluído.",
+      diretorio: workDir,
+      voluntarios: path.join(workDir, "Voluntarios"),
+    };
   }
 
   async inserirItem(idInserir, codigo, data, doc, obs) {
@@ -365,6 +443,284 @@ export class SigaController {
      const result = await this.api.postItem(idInserir, codigo, data, doc, obs);
      if (!this.browser.isVisible) await this.browser.close();
      return { success: true, message: `Ocorrência registrada no SIGA.`, data: result };
+  }
+
+  /**
+   * Valida/resume um lote JSON (sem gravar no SIGA).
+   * Útil antes de `inserir-itens-batch --min-conviccao=95`.
+   */
+  async validarLote(arquivo, options = {}) {
+    const loaded = await loadBatchFromFile(
+      arquivo,
+      { codigoVerificacao: options.codigoVerificacao },
+      {
+        requireCodigo: options.requireCodigo !== false,
+        requireRegra: Boolean(options.exigirRegra),
+        requireConviccao: Boolean(options.exigirConviccao),
+      }
+    );
+
+    const filtro = {
+      minConviccao: options.minConviccao,
+      maxConviccao: options.maxConviccao,
+      regras: options.regras,
+      statusIncluir: options.statusIncluir,
+      statusExcluir: options.statusExcluir,
+      incluirSegurados: Boolean(options.incluirSegurados),
+    };
+
+    const { selected, rejected } = filterBatchItems(loaded.itens, filtro);
+    const resumo = summarizeBatch(loaded.itens);
+    const resumoSelecionados = summarizeBatch(selected.map((s) => s.item));
+
+    let exportPath = null;
+    if (options.exportPath) {
+      const payload = buildExportPayload(
+        options.codigoVerificacao || loaded.codigoVerificacao,
+        selected,
+        { filtro, origem: loaded.path }
+      );
+      exportPath = path.resolve(options.exportPath);
+      await fs.mkdir(path.dirname(exportPath), { recursive: true });
+      await fs.writeFile(exportPath, JSON.stringify(payload, null, 2), "utf8");
+    }
+
+    return {
+      success: true,
+      message: `Lote: ${loaded.itens.length} item(ns); após filtro: ${selected.length} elegível(is), ${rejected.length} fora.`,
+      arquivo: loaded.path,
+      meta: loaded.meta || {},
+      resumo,
+      filtro,
+      elegiveis: selected.length,
+      foraDoFiltro: rejected.length,
+      resumoElegiveis: resumoSelecionados,
+      amostraElegiveis: selected.slice(0, 15).map(({ index, item }) => ({
+        index,
+        regra: item.regra,
+        conviccao: item.conviccao,
+        status: item.status,
+        codigo: item.codigo,
+        dataFato: item.dataFato,
+        numeroDocumento: item.numeroDocumento,
+        livro: item.livro,
+        observacao: item.observacao?.slice(0, 120),
+      })),
+      amostraFora: rejected.slice(0, 15).map(({ index, reasons, item }) => ({
+        index,
+        reasons,
+        regra: item.regra,
+        conviccao: item.conviccao,
+        status: item.status,
+        observacao: item.observacao?.slice(0, 80),
+      })),
+      export: exportPath,
+    };
+  }
+
+  /**
+   * Insere vários apontamentos a partir de um ficheiro JSON/NDJSON.
+   * Mantém a sessão aberta entre itens; fecha o browser no fim (headless).
+   *
+   * @param {string} arquivo Lote JSON/NDJSON
+   * @param {object} options
+   * @param {string|number} [options.codigoVerificacao] Override se o ficheiro não trouxer por item
+   * @param {boolean} [options.dryRun]
+   * @param {boolean} [options.continueOnError]
+   * @param {number} [options.delayMs]
+   * @param {number} [options.from] Índice 0-based sobre a lista **já filtrada**
+   * @param {string|null} [options.log] Caminho de log (append)
+   * @param {boolean} [options.autorizado] Obrigatório true (exceto dry-run) — gate humano da skill
+   * @param {number} [options.minConviccao] Só lança itens com conviccao ≥ N
+   * @param {number} [options.maxConviccao]
+   * @param {string} [options.regras] Ex.: "29.08,29.09"
+   * @param {boolean} [options.incluirSegurados]
+   */
+  async inserirItensBatch(arquivo, options = {}) {
+    const dryRun = Boolean(options.dryRun);
+    const continueOnError = Boolean(options.continueOnError);
+    const delayMs = options.delayMs != null ? Number(options.delayMs) : 150;
+    const from = options.from != null ? Math.max(0, Number(options.from) || 0) : 0;
+    const logPath = options.log || null;
+    const autorizado = Boolean(options.autorizado);
+
+    if (!dryRun && !autorizado) {
+      throw new Error(
+        "inserir-itens-batch exige --autorizado=true (confirmação explícita do analista no chat) ou use --dry-run=true."
+      );
+    }
+
+    const loaded = await loadBatchFromFile(
+      arquivo,
+      { codigoVerificacao: options.codigoVerificacao },
+      {
+        requireCodigo: true,
+        requireRegra: Boolean(options.exigirRegra),
+        requireConviccao: Boolean(options.exigirConviccao),
+      }
+    );
+
+    const filtro = {
+      minConviccao: options.minConviccao,
+      maxConviccao: options.maxConviccao,
+      regras: options.regras,
+      statusIncluir: options.statusIncluir,
+      statusExcluir: options.statusExcluir,
+      incluirSegurados: Boolean(options.incluirSegurados),
+    };
+    const { selected, rejected } = filterBatchItems(loaded.itens, filtro);
+    const itens = selected.map((s) => s.item);
+
+    if (itens.length === 0) {
+      return {
+        success: true,
+        message: "Nenhum item elegível após o filtro (nada lançado).",
+        dryRun,
+        arquivo: loaded.path,
+        totalArquivo: loaded.itens.length,
+        foraDoFiltro: rejected.length,
+        filtro,
+        total: 0,
+        ok: 0,
+        fail: 0,
+        skipped: 0,
+        resultados: [],
+      };
+    }
+
+    if (from >= itens.length) {
+      throw new Error(
+        `--from=${from} está além do lote filtrado (elegíveis=${itens.length}, arquivo=${loaded.itens.length}).`
+      );
+    }
+
+    const appendLog = async (line) => {
+      if (!logPath) return;
+      const abs = path.resolve(logPath);
+      await fs.mkdir(path.dirname(abs), { recursive: true });
+      await fs.appendFile(abs, `${line}\n`, "utf8");
+    };
+
+    await appendLog(
+      `${new Date().toISOString()} START file=${loaded.path} arquivo=${loaded.itens.length} elegiveis=${itens.length} rejected=${rejected.length} from=${from} dryRun=${dryRun} filtro=${JSON.stringify(filtro)}`
+    );
+
+    if (!dryRun) {
+      if (!(await this.browser.hasValidSession())) {
+        throw new Error("Sessão inválida.");
+      }
+    }
+
+    const resultados = [];
+    let ok = 0;
+    let fail = 0;
+    let skipped = from;
+
+    for (let i = from; i < itens.length; i++) {
+      const it = itens[i];
+      const label = `[${i + 1}/${itens.length}] verif=${it.codigoVerificacao} regra=${it.regra || "?"} conv=${it.conviccao ?? "?"} codigo=${it.codigo} data=${it.dataFato} doc=${it.numeroDocumento}`;
+      process.stderr.write(`${label} ... `);
+
+      if (dryRun) {
+        process.stderr.write("DRY-RUN\n");
+        ok++;
+        resultados.push({ index: i, success: true, dryRun: true, item: it });
+        await appendLog(`DRY-RUN ${label}`);
+        continue;
+      }
+
+      try {
+        const data = await this.api.postItem(
+          it.codigoVerificacao,
+          it.codigo,
+          it.dataFato,
+          it.numeroDocumento,
+          it.observacao
+        );
+        process.stderr.write("OK\n");
+        ok++;
+        resultados.push({
+          index: i,
+          success: true,
+          item: {
+            codigoVerificacao: it.codigoVerificacao,
+            codigo: it.codigo,
+            regra: it.regra,
+            conviccao: it.conviccao,
+            dataFato: it.dataFato,
+            numeroDocumento: it.numeroDocumento,
+          },
+          data,
+        });
+        await appendLog(`OK ${label}`);
+      } catch (e) {
+        fail++;
+        const errMsg = e?.message || String(e);
+        process.stderr.write(`FAIL ${errMsg}\n`);
+        resultados.push({
+          index: i,
+          success: false,
+          item: {
+            codigoVerificacao: it.codigoVerificacao,
+            codigo: it.codigo,
+            regra: it.regra,
+            conviccao: it.conviccao,
+            dataFato: it.dataFato,
+            numeroDocumento: it.numeroDocumento,
+          },
+          error: errMsg,
+        });
+        await appendLog(`FAIL ${label} :: ${errMsg}`);
+        if (!continueOnError) {
+          if (!this.browser.isVisible) await this.browser.close();
+          return {
+            success: false,
+            message: `Lote interrompido no item ${i + 1}/${itens.length} (elegíveis).`,
+            arquivo: loaded.path,
+            totalArquivo: loaded.itens.length,
+            foraDoFiltro: rejected.length,
+            filtro,
+            total: itens.length,
+            from,
+            ok,
+            fail,
+            skipped,
+            resultados,
+          };
+        }
+      }
+
+      if (delayMs > 0 && i < itens.length - 1) {
+        await sleep(delayMs);
+      }
+    }
+
+    if (!dryRun && !this.browser.isVisible) {
+      await this.browser.close();
+    }
+
+    await appendLog(
+      `${new Date().toISOString()} DONE ok=${ok} fail=${fail} skipped=${skipped} rejected=${rejected.length}`
+    );
+
+    return {
+      success: fail === 0,
+      message: dryRun
+        ? `Dry-run: ${ok} item(ns) elegíveis validados (nenhum lançamento); ${rejected.length} fora do filtro.`
+        : `Lote concluído: ${ok} ok, ${fail} falha(s); ${rejected.length} fora do filtro.`,
+      dryRun,
+      arquivo: loaded.path,
+      totalArquivo: loaded.itens.length,
+      foraDoFiltro: rejected.length,
+      filtro,
+      total: itens.length,
+      from,
+      ok,
+      fail,
+      skipped,
+      log: logPath ? path.resolve(logPath) : null,
+      resultados,
+    };
   }
 
   async atualizarItem(codigoApontamento, codigoVerificacao, codigoItem, data, doc, obs, reincidencia) {

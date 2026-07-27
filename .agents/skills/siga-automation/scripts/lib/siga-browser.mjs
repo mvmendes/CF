@@ -36,13 +36,18 @@ export class SigaBrowser {
       this.jwtToken = tokenData.jwtUrl || "";
     } catch (e) {}
 
+    // Em modo headed: janela maximizada + viewport=null (usa o tamanho real da janela).
+    // Em headless: viewport amplo (Full HD) para screenshots/automação estáveis.
+    const launchArgs = ['--no-sandbox', '--disable-setuid-sandbox'];
+    if (!headless) launchArgs.push('--start-maximized');
+
     this.browserType = await chromium.launch({
       headless: headless,
-      args: ['--no-sandbox', '--disable-setuid-sandbox']
+      args: launchArgs
     });
 
     this.browserContext = await this.browserType.newContext({
-      viewport: { width: 1280, height: 720 },
+      viewport: headless ? { width: 1920, height: 1080 } : null,
       storageState: storageState
     });
 

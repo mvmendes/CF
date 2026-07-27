@@ -2,6 +2,7 @@ import fs from "fs/promises";
 import path from "path";
 import { fileURLToPath } from 'url';
 import { SigaController } from './controllers/siga-controller.mjs';
+import { parseBatchCliFlags } from './lib/inserir-itens-batch.mjs';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -77,13 +78,86 @@ async function run() {
       break;
     }
     case "validar-voluntarios": {
-      const [localidadeVol, compVol] = args;
+      const [localidadeVol, compVol] = args.filter(argSemFlag);
       result = await controller.validarVoluntarios(localidadeVol, compVol);
+      break;
+    }
+    case "analisar-voluntarios": {
+      const [localidadeAn, compAn] = args.filter(argSemFlag);
+      result = await controller.analisarVoluntarios(localidadeAn, compAn);
+      break;
+    }
+    case "baixar-voluntarios": {
+      const [localidadeBv, compBv] = args.filter(argSemFlag);
+      result = await controller.baixarVoluntarios(localidadeBv, compBv, { isVisible });
       break;
     }
     case "inserir-item": {
       const [idInserir, codigo, data, doc, obs] = args.filter(argSemFlag);
       result = await controller.inserirItem(idInserir, codigo, data, doc, obs);
+      break;
+    }
+    case "inserir-itens-batch": {
+      const { flags, positional } = parseBatchCliFlags(args);
+      let codigoVerificacao = null;
+      let arquivo = null;
+      if (positional.length === 1) {
+        arquivo = positional[0];
+      } else if (positional.length >= 2) {
+        codigoVerificacao = positional[0];
+        arquivo = positional[1];
+      }
+      if (!arquivo) {
+        throw new Error(
+          'Uso: inserir-itens-batch [<idVerificacao>] <arquivo.json|ndjson> [--autorizado=true] [--dry-run=true] [--min-conviccao=95] [--regra=29.08,29.09] [--continue-on-error=true] [--delay-ms=150] [--from=0] [--log=caminho]'
+        );
+      }
+      result = await controller.inserirItensBatch(arquivo, {
+        codigoVerificacao,
+        dryRun: flags.dryRun,
+        continueOnError: flags.continueOnError,
+        delayMs: flags.delayMs,
+        from: flags.from,
+        log: flags.log,
+        autorizado: flags.autorizado,
+        minConviccao: flags.minConviccao,
+        maxConviccao: flags.maxConviccao,
+        regras: flags.regras,
+        statusIncluir: flags.statusIncluir,
+        statusExcluir: flags.statusExcluir,
+        incluirSegurados: flags.incluirSegurados,
+        exigirConviccao: flags.exigirConviccao,
+        exigirRegra: flags.exigirRegra,
+      });
+      break;
+    }
+    case "validar-lote": {
+      const { flags, positional } = parseBatchCliFlags(args);
+      let codigoVerificacao = null;
+      let arquivo = null;
+      if (positional.length === 1) {
+        arquivo = positional[0];
+      } else if (positional.length >= 2) {
+        codigoVerificacao = positional[0];
+        arquivo = positional[1];
+      }
+      if (!arquivo) {
+        throw new Error(
+          'Uso: validar-lote [<idVerificacao>] <arquivo.json|ndjson> [--min-conviccao=95] [--regra=29.08] [--export=saida.json] [--exigir-conviccao] [--exigir-regra]'
+        );
+      }
+      result = await controller.validarLote(arquivo, {
+        codigoVerificacao,
+        minConviccao: flags.minConviccao,
+        maxConviccao: flags.maxConviccao,
+        regras: flags.regras,
+        statusIncluir: flags.statusIncluir,
+        statusExcluir: flags.statusExcluir,
+        incluirSegurados: flags.incluirSegurados,
+        exigirConviccao: flags.exigirConviccao,
+        exigirRegra: flags.exigirRegra,
+        exportPath: flags.exportPath,
+      });
       break;
     }
     case "atualizar-item": {
@@ -180,9 +254,13 @@ async function run() {
             "iniciar-verificacao",
             "extrair-dados",
             "baixar-depositos-despesas",
+            "baixar-voluntarios",
             "validar-voluntarios",
+            "analisar-voluntarios",
             "render-pdf-png",
             "inserir-item",
+            "inserir-itens-batch",
+            "validar-lote",
             "atualizar-item",
             "excluir-item",
             "fechar-verificacao",

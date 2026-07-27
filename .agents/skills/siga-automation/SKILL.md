@@ -35,8 +35,15 @@ Só prossiga com `login`, `extrair-dados`, etc. se o JSON de saída tiver `"ok":
 
 - **Quem realiza e responsabiliza a verificação é o utilizador (analista humano).** A skill e o CLI são **apenas apoio** — extração, organização de ficheiros, leitura de documentos, proposta de mapeamento para o catálogo ERP e texto de parecer — **não** substituem o juízo do auditor.
 - A I.A. **deve** propor achados (`codigo` ERP, dados sugeridos, observação factual). Pode atualizar **`Task-Parecer-*.md`** com essas propostas e os comandos *sugeridos* (como exemplo).
-- **`inserir-item`**, **`atualizar-item`**, **`excluir-item`**, **`fechar-verificacao`** e **`baixar-relatorio`** só podem ser executados depois do utilizador **confirmar explicitamente no chat**, com intenção clara (por exemplo: «sim, lança o item X», «aprovo lançar os quatro pontos», «podes fechar a verificação e baixar o relatório»).
+- **`inserir-item`**, **`inserir-itens-batch`**, **`atualizar-item`**, **`excluir-item`**, **`fechar-verificacao`** e **`baixar-relatorio`** só podem ser executados depois do utilizador **confirmar explicitamente no chat**, com intenção clara (por exemplo: «sim, lança o item X», «aprovo lançar os quatro pontos», «podes fechar a verificação e baixar o relatório»).
+- Em **`inserir-itens-batch`**, além do OK no chat, a I.A. **deve** passar `--autorizado=true` (sem essa flag o CLI recusa o lançamento). `--dry-run=true` valida o JSON sem gravar e **não** exige `--autorizado`.
+- Frases do analista como «lança os com ≥95% de convicção» autorizam **apenas** o subconjunto filtrado por `--min-conviccao=95` (após o lote JSON ter o campo `conviccao` preenchido). Itens `segurado`/`descartado` ficam de fora por omissão.
 - É **vedado** usar como autorização vagas como «implementa o plano», «termina todos os to-dos», «não pares até concluíres», «executa automático» ou tarefas de sistema — **mantém os apontamentos e o fecho em espera** até haver uma **confirmação humana explícita** para cada bloco sensível.
+
+### Fecho em lote — só COs do analista
+
+- Se o analista pedir para «fechar todas as abertas» de um mês, **restrinja** a verificações `CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO` das **Casas de Oração** que ele indicar (ou das que estão em `works/` / pareceres da sessão).
+- **Não** feche verificações de setor (`TESOURARIA`, `TRABALHO VOLUNTÁRIO`, `COMPRAS`, `PIEDADE`, `MANUTENÇÃO PREVENTIVA` no estabelecimento `SET - …`) salvo pedido **explícito** com o `codigoVerificacao` ou o tipo nomeado.
 
 ## Aprendizados Técnicos Críticos (Contexto para I.A.)
 
@@ -79,7 +86,7 @@ Para que a automação seja robusta, a I.A. deve ter ciência de como o SIGA se 
    - Regras de procedimento crítico desta skill (ex.: 29.09 com múltiplos `N.º Documento`, `parseInt` do `codigo`, nunca o rótulo `29.09` sozinho no CLI) estão **satisfeitas**.
    Executar **`inserir-item`** só após confirmação explícita do utilizador (secção «Princípio imperativo»); clareza no catálogo **não** dispensa esse passo.
 
-   **Já há autorização para chamar `inserir-item` / `fechar-verificacao`?** Só quando o utilizador tiver respondido afirmativamente na conversa aos **tipos de ação concretos** (lançar, alterar, excluir, encerrar, baixar). Frases ambíguas ou genéricas de automação não contam.
+   **Já há autorização para chamar `inserir-item` / `inserir-itens-batch` / `fechar-verificacao`?** Só quando o utilizador tiver respondido afirmativamente na conversa aos **tipos de ação concretos** (lançar, alterar, excluir, encerrar, baixar). Frases ambíguas ou genéricas de automação não contam. Em lote, use `--autorizado=true` apenas depois desse OK.
 
    **Quando a I.A. *não* deve adivinhar: deve interpelar o analista (perguntar no chat):**
    - Aparecem **itens novos** ou inéditos no catálogo (p.ex. códigos ou textos de `nomeExibicao` que não existiam nas auditorias anteriores ou fora do roteiro desta skill) e a relação com o documento **não** está 100% clara.
@@ -106,10 +113,39 @@ Supondo que você está na raiz da skill:
 - `verificar-sessao-co <localidade> <competencia>`: Diagnóstico rápido — Mês de Trabalho (`competenciasDados`), `codigoCompetencia` (RH010), troca de CO e amostra de datas em **RH00401** (`*/MM/AA`). Retorna `"ok": true|false`. Ex.: `node scripts/siga-tools.mjs verificar-sessao-co "PEDREIRA" "03/2026"`
 - `extrair-dados <id> <localidade> <competencia>`: O fluxo principal. Faz a troca de unidade, busca a chave GUID do mês, lê despesas e baixa todos os PDFs financeiros, de manutenção e voluntários. Os dados são estruturados em `/works/<Localidade>/<Competencia>/`.
 - `baixar-depositos-despesas <localidade> <competencia> [--limpar-local=true]`: Rebaixa só anexos TES00601/TES00801 (pastas `Depositos/` e `Despesas/`), com troca explícita de CO antes de cada ecrã. Use `--limpar-local=true` para apagar as duas pastas antes de gravar.
-- `validar-voluntarios <localidade> <competencia>`: Valida os apontamentos dos voluntários em busca de repetições sequenciais no arquivo gerado pela extração.
+- `baixar-voluntarios <localidade> <competencia>`: Rebaixa só anexos GED de voluntários (pasta `Voluntarios/` + `dados_voluntarios.json`), sem reextrair o pacote financeiro completo.
+- `validar-voluntarios <localidade> <competencia>`: **Apenas** repetições de horário ≥4× no JSON (29.09). Insuficiente sozinho.
+- `analisar-voluntarios <localidade> <competencia>`: Análise **offline** do JSON — candidatos 29.08 (sem função), 29.09 (repetição + ordem no extrato), 29.10 (sem saída). **Não** detecta 29.11 / 29.14 / 07.01 de linhas em branco (só PDF). Use após `extrair-dados` ou `baixar-voluntarios`.
 - `render-pdf-png <caminhoDoPdf> [pastaSaida]`: Gera **um ficheiro PNG por página** a partir de um PDF (só **Node 20+**: `pdfjs-dist` e `@napi-rs/canvas`; **sem** Python). Se `pastaSaida` for omitida, a saída fica em `<pastaDoPdf>/.pdf-render/<nomeSemExtensao>/`. Útil para inspecionar digitalizações de livro de voluntários (imagem) com zoom na IDE. Ex.: `node scripts/siga-tools.mjs render-pdf-png "works/.../limpeza-fev-2026.pdf"`.
 - `iniciar-verificacao <id> <data>`: Abre a verificação (status Em Andamento) informando a data de início.
 - `inserir-item <idDaVerificacao> <codigoDoItem> <dataFato> <numeroDoDocumento> <observacao>`: Insere um apontamento. Note que a numeração de sequenciais deve constar no campo de documento.
+- `inserir-itens-batch [<idVerificacao>] <arquivo.json|ndjson> [--autorizado=true] [--dry-run=true] [--min-conviccao=95] [--max-conviccao=100] [--regra=29.08,29.09] [--status=proposto] [--incluir-segurados] [--continue-on-error=true] [--delay-ms=150] [--from=0] [--log=caminho]`: Insere **vários** apontamentos a partir de um ficheiro. Sessão única. Progresso em stderr; resumo JSON em stdout. **Exige** `--autorizado=true` para gravar (exceto `--dry-run`). Por omissão **não** lança `status=segurado|descartado`. Com `--min-conviccao=N` só entram itens com `conviccao >= N`.
+- `validar-lote [<idVerificacao>] <arquivo.json|ndjson> [--min-conviccao=95] [--regra=29.08] [--export=saida.json] [--exigir-conviccao] [--exigir-regra]`: **Não grava no SIGA.** Valida schema, resume por regra/faixa de convicção/status e mostra elegíveis vs fora do filtro. Use antes do lançamento; `--export=` grava um JSON só com os elegíveis.
+- **Schema do lote** (campos de validação + inserção). Exemplo completo: `docs/exemplo-lote-apontamentos.json`.
+  ```json
+  {
+    "codigoVerificacao": 1084707,
+    "itens": [
+      {
+        "regra": "29.08",
+        "codigo": 280,
+        "conviccao": 96,
+        "status": "proposto",
+        "livro": "Cozinha",
+        "dataFato": "03/06/2026",
+        "numeroDocumento": "1",
+        "observacao": "…",
+        "evidencia": "Voluntarios/cozinha-jun-2026.pdf",
+        "motivoIncerteza": "opcional"
+      }
+    ]
+  }
+  ```
+  - `regra` = rótulo InfoCCB (`29.08`, `07.01`…) — **não** vai para a API.
+  - `codigo` = inteiro ERP (`280`, `281`…) — **obrigatório** para inserir.
+  - `conviccao` = 0–100 (convicção do agente/analista).
+  - `status` = `proposto` | `pendente` | `segurado` | `descartado` | `lancado`.
+  - Fluxo típico: gravar `works/.../lote-apontamentos.json` no parecer → `validar-lote … --min-conviccao=95` → após OK do analista `inserir-itens-batch … --min-conviccao=95 --autorizado=true`.
 - `atualizar-item <codigoApontamento> <idDaVerificacao> <codigoDoItem> <dataFato> <numeroDoDocumento> <observacao> [reincidencia]`: **Edita** um apontamento já existente (API `atualizar-apontamento`, equivalente ao modal *Editar* / VER00204). Útil para corrigir texto, data, *N.º Documento*, reincidência ou item, sem excluir e recriar. A `observacao` pode ter várias palavras; se a última palavra for `true` ou `false`, ela é interpretada como **reincidência** (opcional). Ex.: `node scripts/siga-tools.mjs atualizar-item 1618999 1084703 281 "06/02/2026" "1" "Texto unificado (29.09)." false`
 - `excluir-item <codigoApontamento> <idDaVerificacao>`: Deleta um item/apontamento inserido erroneamente, utilizando seu ID de Apontamento.
 - `fechar-verificacao <id>`: Operação de submissão final do auditor.
@@ -149,18 +185,82 @@ Use este plano para **qualquer** verificação mensal do Conselho Fiscal, indepe
 - Se o fechamento/GUID não existir para a competência, pare e informe o bloqueio; não invente pastas, GUIDs ou IDs.
 
 ### 4. Auditoria documental obrigatória
+
 - Leia o `fechamento_*.json`, `config/doc_types.json` e o catálogo `config/lista-item-verificacao.json` atualizado.
+- **Obrigatório:** percorrer o **Roteiro obrigatório CO (gate anti-lacuna)** abaixo (Parte 1 do Roteiro CF InfoCCB) e a matriz mínima. Use também `docs/normas/specs/checklist-casa-oracao.md` e `docs/normas/specs/lista-ocorrencias.json`.
 - Inspecione os documentos de `Fechamento`, `Despesas`, `Manutencao`, `Voluntarios` e depósitos/coletas conforme o módulo de auditoria visual desta skill.
 - Quando o PDF for imagem ou a leitura depender de conferência visual, renderize páginas com `node scripts/siga-tools.mjs render-pdf-png "<pdf>"` e analise página a página.
-- Não substitua a leitura visual de livros de voluntários por `dados_voluntarios.json`: o JSON ajuda em repetições, mas não mostra assinaturas, campos vazios, riscos de cancelamento ou ordem real no encarte.
+- Rode `node scripts/siga-tools.mjs analisar-voluntarios "<localidade>" "MM/AAAA"` como **apoio** a 29.08/29.09/29.10 no JSON. **Não** declare auditoria de voluntários concluída só com esse comando.
+- Não substitua a leitura visual de livros de voluntários por `dados_voluntarios.json`: o JSON não mostra assinaturas, caligrafia (29.14), riscos de cancelamento nem ordem real no encarte.
+- **Gate (pré-requisito do parecer):** é **vedado** declarar «análise concluída», apresentar `Task-Parecer` como completo, propor lote «fechado» ou sugerir `fechar-verificacao` sem a secção `## Cobertura` preenchida (template abaixo). Livros/eixos sem achado devem constar como **OK** explícito, nunca omitidos.
+
+### 4b. Roteiro obrigatório CO (gate anti-lacuna)
+
+Escopo mensal da skill = **Parte 1** do *Roteiro de Verificação Documental do Conselho Fiscal* (casas de oração), §§1–24 + formulário **14.8**.  
+**Parte 2** (Presidência, Tesouraria ADM, Compras, Patrimônio ADM, etc.) está **fora** da verificação `CASA DE ORAÇÃO`, salvo pedido explícito do analista para verificação de setor/departamento.
+
+Para **cada** eixo, marcar no `Task-Parecer` o resultado (`OK` / `achado` / `N/A`) antes de seguir:
+
+| # | Bloco (roteiro CF) | O que conferir (rótulos típicos) | Pasta / evidência |
+| --- | --- | --- | --- |
+| R1 | §2 LRC / C-50 | Somas 6.1; rasuras 6.2; ≥3 rubricas/dia 6.3; conciliação LRC×C-52/mapa 6.4; RM separado 6.5; traços 6.6; cultos/RJM 6.7/6.9; digitalização 06.02 / 07.01 | `Fechamento` (livro coletas) |
+| R2 | §3 Depósitos | Frequência semanal **01.10** (~552); colagem/legibilidade; não substituir por transf. pessoal | `Depositos/`, boletos, C-52 |
+| R3 | §4–5 Pagamentos / C-39 | Atraso 3.4/3.5; C-39 com 3 assinaturas; colagem | C-39 + `Despesas/` |
+| R4 | §6–11 NF / cupom / faturas | Destinatário/CNPJ 2.1–2.2; discriminação 2.3; local SP 2.5; quitação; cruzar JSON×PDF×C-39 | `Despesas/*.pdf` |
+| R5 | §12 C-52 | ≥3 assinaturas (1 ministério); saldos × `fechamento_*.json` | `Fechamento` |
+| R6 | §13–20 Pagamentos especiais | Compras a prazo pela CO; PF; pagamento fora de competência | cruzamento despesa |
+| R7 | §21 Fundo Bíblico | Formulário mensal ≠ C-52; 3 responsáveis; **17.01** (~272) se omitido/ilegível | `Fechamento` (EST04102) |
+| R8 | §22 Voluntários | **Todos** os PDFs: 29.08, 29.09, 29.10, 29.11, **29.14**, 07.01; 29.12 livro×SIGA | `Voluntarios/` + JSON só apoio |
+| R9 | §23 Manutenção / brigada | Relatório mensal assinado; ata/lista se trimestre; itens 28.x | `Manutencao/` |
+| R10 | 14.8 bens móveis | Exatamente **um** 14.8 da **competência** (mesmo sem movimentação); competência errada → **05.09** (~305); 14.2 opcional | `Fechamento` |
+
+**Matriz mínima anti-lacuna** (além da tabela R1–R10):
+
+| Eixo | O que fazer | Falha típica se pular |
+| --- | --- | --- |
+| Pacote `doc_types` | C-52, mapa, coletas, depósitos, despesas, FB, **14.8**, manut. assinada, livros | Esquecer 14.8 / FB |
+| Depósitos **01.10** | nº depósitos × nº semanas da competência | 3 depósitos em mês com 4+ semanas |
+| Voluntários **todos** PDFs | 29.08+29.09+29.10+29.11+**29.14**+07.01 por livro | Só GEM/Limpeza; omitir Cozinha/Manutenção/Costura |
+| Despesas / NF | Natureza × código; NF × colagem; manifesto GED | Falso 01.04 ou NF sem anexo |
+| `analisar-voluntarios` / `validar-voluntarios` | Apoio JSON a 29.08/09/10 | Usar JSON como única fonte e perder 29.14 no PDF |
+
+*Lições:* Pedreira 05/2026 (27× 29.08 + 01.10 omitidos por foco parcial); Ademar 05 Costura (falso 07.01 → achado real **29.14**).
+
+### Template obrigatório `## Cobertura` no Task-Parecer
+
+```markdown
+## Cobertura
+
+| Eixo | Resultado | Notas |
+|------|-----------|-------|
+| R1 LRC/C-50 | OK / achado / N/A | |
+| R2 Depósitos 01.10 | … | n depósitos / n semanas |
+| R3 C-39 | … | |
+| R4 NF/Despesas | … | |
+| R5 C-52 | … | |
+| R6 Pag. especiais | … | |
+| R7 Fundo Bíblico | … | |
+| R8 Voluntários (matriz livros) | … | ver tabela abaixo |
+| R9 Manutenção | … | |
+| R10 14.8 | … | competência do anexo |
+
+### Voluntários (um por PDF em Voluntarios/)
+
+| Livro (ficheiro) | 29.08 | 29.09 | 29.10 | 29.11 | 29.14 | 07.01 |
+|------------------|-------|-------|-------|-------|-------|-------|
+| …pdf | OK/achado/N/A | … | … | … | … | … |
+```
 
 ### 5. Parecer, dúvidas e autorização
-- Registre os achados em `works/Task-Parecer-<CO>.md`, com evidência concreta, documento/página/linha quando aplicável, item candidato do catálogo (`codigo`, `nomeExibicao`, `nomeGrupo`) e campos sugeridos de data e `N.º Documento`.
+- Registre os achados em `works/Task-Parecer-<CO>.md` **com** `## Cobertura` completa **e**, quando houver vários apontamentos, em `works/.../lote-apontamentos.json` com `regra` (InfoCCB), `codigo` (ERP), `conviccao` (0–100), `status` e observação — para o analista poder autorizar por limiar («lança ≥95%»).
 - Se houver item novo, regra genérica, múltiplos códigos plausíveis ou dúvida sobre reincidência/competência/anexo, pergunte ao analista antes de lançar.
-- Apresente o parecer no chat e só execute `inserir-item`, `atualizar-item`, `excluir-item`, `fechar-verificacao` ou equivalente após autorização explícita do usuário.
+- Apresente o parecer no chat (e o resumo de `validar-lote` quando existir lote) e só execute `inserir-item` / `inserir-itens-batch` / etc. após autorização explícita.
 
 ### 6. Lançamentos e padrão de observação
 - Para cada apontamento autorizado, chame `node scripts/siga-tools.mjs inserir-item <idVerificacao> <codigoItemERP> "<dataFato>" "<numeroDocumento>" "<observacao>"`.
+- Para **muitos** apontamentos da mesma verificação (ex.: dezenas de 29.08), grave um JSON de lote (com `regra` + `conviccao`) e use `validar-lote` / `inserir-itens-batch`. Prefira `--dry-run=true` ou `validar-lote` antes do lançamento real. Em falha a meio, retome com `--from=<índice>` (0-based sobre a lista **filtrada**).
+- Quando o analista autorizar por limiar («lança ≥95%»), execute:
+  `node scripts/siga-tools.mjs inserir-itens-batch <id> works/.../lote-apontamentos.json --min-conviccao=95 --autorizado=true --log=works/.../lote.log`
 - A observação deve ser **curta, factual e restrita ao achado**: cite documento/localidade/competência, número do documento quando houver e divergência observada.
 - Não prefixe a observação com o código do item (`07.01 -`, `29.09 -` etc.); o item já é intrínseco ao lançamento.
 - Não acrescente recomendações de correção, conclusões não observadas, frases como "demais conferem" ou justificativas fora do escopo do erro.
@@ -207,13 +307,12 @@ Siga **rigorosamente** o plano mestre acima. O roteiro abaixo é apenas um resum
    `node scripts/siga-tools.mjs extrair-dados 123456 "BR 21-0198 - JD MIRIAM - SANTO AMARO" "02/2026"`
    Alerte o usuário que está procedendo com o download de todos os comprovantes.
 
-4. **Análise Preliminar Interna (Usando I.A. Nativa)**:
-   Leia o arquivo JSON consolidado `fechamento_{GUID}.json` que será jogado em `works/`.
-   Inspecione a pasta `Fechamento` e utilize suas próprias capacidades nativas (ex: se necessário usar ferramentas de extração PDF ou visual) para checar a consistência das NF's com as `despesas` descritas no JSON.  
-   Na pasta `Voluntarios/`, ao auditar os livros digitalizados, inclua **obrigatoriamente** a verificação de **linhas de registo em branco no fim das folhas sem cancelamento** (risco horizontal ou diagonal), com **um apontamento 07.01 (`codigo` 304) por página afetada**, conforme o detalhe em *Livro de Voluntários* no módulo *Auditoria Contábil e Visual* (subitem *Cancelamento de linhas de registo não utilizadas*).
+4. **Auditoria documental (sem atalho)**:
+   O parágrafo operacional **não** autoriza análise parcial. Execute **integralmente** o Plano mestre §4 / §4b (Roteiro obrigatório CO + matriz + template `## Cobertura`) e o módulo *Auditoria Contábil e Visual*.  
+   Apoio CLI: `analisar-voluntarios "<localidade>" "MM/AAAA"` (JSON) + `render-pdf-png` nos livros; **proibido** declarar concluído sem `## Cobertura` preenchida.
 
 5. **Geração do Parecer (Task.md)**:
-   Pegue o resultado da análise detalhada e escreva as constatações listadas no arquivo `/works/Task-Parecer-<CO>.md`.
+   Pegue o resultado da análise detalhada e escreva as constatações listadas no arquivo `/works/Task-Parecer-<CO>.md` **incluindo** `## Cobertura`.
    Apresente no chat o que encontrou e pergunte o que o analista aprova como lançamento.
 
 6. **Efetivação das Constatações**:
@@ -233,6 +332,24 @@ Siga **rigorosamente** o plano mestre acima. O roteiro abaixo é apenas um resum
 
 ---
 
+## Normas InfoCCB (referência documental na skill)
+
+Antes e durante a auditoria documental, use a base local em `docs/normas/` (curso InfoCCB *Conselho Fiscal*, `id=28`):
+
+| Recurso | Caminho | Uso |
+| --- | --- | --- |
+| Índice | `docs/normas/README.md` | Como cruzar normas × ERP × evidência; **PI CCB** |
+| Checklist CO | `docs/normas/specs/checklist-casa-oracao.md` | Roteiro mensal de conferência |
+| Periodicidade | `docs/normas/specs/periodicidade-verificacao.md` | Mensal / bimestral / … por departamento |
+| Lista de ocorrências | `docs/normas/specs/lista-ocorrencias.json` (+ `lista-ocorrencias-co.md`) | Rótulos oficiais (`1.1`, `6.2`, `7.1`, `29.09`…) e textos |
+| Inventário fontes | `docs/normas/fonte-infoccb/manifest.json` | Nomes/IDs Moodle — **sem** binários no Git |
+| PDFs/XLSX (só local) | `docs/normas/fonte-infoccb/*` | Baixar com `infoccb-fetch-cf-docs` / CDP; **PI CCB — nunca commit** |
+| Texto extraído (só local) | `docs/normas/_extracted/` | Regenerável; **nunca commit** |
+
+**Regra:** o rótulo da Lista de Ocorrências InfoCCB orienta o *enquadramento*; o **`codigo` inteiro** para `inserir-item` vem só de `config/lista-item-verificacao.json` após sync ERP. Ex.: ocorrência `7.1` / texto *norma interna* corresponde em geral ao item skill **07.01** (`codigo` ~304) — confirme no JSON do ERP.
+
+---
+
 ## 🕵️ Módulo de Auditoria Contábil e Visual (Feito Pelo Agente)
 
 A skill de Automação do SIGA foi desenhada para que **o próprio Agente (você)** atue como o Auditor de Inteligência Visual (OCR e Visão Computacional). **Analisar uma Casa de Oração é um processo complexo e criterioso**, não se resuma a olhar os nomes dos arquivos.
@@ -245,13 +362,18 @@ Este passo de categorizar e validar profundamente os documentos é **ESSENCIAL e
    - Abra o `fechamento_{GUID}.json` extraído. Ele possui os totais declarados no sistema (ex: *totalColetas*, *totalDespesas*) e o Array exato de NFs (`despesas`).
    - Carregue os Padrões Visuais Base: `.agents/skills/siga-automation/config/doc_types.json`
    - Carregue o **Catálogo de Ocorrências** (já sincronizado com o ERP): `config/lista-item-verificacao.json`. Relembre as regras do **ponto 5** dos *Aprendizados Técnicos*: a partir das `nomeExibicao`, decida com confiança plena o `codigo` de cada apontamento ou **pergunte ao analista** se houver itens novos ou ambiguidade.
+   - Consulte também `docs/normas/specs/checklist-casa-oracao.md` e `docs/normas/specs/lista-ocorrencias.json` para alinhar o achado aos rótulos oficiais InfoCCB antes de mapear ao ERP.
 
 2. **Auditoria Documental e Cruzamento Contábil**: 
    Acesse a pasta extraída (que contém PDFs de `Fechamento`, `Despesas`, `Manutencao` e `Voluntarios`). Você tem a habilidade de analisar imagens nativamente ou através da extensão recomendada. Você deve cruzar os dados da seguinte forma:
    
-   - **Livro de Coletas (C-50)**: 
-     - *Assinaturas:* Todas as linhas/dias preenchidos devem possuir no mínimo 3 rubricas simples (Vistos).
-     - *Integridade Fiel (OCR):* Fique atento à qualidade do scanner! Caso a imagem esteja mal enquadrada/cortada ao meio (exibindo perda de informação, ausência dos centavos na margem ou perda do total diário no recorte da página lateral direita), você DEVE apontar imediatamente a inconsistência: **"06.02 - Rasura, preenchimento incorreto ou incompleto no registro das coletas"**. O documento só é válido se estiver 100% legível nos valores numéricos horizontais.
+   - **Livro de Coletas (C-50 / LRC)**: 
+     - *Assinaturas (6.3):* Todas as linhas/dias preenchidos devem possuir no mínimo 3 rubricas simples (Vistos).
+     - *Somas e conciliação (6.1 / 6.4):* Confira totais do mês no livro e cruzamento com C-52 / mapa de coletas.
+     - *RM / ensaio (6.5):* Coleta de Reunião de Mocidade / ensaio regional em linha separada do culto oficial.
+     - *Campos vazios (6.6):* Traço horizontal (−) ou diagonal nas colunas sem valor; cultos/RJM sem frutos ainda assim registrados (6.7 / 6.9).
+     - *Rasuras (6.2):* Sem justificativa no verso → priorizar 6.2 sobre 07.01 quando for só rasura de livro.
+     - *Integridade Fiel (OCR):* Imagem mal enquadrada/cortada (perda de centavos/total) → **"06.02 - Rasura, preenchimento incorreto ou incompleto no registro das coletas"** (ou 07.01 se só legibilidade genérica).
    
    - **Mapa de Coletas (PDF do SIGA em `Fechamento`)**:
      - *Estrutura:* Relatório consolidado (ex.: colunas **OFP**, **CXM**, **Total**), com desdobramentos *Valor arrecadado em Espécie*, *em Cartão*, e por vezes **"Vlr. arrec. em PIX / TED / Transf."* (ou texto equivalente). Detalhe em `doc_types.json` → `mapa_coletas` / `criterio_emissao_manual`.
@@ -266,25 +388,41 @@ Este passo de categorizar e validar profundamente os documentos é **ESSENCIAL e
      - *Regras de Hierarquia:* Obrigatoriamente, 1 dessas assinaturas pertence ao **Ministério Local** (Ancião, Diácono ou Cooperador). As demais (no mínimo 2) pertencem a cargos da curadoria/administração (Administração, Tesoureiro, Porteiro). Invalide sumariamente relatórios preenchidos apenas por oficiais paralelos (sum assinatura do ministério da CO atestado no mês atual).
      - *Saldos:* O Saldo Atual cruza perfeitamente com o nó `totalColetas` do JSON?
 
+   - **Formulário 14.8 (bens móveis) — procedimento dedicado**:
+     - Exigir **exatamente um** PDF/anexo **14.8** da **competência auditada** (mesmo “sem movimentação”). Ausente / competência errada / não anexado → **05.09** (`codigo` típico **305**).
+     - Mais de um 14.8 ou 14.8 de outro mês no pacote do mês atual → apontamento (não satisfaz a obrigatoriedade).
+     - **14.2** é opcional (só se houver movimentação) e **não** substitui o 14.8.
+     - Prazo: se a competência ainda for o mês anterior ao corrente e o prazo de anexo no SIGA vigorar, o analista pode **segurar** o 305; competências já vencidas → manter apontamento.
+
    - **Fechamento do Fundo Bíblico (formulário mensal, distinto do C-52)**: 
      - *Obrigatoriedade e confusão:* O **Fechamento do Fundo Bíblico** é documento **obrigatório** e **não** é o movimento C-52, nem o mapa/recebimentos de coletas. Padrões e critérios de leitura: `config/doc_types.json` → `fundo_biblico` (`file_patterns`, `criterio_auditoria`, `conteudo_para_reconhecer`). Relatório SIGA típico: **EST04102**, paginação *Folha 1/2* (tabelas de estoque) e *Folha 2/2* (três blocos *Responsável* com assinaturas e nomes).
      - *Verificação na pasta e no SIGA:* Confira a pasta `Fechamento` extraída **e** a lista de anexos do fechamento no SIGA: deve existir um PDF cujo conteúdo seja este formulário. Se o anexo do Fundo Bíblico **não** aparece (só C52, despesas, depósitos, mapas, etc.), trata-se de **omissão** do documento.
      - *Assinaturas:* Se o PDF existir, abra a **última folha** (em geral *Folha 2 / 2*): exigem-se **três** assinaturas nos blocos *Responsável* (a primeira folha costuma trazer só quadros de valores, sem as três rubricas). Se faltar o arquivo, ou faltar assinatura em um ou mais blocos, o enquadramento é **17.01** (ausência de formulário de fechamento mensal devidamente preenchido e assinado), com `codigo` de item no SIGA = **272** (confirmar em `lista-item-verificacao.json` após `sincronizar-lista-itens`).
    
-   - **Colagem de Despesas (C-39)**: 
+   - **Colagem de Despesas (C-39) e documentos fiscais**: 
      - *Composição C-39:* Verifique as 3 assinaturas visíveis e obrigatórias no cabeçalho ou rodapé formal do modelo C-39.
-     - *Rastreabilidade de NFs:* Cada nota listada no `despesas` do JSON (ex: R$ 159,80 Leroy Merlin, R$ 542,80 Enel/Eletropaulo) consta materialmente anexada ou grampeada nesta Colagem de Despesas? (Aponte NF ausente de comprovante com os itens `03.01` ou `03.02`).
-     - *Nomes GED duplicados:* Após extração/re-download, leia `Despesas/.ged-download-manifest.json` (se existir). Para cada grupo com `conteudoIdentico: false`, abra **ambos** os PDFs (`CF052554.pdf` e `CF052554__<guid>.pdf`), compare valor/data/fornecedor e cruze com a linha da despesa no JSON/SIGA (`origemGuid`, `nomeListaGED`). Registre no parecer se é upload duplicado inofensivo ou possível comprovante arquivado no lugar errado.
+     - *Rastreabilidade de NFs:* Cada nota listada no `despesas` do JSON consta materialmente anexada? (NF ausente → `03.01` / `03.02`).
+     - *Checks fiscais (roteiro §7–11 / ocorrências 2.x):* destinatário e CNPJ CCB (2.1–2.2); discriminação de itens — evitar “DIVERSOS” (2.3); local de entrega SP quando aplicável (2.5); carimbo/recibo de quitação; papel térmico com cópia quando couber; compras a prazo pela CO não devem ocorrer.
+     - *Natureza × código contábil:* ex. gás de cozinha tipicamente 3027 — inconsistência gritante → propor apontamento (critério do analista / catálogo).
+     - *Nomes GED duplicados:* Após extração/re-download, leia `Despesas/.ged-download-manifest.json` (se existir). Para cada grupo com `conteudoIdentico: false`, abra **ambos** os PDFs, compare valor/data/fornecedor e cruze com a linha da despesa no JSON/SIGA. Registre no parecer se é upload duplicado inofensivo ou possível comprovante trocado.
    
    - **Colagem de Depósitos (Local das Coletas)**: 
      - As filipetas bancárias ou comprovantes de caixa eletrônico devem estar legíveis na folha A4 e a folha rubricada 3 vezes.
+     - **Frequência semanal (01.10):** conte o número de depósitos do mês (relação TES00702 / colagem / C-52) e compare com as **semanas** da competência. Padrão: depósito **pelo menos uma vez por semana**. Se a quantidade estiver abaixo do padrão → **01.10** (`codigo` ERP típico **552**; confirmar no catálogo). Não confunda com 01.08 (comprovante não colado em A4).
+
+   - **Manutenção preventiva / brigada (CO)**:
+     - Relatório mensal de manutenção (MNT) **assinado** presente em `Manutencao/` (`doc_types` → `relatorio_manutencao`).
+     - Atas trimestrais / lista de presença / check-list elétrico / brigada / extintores: conferir quando a periodicidade do mês exigir (itens `28.x` / `23.x` na lista de ocorrências). Ausência do relatório mensal obrigatório → apontar conforme catálogo ERP.
 
    - **Livro de Voluntários (RH004 / RH010)**:
-     - *Fonte de verdade para o preenchimento no livro (papel digitalizado):* **Apenas o PDF** na pasta `Voluntarios/`. A análise de **assinaturas**, de **código de função** preenchido **no encarte do livro**, de **entradas/saídas** em branco e de **ordem cronológica dos horários de entrada** (sentido de leitura do PDF, de cima para baixo, **no mesmo dia e no mesmo livro**) é **sempre visual** no PDF, **não** substituível por inspeção isolada de `dados_voluntarios.json` (o JSON do SIGA não mostra assinaturas; pode servir de apoio, mas **não** descarta a leitura folha a folha).
-     - *Cancelamento de linhas de registo não utilizadas (07.01) — passo explícito:* No fim de **cada folha** do livro (quadro de presença), as linhas **em branco** que não forem preenchidas devem estar **anuladas** conforme o manual: **risco horizontal** (quando for cancelar **uma** linha) ou **risco diagonal** abrangendo o **bloco** de linhas vazias até ao fim do quadro. Percorra **cada** PDF em `Voluntarios/` (todos os livros do mês) **página a página** (use `node scripts/siga-tools.mjs render-pdf-png "<caminho/do/ficheiro.pdf>"` se ajudar a zoom/IDE). Se existirem linhas vazias **sem** anulação visível, é **não cumprimento** da instrução de preenchimento do livro / norma interna: enquadrar em **07.01 - Não conformidade com a norma/regra/comunicado interno** — `codigo` **304** (sempre confirmar após `sincronizar-lista-itens`). **Lançar um apontamento 07.01 por folha (número de página do PDF) com problema**; na `observacao`, indique o **ficheiro**, a **página** e o tipo de falta (p.ex. bloco em branco sem risco diagonal; linha final sem risco). **Diferenciar** do 07.01 de outros documentos (p.ex. Mapa de Coletas): use *data do fato* coerente com a competência (p.ex. último dia do mês) e *N.º Documento* **sequencial** para o par **mesmo** `codigo` **304** + **mesma** data, sem saltar repetição. Não tratar como falha a folha em que a **última** linha vazia estiver claramente cortada com **risco horizontal** (anulação aceitável à linha).
+     - *Fonte de verdade para o preenchimento no livro (papel digitalizado):* **Apenas o PDF** na pasta `Voluntarios/`. A análise de **assinaturas**, de **código de função** preenchido **no encarte do livro**, de **entradas/saídas** em branco, de **ordem cronológica dos horários de entrada** (sentido de leitura do PDF, de cima para baixo, **no mesmo dia e no mesmo livro**) e de **caligrafia / preenchimento único (29.14)** é **sempre visual** no PDF, **não** substituível por inspeção isolada de `dados_voluntarios.json` (o JSON do SIGA não mostra assinaturas nem letra; pode servir de apoio, mas **não** descarta a leitura folha a folha).
+     - *CLI de apoio:* `analisar-voluntarios` lista candidatos 29.08/29.09/29.10 no JSON; `validar-voluntarios` só repetições. **Nenhum** dos dois fecha a matriz R8.
+     - *Varredura obrigatória de todos os livros:* liste os ficheiros em `Voluntarios/*.pdf` e trate **cada** um (Adm, Cozinha, Limpeza, Costura, GEM, EBI, Estacionamento, **Manutenção Preventiva**, etc.). Não interrompa a matriz após achar 29.09 num único livro. Cozinha e Manutenção Preventiva são pontos críticos para **29.08**; Costura e livros com muitas linhas da mesma mão são pontos críticos para **29.14**.
+     - *Cancelamento de linhas de registo não utilizadas (07.01) — passo explícito:* No fim de **cada folha** do livro (quadro de presença), as linhas **em branco** que não forem preenchidas devem estar **anuladas** conforme o manual: **risco horizontal** (quando for cancelar **uma** linha) ou **risco diagonal** abrangendo o **bloco** de linhas vazias até ao fim do quadro. Percorra **cada** PDF em `Voluntarios/` (todos os livros do mês) **página a página** (use `node scripts/siga-tools.mjs render-pdf-png "<caminho/do/ficheiro.pdf>"` se ajudar a zoom/IDE). Se existirem linhas vazias **sem** anulação visível, é **não cumprimento** da instrução de preenchimento do livro / norma interna: enquadrar em **07.01 - Não conformidade com a norma/regra/comunicado interno** — `codigo` **304** (sempre confirmar após `sincronizar-lista-itens`). **Lançar um apontamento 07.01 por folha (número de página do PDF) com problema**; na `observacao`, indique o **ficheiro**, a **página** e o tipo de falta (p.ex. bloco em branco sem risco diagonal; linha final sem risco). **Diferenciar** do 07.01 de outros documentos (p.ex. Mapa de Coletas): use *data do fato* coerente com a competência (p.ex. último dia do mês) e *N.º Documento* **sequencial** para o par **mesmo** `codigo` **304** + **mesma** data, sem saltar repetição. Não tratar como falha a folha em que a **última** linha vazia estiver claramente cortada com **risco horizontal** (anulação aceitável à linha). **Não** usar 07.01 para “folha cheia com mesma letra”: isso é **29.14**.
+     - *Regra 29.14 (preenchimento único / caligrafia idêntica) — **obrigatória** em cada livro:* No PDF, compare a letra dos campos **Dia**, **Código da Função**, **Nome** e **Horários** entre linhas de **voluntários distintos**. Se o encarte (ou o bloco do mês) mostrar **caligrafia idêntica** (mesma mão, mesma caneta/traço) preenchendo registros de colaboradores diferentes → enquadrar em **29.14 - Indícios de preenchimento único…** — `codigo` ERP típico **277** (grupo *LEGALIDADE - VOLUNTÁRIO*; confirmar após `sincronizar-lista-itens`). **Fonte de lançamento = catálogo ERP** (`lista-item-verificacao.json`), não o texto antigo da Lista InfoCCB que ainda pode rotular `29.14` como “linha em branco”. Apoio normativo: roteiro CF §26.5 (rasura / alteração / preenchimento por terceiros — mesma mão/caneta). **Um apontamento por livro/competência** com evidência clara (ou por folha se o analista pedir granularidade); na `observacao`, cite o ficheiro, folhas e o fato (caligrafia idêntica em nomes/horários). Assinaturas na coluna própria podem variar e **não** anulam sozinhas o achado nos campos de identificação/horário. JSON RH **não** detecta 29.14.
      - *Regra 29.11 (Assinaturas):* No PDF, cada **linha** utilizada deve exibir a rubrica/assinatura do voluntário. Linha com horários preenchidos e **sem** assinatura = apontamento. Confirme com zoom nas varreduras; PDFs de livro costumam ser **imagem** (sem camada de texto), exigindo inspeção visual.
-     - *Campos no livro (PDF), mapear no catálogo após `sincronizar-lista-itens`:* p.ex. **29.08** (cód. de função em branco, `codigo` típico `280`), **29.10** (sem saída, `282`); rótulos como “campo obrigatório / rasura” podem constar noutro item (ver **29.04** se existir no ERP). Sempre: `nomeExibicao` → `codigo` no JSON. Entrada e saída vazias validam-se **só** no PDF.
-     - *Regra 29.09 (fora da ordem, repetição de horário):* **(a) Ordem cronológica no livro (PDF):** se, percorrendo o dia no sentido de leitura, o horário de **entrada** de uma linha for **anterior** ao da **linha de cima** (retrocesso), trata-se de *fora da ordem* (código de item `281` após confirmar no catálogo). **(b) Repetição de horário:** ainda se pode apoiar no JSON para contar repetições idênticas de entrada/saída no **mesmo** dia; a partir da 4.ª, um apontamento por ocorrência, *N.º Documento* **1, 2, … N**. Use `atualizar-item` se precisar corrigir apontamento.
+     - *Campos no livro (PDF), mapear no catálogo após `sincronizar-lista-itens`:* p.ex. **29.08** (cód. de função em branco, `codigo` típico `280`), **29.10** (sem saída, `282`); rótulos como “campo obrigatório / rasura” podem constar noutro item (ver **29.04** se existir no ERP). Sempre: `nomeExibicao` → `codigo` no JSON. Entrada e saída vazias validam-se **só** no PDF. **29.08:** uma linha usada sem código de função = um apontamento (N.º Doc sequencial por livro/competência conforme prática do analista).
+     - *Regra 29.09 (fora da ordem, repetição de horário):* **(a) Ordem cronológica no livro (PDF):** se, percorrendo o dia no sentido de leitura, o horário de **entrada** de uma linha for **anterior** ao da **linha de cima** (retrocesso), trata-se de *fora da ordem* (código de item `281` após confirmar no catálogo). **(b) Repetição de horário:** ainda se pode apoiar no JSON (`analisar-voluntarios`) para contar repetições idênticas de entrada/saída no **mesmo** dia; a partir da 4.ª, um apontamento por ocorrência, *N.º Documento* **1, 2, … N**. Use `atualizar-item` se precisar corrigir apontamento. Aplique (a) e (b) em **todos** os livros, não só nos grupos que o CLI listou.
      - *Regra 29.12 (Cruzamento Livro vs SIGA):* Só após a conferência no PDF, bata com o `dados_voluntarios.json`. Divergências: regra 29.12 com o **código** numérico do catálogo (ex. `284`), com página/linha do **PDF** citada.
 
 3. **Gerar Relatório de Pendências Definitivo (Parecer do Fiscal)**: 

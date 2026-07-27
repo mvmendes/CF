@@ -1,0 +1,10 @@
+# Texto extraído das normas (local — não versionado)
+
+Conteúdo OCR/texto dos PDFs InfoCCB. **Propriedade intelectual CCB — não commitar.**
+
+Gerar com:
+
+```bash
+node scripts/infoccb-extract-text.mjs
+node scripts/infoccb-extract-xlsx.mjs
+```

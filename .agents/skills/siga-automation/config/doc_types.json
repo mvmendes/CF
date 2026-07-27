@@ -219,7 +219,23 @@
                 "*BENS*MOVEIS*",
                 "*14.8*"
             ],
-            "verification_items": ["25.01"]
+            "verification_items": ["25.01"],
+            "codigo_item_siga_erp": 305,
+            "nota_catalogo": "Após sincronizar-lista-itens, confirmar em lista-item-verificacao.json: regra 05.09 (documento não digitalizado/anexado). Assinaturas do 14.8 → 25.01 (ERP conforme catálogo).",
+            "criterio_auditoria": {
+                "obrigatorio_exatamente_um": "O fechamento da competência sob auditoria deve conter exatamente um Formulário 14.8 daquela competência (mesmo 'sem movimentação').",
+                "falta_documento_ou_nao_reconhecido": "Não há PDF de 14.8 da competência correta → 05.09 (ERP 305).",
+                "competencia_errada": "Há anexo rotulado/nomeado como 14.8, porém o conteúdo é de outra competência (ex.: 14.8 de 04/2026 no fechamento de 05/2026) → gera 05.09 (ERP 305); o documento da competência errada não satisfaz a obrigatoriedade.",
+                "mais_de_um": "Mais de um Formulário 14.8 no mesmo fechamento/competência → também gera apontamento (05.09 / critério do analista).",
+                "formulario_14_2": "O Formulário 14.2 é opcional (depende de haver movimentação no mês). Não substitui o 14.8; ausência isolada de 14.2 não gera apontamento.",
+                "prazo_anexo": "Se a competência sob auditoria ainda for o mês anterior ao corrente e o prazo de anexar no SIGA estiver vigente, o analista pode segurar o 305 e pedir à CO que anexe o 14.8 correto antes de lançar. Competências já encerradas → manter o apontamento.",
+                "conteudo_para_reconhecer": [
+                    "Título/identificação: Formulário 14.8 / Movimento Mensal de Bens Móveis (ou equivalente).",
+                    "Competência (mês/ano) alinhada ao fechamento auditado.",
+                    "Pode declarar 'sem movimentação' no mês."
+                ],
+                "nao_e_este_documento": "Formulário 14.2 (ocorrência de entradas/saídas pontuais) não substitui o 14.8."
+            }
         },
         {
             "type": "livro_voluntarios",
@@ -237,7 +253,8 @@
                 "*VOLUNTARIO*",
                 "*FOLHAS_BRANCAS*"
             ],
-            "verification_items": ["29.02", "29.04", "29.06", "29.07", "29.08", "29.09", "29.10", "29.11", "29.12"]
+            "verification_items": ["29.02", "29.04", "29.06", "29.07", "29.08", "29.09", "29.10", "29.11", "29.12", "29.14"],
+            "nota_29_14": "Obrigatório em cada PDF de livro: indícios de preenchimento único (caligrafia idêntica entre colaboradores). ERP tipico codigo 277 — confirmar lista-item-verificacao.json. Nao substituivel por dados_voluntarios.json."
         },
         {
             "type": "expense_validation",

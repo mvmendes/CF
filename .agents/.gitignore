@@ -2,3 +2,12 @@ node_modules
 works
 .siga_session
 token.json
+scratch
+
+# Normas InfoCCB — propriedade intelectual CCB: NÃO versionar binários nem OCR integral.
+# Baixar localmente via scripts/infoccb-*.mjs (ver docs/normas/README.md).
+**/docs/normas/fonte-infoccb/**/*.pdf
+**/docs/normas/fonte-infoccb/**/*.xlsx
+**/docs/normas/fonte-infoccb/**/*.docx
+**/docs/normas/_extracted/**
+!**/docs/normas/_extracted/.gitkeep

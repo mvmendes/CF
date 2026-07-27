@@ -1,0 +1,3256 @@
+{
+  "fonte": "InfoCCB / Conselho Fiscal / Lista de Ocorrências v2",
+  "recursoMoodleId": 8787,
+  "geradoEm": "2026-07-23",
+  "total": 464,
+  "itens": [
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.1",
+      "descricao": "O Formulário C52 não apresentou assinatura do ir. Diacono e minimo de 3 assinaturas.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.2",
+      "descricao": "O Saldo do caixa esta acima do limite máximo orientado pela Administração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.3",
+      "descricao": "Ausência de Justificativa do Diàcono quando limite máximo de caixa for ultrapassado.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.4",
+      "descricao": "O código da despesa esta em desacordo com a natureza da despesa.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.5",
+      "descricao": "Formulário C39 - O Histórico e Complemento esta em desacordo com a despesa registrada.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.6",
+      "descricao": "Formulário C39 - Não possui as 3 assinaturas necessárias",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.7",
+      "descricao": "Formulário C39 - Apresenta colagens em desacordo com as normas administrativas.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.8",
+      "descricao": "Comprovantes de depósitos de coleta não foram copiados e ou colados folha A4.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Relatório financeiro",
+      "codigo": "1.9",
+      "descricao": "Ausência de cópia de Cupons e/ou CFE-SAT termossensível.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.1",
+      "descricao": "Campo destinatário: Difere aos dados do cadastro da Congregação?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.2",
+      "descricao": "CNPJ ausente ou difere ao do cadastro da Congregação - informar o CNPJ da respectiva Administração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.3",
+      "descricao": "Corpo do documento fiscal: Inconsistências referentes aos produtos",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.4",
+      "descricao": "Compras a Prazo: ADM/SETOR - ausência da indicação da forma de pagto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.5",
+      "descricao": "Ausência ou incosistência na indicação de local de entrega, somente em caso de Construções ou Reforma, onde o fornecedor entrega direto na Casa de Oração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.1",
+      "descricao": "Ausência do carimbo e/ou recibo de quitação (datado)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.2",
+      "descricao": "Nota fiscal com CFOP 5929 (Lançamento relativo ao Cupom Fiscal) sem o cupom fiscal.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.3",
+      "descricao": "Quitação por cartão ou pelo caixa eletrônico (Casa de Oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.4",
+      "descricao": "Quitação por débito automático (Casas de Oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.5",
+      "descricao": "Pagamento em atraso, independente de justificativa.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.6",
+      "descricao": "Pagamento fora de competência  (Casa de oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.7",
+      "descricao": "Pagamento para Pessoa física (exceto casas de oração cedida ou alugada)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.9",
+      "descricao": "Compras a prazo no Setor - sem anexo da Cópia Doc Fiscal nos respectivos pagamentos.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.10",
+      "descricao": "Compras a prazo pelas Casas de oração com pagamento fora do mês de compra",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Pagamento",
+      "codigo": "3.11",
+      "descricao": "Compras acima do limite recomendado pelo Setor/Administração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "4.1",
+      "descricao": "Ausência de documento legal",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "4.2",
+      "descricao": "Rasura, alteração ou preenchimento por terceiros",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "4.3",
+      "descricao": "Natureza da despesa não pertinente e ou descrição de forma genérica.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "4.4",
+      "descricao": "Aluguéis e serviços: Retenção e pagamento de impostos (ISS/INSS/PIS/COFINS/IRRF, etc)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "5.1",
+      "descricao": "Luz, gás, água, telefone e taxas: Em nome de terceiros (exceto cedida ou alugada)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "5.3",
+      "descricao": "Ausência de Contrato Locação: Serviços, Equipamentos, Imóvel, Estac, etc)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "5.4",
+      "descricao": "Contratação de locação/aluguéis - Casa de oração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "5.5",
+      "descricao": "Contratação Profissionais Autônomos (MEI) e Pessoa Fisica - Atenção aos impostos",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "5.6",
+      "descricao": "Contratação de Serviços de empresas de outro município - Casa de oração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "5.7",
+      "descricao": "Ausência de Carta justificativa do diacono para pagamento em atraso.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "5.8",
+      "descricao": "Ausência de Carta justificativa de saldo acima de R$200,00 assinada pelo Diacono.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.1",
+      "descricao": "Totais e subtotais das linhas e colunas incorretos.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.2",
+      "descricao": "Rasura, preenchimento incorreto ou incompleto no registro das coletas.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.3",
+      "descricao": "Ausência de visto (mínimo três) nas colunas do formulário ou ocorrência.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.4",
+      "descricao": "Ausência de justificativa nas folhas de ocorrências .",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.5",
+      "descricao": "Ausência de registro separado para Reunião de Mocidade, Culto de Conselhos ou Ensaio Regional.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.6",
+      "descricao": "Campos em branco não inutilizados e ou linhas restantes sem o traço diagonal.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.7",
+      "descricao": "Ausência de registro de coleta nos cultos oficiais e Reunião de Jovens e Menores.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.8",
+      "descricao": "Ausência de assinatura do diácono (s) na folha mensal de recebimento do Livro de Registro de Coletas.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Registro de coletas",
+      "codigo": "6.9",
+      "descricao": "Divergência entre o livro e o balancete/movimento financeiro (C-52).",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Relatórios",
+      "codigo": "7.1",
+      "descricao": "Contém assinaturas: Relatório razão analítico auxiliar da tesouraria?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Relatórios",
+      "codigo": "7.2",
+      "descricao": "Contém assinaturas: Relatório razão gerencial?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Relatórios",
+      "codigo": "7.3",
+      "descricao": "Contém assinaturas: Relatório da Distribuidora - Posição de estoque?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Relatórios",
+      "codigo": "7.4",
+      "descricao": "Foram emitidos: Relatórios de apoio Bcte analítico, Mapa de receita/despesas, Resumo saldo caixa e Conciliação Bancária?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Ativo Circulante - Conciliação",
+      "codigo": "8.1",
+      "descricao": "Está conciliado o grupo 100 - Caixa Geral: Balancete x Mapa relatório saldo caixa x Mapas receita/despesa?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Ativo Circulante - Conciliação",
+      "codigo": "8.2",
+      "descricao": "Está conciliado o grupo 101 - Bancos conta movimento: Balancete x Extrato bancário x Conciliação?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Ativo Circulante - Conciliação",
+      "codigo": "8.3",
+      "descricao": "Está conciliado o grupo 103 - Aplicações Financeiras: Balancete x Extrato bancário x Conciliação?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Ativo Circulante - Conciliação",
+      "codigo": "8.4",
+      "descricao": "Está conciliado o grupo 104 - Direitos Realizáveis: Balancete x Contrato fornecedores x Folha Pgto x Controles?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Ativo Circulante - Conciliação",
+      "codigo": "8.5",
+      "descricao": "Está conciliado o grupo 105 - Estoques: Balancete x Controle estoque distribuidora?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Ativo Circulante - Conciliação",
+      "codigo": "8.6",
+      "descricao": "Está conciliado o grupo 106 - Contas correntes: Balancete x Mapa saldos de caixa x Mapa Coleta x Contrato x ATA?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Ativo Circulante - Conciliação",
+      "codigo": "8.7",
+      "descricao": "Está conciliado o grupo 107 - Fundos de Aplicação Restrita: Balancete x Conciliação?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Ativo Circulante - Conciliação",
+      "codigo": "8.8",
+      "descricao": "Está conciliado o ATIVO CIRCULANTE (Caixa, Bancos, Aplicações e Outros) - Partidas antigas ou de outra natureza?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.1",
+      "descricao": "Estão conciliados os sub grupos 1100 1108 1109 - Imóveis, Terrenos e Benfeitorias: Balancete x Rel Ativo Imobilizado?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.2",
+      "descricao": "Estão conciliados os sub grupos 1101 1103 - Móveis e Utensílios e Máquinas e Ferramentas: Bcte x Rel Ativo Imobilizado?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.3",
+      "descricao": "Estão conciliados os sub grupos 1102 1105 - Orgãos e Instr musicais e Sistemas e Equip.: Bcte x Rel Ativo Imobilizado?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.4",
+      "descricao": "Estão conciliados os sub grupos 1106 1107 - Instalações e Veículos: Balancete x Relatório do Ativo Imobilizado?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.5",
+      "descricao": "Estão conciliados os grupos 1104 11010 11011 - Linhas Telef, Softwares e Desenv Softwares: Bcte x Rel Ativo Imobilizado?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.6",
+      "descricao": "Está conciliado o grupo 111 - Congregações em Construção x Matrícula aberta?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.7",
+      "descricao": "Está conciliado o grupo 112 - Congregações em Reforma x Matrícula aberta?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.8",
+      "descricao": "Está conciliado o grupo 113 - Mão de Obra própria Construção/Reforma x Matrícula aberta?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.9",
+      "descricao": "Está conciliado o grupo 114 - Mão de Obra terceiros Construção/Reforma x Matrícula aberta?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.10",
+      "descricao": "Está conciliado o grupo 116 - Mão de obra Voluntária Construção/Reforma x Matrícula aberta?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.11",
+      "descricao": "Está conciliado o grupo 115 - Depreciação e amortização acumulada?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Permanente Imobilizado - Conciliação: Balancete x Controle Ativo Fixo x Casas de Oração",
+      "codigo": "9.12",
+      "descricao": "Está conciliado o ATIVO PERMANENTE - Partidas antigas ou de outra natureza?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Passivo Circulante - Conciliação",
+      "codigo": "10.1",
+      "descricao": "Está conciliado o grupo 200 - Fornecedores: Balancete x Documentação (Contrato, NF, etc) x Falta de pagamento?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Passivo Circulante - Conciliação",
+      "codigo": "10.2",
+      "descricao": "Está conciliado o grupo 201 - Contas a Pagar: Balancete x Documentação x Falta de pagamento?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Passivo Circulante - Conciliação",
+      "codigo": "10.3",
+      "descricao": "Está conciliado o grupo 202 - Obrigações Sociais e Tributárias: Balancete x Documentação x Falta de pagamento?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Passivo Circulante - Conciliação",
+      "codigo": "10.4",
+      "descricao": "Está conciliado o grupo 203 - Credores por compra de imóveis: Balancete x Contrato de Compra e Venda x Falta de pagamento?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Passivo Circulante - Conciliação",
+      "codigo": "10.5",
+      "descricao": "Está conciliado o grupo 204 - Conta corrente?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Passivo Circulante - Conciliação",
+      "codigo": "10.6",
+      "descricao": "Está conciliado o grupo 207 - Arrecadação por conta de terceiro?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Passivo Circulante - Conciliação",
+      "codigo": "10.7",
+      "descricao": "Está conciliado o grupo 208 - Coletas Rec outra Administração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Passivo Circulante - Conciliação",
+      "codigo": "10.8",
+      "descricao": "Está conciliado o PASSIVO CIRCULANTE - Partidas antigas ou de outra natureza?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Contas de Resultado - Conciliação",
+      "codigo": "11.1",
+      "descricao": "Está conciliado o grupo 3 - Despesas com o Relatório do Mov Financerio?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Grupo 4 - Receitas - Conciliação",
+      "codigo": "11.2",
+      "descricao": "Está conciliado o grupo 400 - Coletas x Mapas de Registro de Coletas?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Grupo 4 - Receitas - Conciliação",
+      "codigo": "11.3",
+      "descricao": "Estão conciliados os sub grupos 401 403 e 404 - Ofertas, Ofertas de Materiais e Ofertas de Mão de Obra Voluntária?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Grupo 4 - Receitas - Conciliação",
+      "codigo": "11.4",
+      "descricao": "Estão conciliados os grupos 41 42 43 - Receitas diversas, Transf recebidas e Receita com Distrib de bíblias e hinários?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Notas explicativas / comentários - Contadores e Assessores",
+      "codigo": "12.1",
+      "descricao": "Ausência de Assinatura dos irmãos Contadores e Assessores da Administração/Setor",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Notas explicativas / comentários - Contadores e Assessores",
+      "codigo": "12.2",
+      "descricao": "Ausência de Fechamento até o último dia útil do mês seguinte ao da data-base",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Notas explicativas / comentários - Contadores e Assessores",
+      "codigo": "12.3",
+      "descricao": "Ausência de registros significativos",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Notas explicativas / comentários - Contadores e Assessores",
+      "codigo": "12.4",
+      "descricao": "Ausência de Notas explicativas / comentários incompletos ou sem justificativa adequada",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "Notas explicativas / comentários - Contadores e Assessores",
+      "codigo": "12.5",
+      "descricao": "Ausência cópia documentação comprobatória do saldo contábil - NF, Contrato, etc (Constituição)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.1",
+      "descricao": "Ausência do Motivo da Viagem.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.2",
+      "descricao": "Ausência de Indicação das datas de partida e retorno.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.3",
+      "descricao": "Campos de histórico do envelope não preenchidos",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.4",
+      "descricao": "Diferença de valores em relação aos documentos apresentados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.5",
+      "descricao": "Rasuras no preenchimento",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.6",
+      "descricao": "Ausência de indicação da data de devolução",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.7",
+      "descricao": "Ausência de assinatura do viajante",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.8",
+      "descricao": "Documento ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.9",
+      "descricao": "Ausência de documento fiscal",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.10",
+      "descricao": "Diaria de hospedagem sem identificação ou divergente do viajante.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.11",
+      "descricao": "Envelopes ausentes sem a prestação de contas",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.12",
+      "descricao": "Envelope único para dois ou mais viajantes",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.13",
+      "descricao": "Ausência do formulário de autorização da viajem",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.14",
+      "descricao": "Ausência de copía dos cupons fiscal termostatico",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Envelopes de Viagens (informar número do envelope inicial e final do mês)",
+      "codigo": "13.15",
+      "descricao": "Despesa sem devida justificativa.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Estrutura e equipe",
+      "codigo": "14.01",
+      "descricao": "Departamento ainda não estruturado com equipe e equipamentos conforme orientações contidas na sessão 16 do Manual Administrativo.",
+      "peso": 50
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Controles Interno",
+      "codigo": "14.02",
+      "descricao": "Ausência de Requisição no processo de compra",
+      "peso": 10
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Legalidade",
+      "codigo": "14.03",
+      "descricao": "Ausência de evidência de “Consulta aos órgãos públicos” para validar legalidade do fornecedor.",
+      "peso": 5
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Controles Interno",
+      "codigo": "14.04",
+      "descricao": "Ausência de Ficha técnica dos Produtos",
+      "peso": 5
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Controles Interno",
+      "codigo": "14.05",
+      "descricao": "Ausência do Mapa de Cotação de Compras",
+      "peso": 5
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Controles Interno",
+      "codigo": "14.06",
+      "descricao": "Ausência de pedido de compra devidamente formalizado",
+      "peso": 10
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Controles Interno",
+      "codigo": "14.07",
+      "descricao": "Ausência do Contrato padrão da Sessão 13, 13.20 e 13.21 ou outro apreciado pelo Depto. Jurídico",
+      "peso": 30
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Controles Interno",
+      "codigo": "14.08",
+      "descricao": "Compra de produto/serviço fora do convenio CNS sem justificativa adequada.",
+      "peso": 5
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Distribuidora",
+      "codigo": "15.1",
+      "descricao": "Ausência de autorização formal na doação a terceiros",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Distribuidora",
+      "codigo": "15.2",
+      "descricao": "Ausência de procuração data vigente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Distribuidora",
+      "codigo": "15.3",
+      "descricao": "Ausência do \"termo de conciliação de saldos\" mensal.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Preenchimento",
+      "codigo": "15.4",
+      "descricao": "Campo destinatário: Difere aos dados do cadastro da Congregação?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Preenchimento",
+      "codigo": "15.5",
+      "descricao": "CNPJ ausente ou difere ao do cadastro da Congregação - informar o CNPJ da respectiva Administração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Preenchimento",
+      "codigo": "15.6",
+      "descricao": "Corpo do documento fiscal: Inconsistências referentes aos produtos",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Preenchimento",
+      "codigo": "15.7",
+      "descricao": "Compras a Prazo: ADM/SETOR - ausência da indicação da forma de pagto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Preenchimento",
+      "codigo": "15.8",
+      "descricao": "Ausência ou incosistência na indicação de local de entrega, somente em caso de Construções ou Reforma, onde o fornecedor entrega direto na Casa de Oração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.9",
+      "descricao": "Ausência do carimbo e/ou recibo de quitação (datado)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.10",
+      "descricao": "Nota fiscal com CFOP 5929 (Lançamento relativo ao Cupom Fiscal) sem o cupom fiscal.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.11",
+      "descricao": "Quitação por cartão ou pelo caixa eletrônico (Casa de Oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.12",
+      "descricao": "Quitação por débito automático (Casas de Oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.13",
+      "descricao": "Pagamento em atraso, independente de justificativa.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.14",
+      "descricao": "Pagamento fora de competência  (Casa de oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.15",
+      "descricao": "Pagamento para Pessoa física (exceto casas de oração cedida ou alugada)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.16",
+      "descricao": "Ausência cheque cancelado e inutilizado: Anexado à cópia de cheque (Admistrativo)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.17",
+      "descricao": "Compras a prazo no Setor - sem anexo da Cópia Doc Fiscal nos respectivos pagamentos.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.18",
+      "descricao": "Compras a prazo pelas Casas de oração com pagamento fora do mês de compra",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Pagamento",
+      "codigo": "15.19",
+      "descricao": "Compras acima do limite recomendado pelo Setor/Administração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "15.20",
+      "descricao": "Ausência de documento legal",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "15.21",
+      "descricao": "Rasura, alteração ou preenchimento por terceiros",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "15.22",
+      "descricao": "Natureza da despesa não pertinente e ou descrição de forma genérica.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "15.23",
+      "descricao": "Aluguéis e serviços: Retenção e pagamento de impostos (ISS/INSS/PIS/COFINS/IRRF, etc)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "Engenharia",
+      "codigo": "16.1",
+      "descricao": "Formulário 1,2,3 ou 4 sem a devida aprovação ministerial e formalização em ATA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "Engenharia",
+      "codigo": "16.2",
+      "descricao": "Ausência de ARQUIVOS DE PROJETOS ARQUITETÔNICOS de casa de oração!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | FUNDO MUSICAL",
+      "subgrupo": "Fundo Musical",
+      "codigo": "18.1",
+      "descricao": "Ausência do inventário fisico dos instrumentos musicais",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | FUNDO MUSICAL",
+      "subgrupo": "Fundo Musical",
+      "codigo": "18.2",
+      "descricao": "Ausência do Termo de Verificação do Saldo Caixa do mês anterior devidamente datado e assinado.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | FUNDO MUSICAL",
+      "subgrupo": "Fundo Musical",
+      "codigo": "18.3",
+      "descricao": "Ausência de Controle dos Instrumentos (Planilha).",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "Informática e Telecomunicações",
+      "codigo": "19.1",
+      "descricao": "Inventário de Hardwares da Administraçao e Casa de Oração não executado no prazo vigente (Até dezembro do ano anterior)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "Informática e Telecomunicações",
+      "codigo": "19.2",
+      "descricao": "Inventário de Softwares da Administraçao e Casa de Oração não executado no prazo vigente (Até dezembro do ano anterior)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "Informática e Telecomunicações",
+      "codigo": "19.3",
+      "descricao": "Ausência de contrato de prestação serviço ou contrato sem aprovação do Depto. Juridico",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "Informática e Telecomunicações",
+      "codigo": "19.4",
+      "descricao": "Administração/Setor não esta usando o plano CCBTEL",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.1",
+      "descricao": "Ausência de controle gerencial de processo judicial",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.2",
+      "descricao": "Ausência Acompanhamento de fase processual",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.3",
+      "descricao": "O advogado responsável não tem conhecimento de todos os processos jurídicos da administração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.4",
+      "descricao": "Ausência de provisão de valores de risco contencioso",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.5",
+      "descricao": "Sem comunicação formal da decisão judicial desfavorável",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.6",
+      "descricao": "Ausência de acompanhamento dos documentos legais da Congregação registrados em cartório e órgãos pertinentes",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.7",
+      "descricao": "Ausência de modelo padrão de minutas processuais",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.8",
+      "descricao": "A minuta de contrato (jurídico ou comercia) não é validada pelo Departamento Jurídico",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Jurídico",
+      "codigo": "20.9",
+      "descricao": "Ausência de parecer jurídico formalizado para a Administração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "M. Preventiva: Administração - Estrutura e equipe",
+      "codigo": "21.1",
+      "descricao": "Quantidade insuficiente de colaboradores/coordenadores para receber e analisar atividades de Manutenção Preventiva da Administração/Setor e Casa de Oração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "M. Preventiva: Administração - Estrutura e equipe",
+      "codigo": "21.2",
+      "descricao": "O Grupo de Trabalho não apresentou evidências de que todas as Casas de Oração têm voluntário na coordenação da atividade de manutenção e um colaborador da escrita.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "M. Preventiva: Administração - Controles Interno",
+      "codigo": "21.3",
+      "descricao": "O Grupo de Trabalho não apresentou evidências de que todas as Casas de Oração possuem o livro azul.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "M. Preventiva: Administração - Controles Interno",
+      "codigo": "21.4",
+      "descricao": "O Grupo de Trabalho não apresentou evidências de que controla mensalmente o recebimento das folhas do livro de manutenção preventiva.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "M. Preventiva: Administração - Controles Interno",
+      "codigo": "21.5",
+      "descricao": "O Grupo de Trabalho não apresentou evidências de que análise crítica no Livro Azul e relatórios entregue mensalmente pelas Casas de Oração, Administração/Setor",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "M. Preventiva: Administração - Controles Interno",
+      "codigo": "21.6",
+      "descricao": "No fechamento anual o Livro Azul não foi enviado para armazenamento na Administração/Regional.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "M. Preventiva: Administração - Treinamento e Reciclagem",
+      "codigo": "21.7",
+      "descricao": "O Grupo de Trabalho não apresentou evidências de treinamento (Reciclagem) frequente com as Casas de Oração / Administração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "Segurança e Brigada de Incêndio: Administração",
+      "codigo": "22.1",
+      "descricao": "A administração possui equipe especializada para treinamento das equipes de brigada de incêndio das casas de oração?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "Segurança e Brigada de Incêndio: Administração",
+      "codigo": "22.2",
+      "descricao": "Há engenheiro de segurança na administração responsável pela emissão dos certificados?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "Segurança e Brigada de Incêndio: Administração",
+      "codigo": "22.3",
+      "descricao": "Em caso de respostas negativas para os itens 21.20 e 21.21, a Administração contrata equipe de treinamento para o grupo de brigada de incêndio?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "Segurança e Brigada de Incêndio: Administração",
+      "codigo": "22.4",
+      "descricao": "A administração mantem equipe de Brigada de Incêndio com treinamento atualizado nas casas de oração?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "Segurança e Brigada de Incêndio: Administração",
+      "codigo": "22.5",
+      "descricao": "A administração mantem atualizada a relação de brigadistas em quadros nas casa de oração ?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "Segurança e Brigada de Incêndio: Administração",
+      "codigo": "22.6",
+      "descricao": "A administração orienta o grupo de brigadistas a fazer verificação de mitigação de riscos e registrou em ata própria? (extintores, prancha, itens de primeiros socorros, etc)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.1",
+      "descricao": "Controle dos bens patrimoniais Imóveis inexistente ou incompleto.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.2",
+      "descricao": "Essa planilha apresenta relação dos imóveis da entidade pertencentes a Administração por tipo de uso",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.3",
+      "descricao": "Essa planilha apresenta relação dos imóveis alugados à entidade por tipo de uso",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.4",
+      "descricao": "Essa planilha apresenta relação dos imóveis cedidos à entidade por tipo de uso",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.5",
+      "descricao": "Possui documentação dos imóveis da entidade, alugados e cedidos, vigentes?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.6",
+      "descricao": "A administração realiza o cadastramento de imunidade dos imoveis junto aos orgãos competentes.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.7",
+      "descricao": "Relação dos imóveis em situação de regularização com status do processo",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.8",
+      "descricao": "Casas de Oração com comodatários possui contrato de comodato vigente?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.9",
+      "descricao": "Terrenos em processo de aquisição possuem a aprovação do Jurídico e Engenharia?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.10",
+      "descricao": "As construções de Casas de Oração e demais imoveis possuem a aprovação da Engenharia?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.11",
+      "descricao": "As reformas de Casas de Oração e demais imoveis possuem a aprovação da Engenharia?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.12",
+      "descricao": "As construções e reformas que se utilizam de serviço em mutirão, possuem os livros exclusivos de adesão e controle de presença?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.13",
+      "descricao": "Todas as alterações patrimoniais foram passadas para aprovação em reunião conforme o Estatuto?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.14",
+      "descricao": "Em caso de Constituição, Desmembramento ou Extinção da administração, houve a transferencia dos bens patrimoniais imoveis para administração destino?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Patrimônio: Bens Imóveis",
+      "codigo": "24.15",
+      "descricao": "Há na Administração a relação das Salas de Oração não oficializadas que geram despesas?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "P. BENS MÓVEIS - Estrutura e equipe",
+      "codigo": "25.01",
+      "descricao": "Equipe de Bens Moveis Incompleta conforme orientações do Manual Administrativo",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "P. BENS MÓVEIS - Controles Interno",
+      "codigo": "25.02",
+      "descricao": "Saneamento das contas de Bens Móveis não atualizado",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "P. BENS MÓVEIS - Controles Interno",
+      "codigo": "25.03",
+      "descricao": "Inventário de Bens da Administraçao e Casa de Oração não executado no prazo vigente (Até dezembro do ano anterior)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "P. BENS MÓVEIS - Controles Interno",
+      "codigo": "25.04",
+      "descricao": "Bem não etiquetados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "P. BENS MÓVEIS - Legalidade/Normas internas",
+      "codigo": "25.05",
+      "descricao": "Ausência de aprovação ministerial para equipamentos \"baixados\" ou \"transferidos\".",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.1",
+      "descricao": "Ausência de procuração para diacono responsável fazer movimentações bancarias.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.2",
+      "descricao": "Cheque emitido fora do padrão conforme norma administrativa.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.3",
+      "descricao": "Nâo existe conta corrente separada para o departamento de contabilidade",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.4",
+      "descricao": "Ausência do termo de verificação de saldos de caixa devidamente assinados (Mês anterior)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.5",
+      "descricao": "Documentos fiscais - Campo destinatário: Difere aos dados do cadastro da Congregação!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.6",
+      "descricao": "CNPJ ausente ou difere ao do cadastro da Congregação - informar o CNPJ da respectiva Administração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.7",
+      "descricao": "Corpo do documento fiscal: Inconsistências referentes aos produtos",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.8",
+      "descricao": "Pagamento em atraso, independente de justificativa.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.9",
+      "descricao": "Ausência de documento legal",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.10",
+      "descricao": "Rasura, alteração ou preenchimento por terceiros",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Preenchimento",
+      "codigo": "26.11",
+      "descricao": "Campo destinatário: Difere aos dados do cadastro da Congregação?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Preenchimento",
+      "codigo": "26.12",
+      "descricao": "CNPJ ausente ou difere ao do cadastro da Congregação - informar o CNPJ da respectiva Administração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Preenchimento",
+      "codigo": "26.13",
+      "descricao": "Corpo do documento fiscal: Inconsistências referentes aos produtos",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Preenchimento",
+      "codigo": "26.14",
+      "descricao": "Compras a Prazo: ADM/SETOR - ausência da indicação da forma de pagto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Preenchimento",
+      "codigo": "26.15",
+      "descricao": "Ausência ou incosistência na indicação de local de entrega, somente em caso de Construções ou Reforma, onde o fornecedor entrega direto na Casa de Oração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.16",
+      "descricao": "Ausência do carimbo e/ou recibo de quitação (datado)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.17",
+      "descricao": "Nota fiscal com CFOP 5929 (Lançamento relativo ao Cupom Fiscal) sem o cupom fiscal.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.18",
+      "descricao": "Quitação por cartão ou pelo caixa eletrônico (Casa de Oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.19",
+      "descricao": "Quitação por débito automático (Casas de Oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.20",
+      "descricao": "Pagamento em atraso, independente de justificativa.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.21",
+      "descricao": "Pagamento fora de competência  (Casa de oração)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.22",
+      "descricao": "Pagamento para Pessoa física (exceto casas de oração cedida ou alugada)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.23",
+      "descricao": "Ausência cheque cancelado e inutilizado: Anexado à cópia de cheque (Admistrativo)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.24",
+      "descricao": "Compras a prazo no Setor - sem anexo da Cópia Doc Fiscal nos respectivos pagamentos.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.25",
+      "descricao": "Compras a prazo pelas Casas de oração com pagamento fora do mês de compra",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Pagamento",
+      "codigo": "26.26",
+      "descricao": "Compras acima do limite recomendado pelo Setor/Administração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "26.27",
+      "descricao": "Ausência de documento legal",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "26.28",
+      "descricao": "Rasura, alteração ou preenchimento por terceiros",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "26.29",
+      "descricao": "Natureza da despesa não pertinente e ou descrição de forma genérica.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "26.30",
+      "descricao": "Aluguéis e serviços: Retenção e pagamento de impostos (ISS/INSS/PIS/COFINS/IRRF, etc)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Secretaria",
+      "codigo": "27.1",
+      "descricao": "Não existe Atas para as reuniões oficiais",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Secretaria",
+      "codigo": "27.2",
+      "descricao": "Existem Atas de reuniões que não estão assinadas e/ou arquivadas",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Secretaria",
+      "codigo": "27.3",
+      "descricao": "Não há lista de presença anexada às Atas das reunioes oficiais",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Secretaria",
+      "codigo": "27.4",
+      "descricao": "Não existe o registro de posse dos membros da Administração ou Conselho Fiscal e demais itens obrigatórios na Ata da AGO",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Secretaria",
+      "codigo": "27.5",
+      "descricao": "A Ata da AGO não foi registrada em Cartório",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Secretaria",
+      "codigo": "27.6",
+      "descricao": "A AGO não foi realizada até o último dia útil do mês de março",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Secretaria",
+      "codigo": "27.7",
+      "descricao": "Não há controle de procuração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Tesouraria",
+      "codigo": "28.1",
+      "descricao": "Aplicações financeiras da Congregação com retenção de IR.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Tesouraria",
+      "codigo": "28.3",
+      "descricao": "Ausência de conciliação dos Mapas de coletas mensais. (Ultimo Mês)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Tesouraria",
+      "codigo": "28.5",
+      "descricao": "Cheque emitido não conforme o Manual Administrativo.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Tesouraria",
+      "codigo": "28.7",
+      "descricao": "Pagamento de compras sem autorização conforme Manual Administrativo",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Tesouraria",
+      "codigo": "28.10",
+      "descricao": "Pagamentos de concessionários não configurado com débito automático.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Tesouraria",
+      "codigo": "28.11",
+      "descricao": "A Tesouraria não deu conhecimento da posição financeira ao ministério conforme modelo de reunião mensal. (Ultima reunião)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Tesouraria",
+      "codigo": "28.12",
+      "descricao": "Pagamento de DARF em atraso ou sem conferência da Contabilidade.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Tesouraria",
+      "codigo": "28.13",
+      "descricao": "Transferências de numerários sem ATA de aprovação.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Livro de  Acompanhamento da Manutenção Preventiva - Casa de Oração",
+      "codigo": "23.01",
+      "descricao": "Não entregou o checklist do mês no prazo estabelecido.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Livro de  Acompanhamento da Manutenção Preventiva - Casa de Oração",
+      "codigo": "23.02",
+      "descricao": "Checklist sem o devido preenchimento ou não assinado pelo responsável.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Fechamento de Fundo Bíblico",
+      "codigo": "17.1",
+      "descricao": "Ausência de formulario de fechamento mensal devidamente preenchido e assinado.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.1",
+      "descricao": "Casa de oração não tem responsavel pelo preenchimento das informações nos livros de adesão e nos livros de registro de presença!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.1",
+      "descricao": "Campo destinatário: Difere aos dados do cadastro da Congregação?",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.2",
+      "descricao": "CNPJ ausente ou difere ao do cadastro da Congregação - informar o CNPJ da respectiva Administração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.3",
+      "descricao": "Corpo do documento fiscal: Inconsistências referentes aos produtos",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.4",
+      "descricao": "Compras a Prazo: ADM/SETOR - ausência da indicação da forma de pagto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Preenchimento",
+      "codigo": "2.5",
+      "descricao": "Ausência ou incosistência na indicação de local de entrega, somente em caso de Construções ou Reforma, onde o fornecedor entrega direto na Casa de Oração.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Pagamento",
+      "codigo": "3.5",
+      "descricao": "Pagamento em atraso",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Pagamento",
+      "codigo": "3.8",
+      "descricao": "Ausência cheque cancelado e inutilizado: Anexado à cópia de cheque (Administrativo)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Pagamento",
+      "codigo": "3.9",
+      "descricao": "Compras a prazo no ADM/Setor - sem anexo da Cópia Doc Fiscal nos respectivos pagamentos.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "4.1",
+      "descricao": "Ausência de documento legal",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "4.2",
+      "descricao": "Rasura, alteração ou preenchimento por terceiros",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "4.3",
+      "descricao": "Natureza da despesa não pertinente e ou descrição de forma genérica.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Legitimidade e impostos",
+      "codigo": "4.4",
+      "descricao": "Aluguéis e serviços: Retenção e pagamento de impostos (ISS/INSS/PIS/COFINS/IRRF, etc)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "5.1",
+      "descricao": "Luz, gás, água, telefone e taxas: Em nome de terceiros (exceto cedida ou alugada)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "5.2",
+      "descricao": "Ausência do carimbo e assinaturas nas compras e recebimentos, observada as especificações adicionais da Administração/Setor",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "5.3",
+      "descricao": "Ausência de Contrato Locação: Serviços, Equipamentos, Imóvel, Estac, etc)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "5.5",
+      "descricao": "Contratação Profissionais Autônomos (MEI) e Pessoa Fisica - Imposto não retido",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "7.1",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "TIME GESTOR VOLUNTÁRIOS",
+      "codigo": "30.01",
+      "descricao": "Quantidade insuficiente de colaboradores/coordenadores no departamento de atividade voluntária para apoiar a Administração/Setor e Casas de oração",
+      "peso": 50
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "TIME GESTOR VOLUNTÁRIOS",
+      "codigo": "30.02",
+      "descricao": "O Grupo de trabalho não apresentou evidências de que todas as Casas de Oração possuem responsável pelas atividades voluntárias.",
+      "peso": 30
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "CONTROLE INTERNO VOLUNTARIO",
+      "codigo": "30.03",
+      "descricao": "O grupo de trabalho não apresentou evidencias da verificação qualitativa dos livros modelos 1 e 3. (Casa de Oração e Administração/Setor)",
+      "peso": 20
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "CONTROLE INTERNO VOLUNTARIO",
+      "codigo": "30.04",
+      "descricao": "O grupo de trabalho não apresentou evidencias da verificação qualitativa dos livros modelos 2 e 4. (Casa de Oração e Administração/Setor)",
+      "peso": 20
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "LEGALIDADE - VOLUNTÁRIO",
+      "codigo": "30.05",
+      "descricao": "Ausencia de livro(s) modelo(s) 1 e 3 na Administração/Setor ou Casa de Oração.",
+      "peso": 50
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "LEGALIDADE - VOLUNTÁRIO",
+      "codigo": "30.06",
+      "descricao": "Ausencia de livro(s) modelo(s) 2 e 4 na Administração/Setor ou Casa de Oração.",
+      "peso": 50
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "LEGALIDADE - VOLUNTÁRIO",
+      "codigo": "30.07",
+      "descricao": "Copia de documentos pessoais arquivados em desacordo com a LGPD - (RG, CPF, Comprovantes de residencia e outros).",
+      "peso": 20
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "PROCEDIMENTOS - VOLUNTÁRIO",
+      "codigo": "30.08",
+      "descricao": "As vias amarelas não foram armazenadas na Administração/Setor, dificultando a consulta pelos demais departamentos.",
+      "peso": 5
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "CONTROLE INTERNO VOLUNTARIO",
+      "codigo": "30.09",
+      "descricao": "O grupo de trabalho não apresentou evidencias do Controle de Horas Trabalhadas.",
+      "peso": 20
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "CONTROLE INTERNO VOLUNTARIO",
+      "codigo": "30.10",
+      "descricao": "O grupo de trabalho não apresentou evidencias do Controle de horas registradas no SIGA.",
+      "peso": 30
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "PROCEDIMENTOS - VOLUNTÁRIO",
+      "codigo": "30.11",
+      "descricao": "O relatório de horas lançadas no CCBSIGA não foi enviado à Seguradora dentro do prazo estipulado. (Mensal)",
+      "peso": 30
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "PROCEDIMENTOS - VOLUNTÁRIO",
+      "codigo": "30.12",
+      "descricao": "Departamento não respondeu o checklist mensal ou respondeu fora do prazo",
+      "peso": 5
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "COMPRAS - Legalidade",
+      "codigo": "14.09",
+      "descricao": "Processo de compra não aderente ao princípio da Separação de Responsabilidade (Quem autoriza NÃO compra, quem compra NÂO recebe/confere, quem recebe/confere NÂO paga)",
+      "peso": 20
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "28.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "15.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "15.98",
+      "descricao": "Departamento não respondeu o Checklist mensal ou respondeu fora do prazo",
+      "peso": 15
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "28.98",
+      "descricao": "Departamento não respondeu o checklist mensal ou respondeu fora do prazo",
+      "peso": 15
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "21.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": "0"
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "25.98",
+      "descricao": "Departamento não respondeu o checklist mensal ou respondeu fora do prazo",
+      "peso": 15
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "25.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "30.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "16.98",
+      "descricao": "Departamento não respondeu o checklist mensal ou respondeu fora do prazo",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "16.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | FUNDO MUSICAL",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "18.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "19.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "20.99",
+      "descricao": "Departamento não respondeu o checklist mensal ou respondeu fora do prazo",
+      "peso": 15
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "20.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "27.98",
+      "descricao": "Departamento não respondeu o checklist mensal ou respondeu fora do prazo",
+      "peso": 15
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "27.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "24.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "Outros documentos e contratos (normas internas). Normas Internas: Contratos e outros documentos",
+      "codigo": "14.10",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, ou preenchimento com rasuras e ou borrões",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento Uso incorreto dos livros modelos 2 e 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | MANUTENÇÃO PREVENTIVA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, ou preenchimento com rasuras e ou borrões",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento Uso incorreto dos livros modelos 2 e 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | COMPRAS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, ou preenchimento com rasuras e ou borrões",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento Uso incorreto dos livros modelos 2 e 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, ou preenchimento com rasuras e ou borrões",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento Uso incorreto dos livros modelos 2 e 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | DISTRIBUIDORA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.98",
+      "descricao": "Departamento não respondeu o checklist mensal ou respondeu fora do prazo",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | PIEDADE",
+      "subgrupo": "PIEDADE - Legalidade/Normas internas",
+      "codigo": "26.99",
+      "descricao": "Não conformidade com a norma/regra/comunicado interno",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, ou preenchimento com rasuras e ou borrões",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento Uso incorreto dos livros modelos 2 e 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TESOURARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | JURÍDICO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horário de saída.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação BIMESTRAL | SECRETARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horário de saída.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação TRIMESTRAL | CONTABILIDADE",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | CASA DE ORAÇÃO",
+      "subgrupo": "P. BENS MÓVEIS - Controles Interno",
+      "codigo": "25.1",
+      "descricao": "Formulário 14.8 entregue sem assinatura do ministério e o responsável da Casa de Oração",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS IMÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | PATRIMÔNIO BENS MÓVEIS",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | INFORMÁTICA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação SEMESTRAL | ENGENHARIA",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.2",
+      "descricao": "Não disponibilizou as vias amarelas dos livros de presença do respectivo mês.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.3",
+      "descricao": "Preenchimento - Cabeçalhos das folhas apresentadas estão preenchidos incorreto ou parcial!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.4",
+      "descricao": "Preenchimento - Campo não preenchido, preenchimento com rasuras e ou borrões ou preenchido incorretamente.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.5",
+      "descricao": "Preenchimento - Uso incorreto dos livros modelos 1, 2 e 3, 4 segundo as modalidades dos serviços executados",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.6",
+      "descricao": "Preenchimento - Nome de colaborador ilegível",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.7",
+      "descricao": "Preenchimento - Livro 2 - não registrada entrega dos EPIs necessários para a execução dos serviços.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.8",
+      "descricao": "Preenchimento - O código da função/atividade incorreto",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.9",
+      "descricao": "Preenchimento - Registro com horario de entrada fora da ordem cronológica, ou rasurado e ou repetição.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.10",
+      "descricao": "Preenchimento - Registro sem horario de saída!",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.11",
+      "descricao": "Registros sem a devida assinatura do voluntário.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.12",
+      "descricao": "Os registros constantes das vias amarelas não foram todos lançados no SIGA.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.13",
+      "descricao": "Ausencia de hora s voluntárias do SIGA e ou não assinado pelo ministério.",
+      "peso": 1
+    },
+    {
+      "aplicacao": "CONSELHO FISCAL | Aplicação MENSAL | TRABALHO VOLUNTÁRIO",
+      "subgrupo": "REGISTRO DE VOLUNTARIO",
+      "codigo": "29.14",
+      "descricao": "Linha em branco (transposição desnecessária de linha)",
+      "peso": 1
+    }
+  ]
+}
